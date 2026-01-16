@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Carrinho | Anbrujomi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Anbrujomi</h1>
+  <nav>
+    <a href="index.html">Produtos</a>
+  </nav>
+</header>
+
+<main class="container card">
+  <h2>Seu Carrinho</h2>
+  <ul id="lista"></ul>
+
+  <p>Subtotal: R$ <span id="subtotal">0</span></p>
+
+  <label>Estado</label>
+  <select id="estado" onchange="calcularFrete()">
+    <option value="0">Selecione</option>
+    <option value="25">SP</option>
+    <option value="30">RJ</option>
+    <option value="35">MG</option>
+    <option value="40">Outros</option>
+  </select>
+
+  <p>Frete: R$ <span id="frete">0</span></p>
+  <h3>Total: R$ <span id="total">0</span></h3>
+
+  <div class="pagamentos">
+    <a class="btn pix" href="https://mpago.la/SEU_PIX">Pagar com Pix</a>
+    <a class="btn cardpay" href="https://mpago.la/SEU_CARTAO">Cartão de Crédito</a>
+    <a class="btn whatsapp" id="zap">Finalizar no WhatsApp</a>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
