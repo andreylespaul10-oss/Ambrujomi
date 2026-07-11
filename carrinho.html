@@ -7,37 +7,45 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="aviso">Frete para todo o Brasil &bull; Pagamento via Pix, cartão ou WhatsApp</div>
+
 <header>
-  <h1>Anbrujomi</h1>
+  <h1>Anbru<span>jomi</span></h1>
   <nav>
     <a href="index.html">Produtos</a>
+    <a href="carrinho.html">Carrinho <span class="badge-carrinho" id="badge">0</span></a>
   </nav>
 </header>
 
-<main class="container card">
-  <h2>Seu Carrinho</h2>
-  <ul id="lista"></ul>
+<main class="container card carrinho-box">
+  <div class="info">
+    <h2>Seu carrinho</h2>
+    <ul id="lista"></ul>
 
-  <p>Subtotal: R$ <span id="subtotal">0</span></p>
+    <label for="estado">Calcular frete</label>
+    <select id="estado" onchange="render()">
+      <option value="0">Selecione o estado</option>
+      <option value="25">São Paulo — R$ 25</option>
+      <option value="30">Rio de Janeiro — R$ 30</option>
+      <option value="35">Minas Gerais — R$ 35</option>
+      <option value="40">Demais estados — R$ 40</option>
+    </select>
 
-  <label>Estado</label>
-  <select id="estado" onchange="calcularFrete()">
-    <option value="0">Selecione</option>
-    <option value="25">SP</option>
-    <option value="30">RJ</option>
-    <option value="35">MG</option>
-    <option value="40">Outros</option>
-  </select>
+    <div class="resumo">
+      <p>Subtotal <span>R$ <span id="subtotal">0</span></span></p>
+      <p>Frete <span>R$ <span id="frete">0</span></span></p>
+      <h3>Total <span>R$ <span id="total">0</span></span></h3>
+    </div>
 
-  <p>Frete: R$ <span id="frete">0</span></p>
-  <h3>Total: R$ <span id="total">0</span></h3>
-
-  <div class="pagamentos">
-    <a class="btn pix" href="https://mpago.la/SEU_PIX">Pagar com Pix</a>
-    <a class="btn cardpay" href="https://mpago.la/SEU_CARTAO">Cartão de Crédito</a>
-    <a class="btn whatsapp" id="zap">Finalizar no WhatsApp</a>
+    <div class="pagamentos">
+      <a class="btn pix" href="https://mpago.la/SEU_PIX">Pagar com Pix</a>
+      <a class="btn cardpay" href="https://mpago.la/SEU_CARTAO">Pagar com cartão de crédito</a>
+      <a class="btn whatsapp" id="zap" href="#">Finalizar pelo WhatsApp</a>
+    </div>
   </div>
 </main>
+
+<footer>Anbrujomi &mdash; versão de teste. Os links de pagamento serão configurados com as suas contas.</footer>
 
 <script src="script.js"></script>
 </body>

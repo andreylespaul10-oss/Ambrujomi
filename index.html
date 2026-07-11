@@ -7,33 +7,55 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="aviso">Frete para todo o Brasil &bull; Pagamento via Pix, cartão ou WhatsApp</div>
+
 <header>
-  <h1>Anbrujomi</h1>
+  <h1>Anbru<span>jomi</span></h1>
   <nav>
     <a href="index.html">Produtos</a>
-    <a href="carrinho.html">Carrinho</a>
+    <a href="carrinho.html">Carrinho <span class="badge-carrinho" id="badge">0</span></a>
   </nav>
 </header>
 
+<section class="hero">
+  <p class="rotulo">Loja oficial</p>
+  <h2>Produtos que facilitam o seu dia a dia</h2>
+  <p class="sub">Selecionamos itens de bem-estar e tecnologia com entrega para todo o Brasil. Adicione ao carrinho e finalize em menos de um minuto.</p>
+</section>
+
 <main class="container grid">
   <div class="card">
-    <h3>Massageador Portátil</h3>
-    <p class="price">R$ 197</p>
-    <button onclick="add('Massageador Portátil',197)">Adicionar</button>
+    <div class="foto foto-1" aria-hidden="true">💆</div>
+    <div class="info">
+      <h3>Massageador Portátil</h3>
+      <p class="desc">Alivia tensões do pescoço e ombros. Recarregável por USB, com 4 níveis de intensidade.</p>
+      <p class="price">R$ 197<small>em até 3x sem juros</small></p>
+      <button onclick="add('Massageador Portátil',197)">Adicionar ao carrinho</button>
+    </div>
   </div>
 
   <div class="card">
-    <h3>Fone Bluetooth</h3>
-    <p class="price">R$ 149</p>
-    <button onclick="add('Fone Bluetooth',149)">Adicionar</button>
+    <div class="foto foto-2" aria-hidden="true">🎧</div>
+    <div class="info">
+      <h3>Fone Bluetooth</h3>
+      <p class="desc">Som limpo, cancelamento de ruído e bateria de até 24h com o estojo de recarga.</p>
+      <p class="price">R$ 149<small>em até 3x sem juros</small></p>
+      <button onclick="add('Fone Bluetooth',149)">Adicionar ao carrinho</button>
+    </div>
   </div>
 
   <div class="card">
-    <h3>Lâmpada LED Inteligente</h3>
-    <p class="price">R$ 129</p>
-    <button onclick="add('Lâmpada LED',129)">Adicionar</button>
+    <div class="foto foto-3" aria-hidden="true">💡</div>
+    <div class="info">
+      <h3>Lâmpada LED Inteligente</h3>
+      <p class="desc">Controle pelo celular, 16 milhões de cores e compatível com Alexa e Google Home.</p>
+      <p class="price">R$ 129<small>em até 3x sem juros</small></p>
+      <button onclick="add('Lâmpada LED',129)">Adicionar ao carrinho</button>
+    </div>
   </div>
 </main>
+
+<footer>Anbrujomi &mdash; versão de teste. Fotos dos produtos serão adicionadas em breve.</footer>
 
 <script src="script.js"></script>
 </body>
