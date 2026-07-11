@@ -55,7 +55,6 @@ Abra `index.html` em qualquer navegador — não precisa de servidor.
 
 A pasta `docs/` contém a especificação técnica completa em 24 partes
 (visão, arquitetura, design system, componentes, páginas, banco de dados,
-API, SEO, performance, segurança, integrações DSers/AliExpress, testes,
-deploy e checklist de lançamento) + o master prompt de implementação.
-
-Nota: a Parte 19 não foi recebida (numeração pula da 18 para a 20).
+API, SEO, performance, segurança, integrações DSers/AliExpress, recursos
+premium/IA, testes, deploy e checklist de lançamento) + o master prompt
+de implementação.
