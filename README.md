@@ -43,6 +43,17 @@ referência visual e funcional.
 
 Abra `index.html` em qualquer navegador — não precisa de servidor.
 
+## 🎯 DECISÃO DE ARQUITETURA (11/07/2026)
+
+**Caminho escolhido: Wix Headless + Vercel.**
+Frontend em código próprio (base: este protótipo) hospedado no Vercel,
+usando o site Wix "BlissGlow" como motor de comércio por trás
+(catálogo, carrinho, checkout com Stripe, pedidos e DSers continuam no Wix).
+Domínio blissglow.store apontará para o Vercel.
+
+Status: **aguardando o envio da especificação "Série 2"** pela Ana
+(novas partes com tudo do site). Quando ela der o OK, iniciar a implementação.
+
 ## 🚧 Próximos passos
 
 1. Fotos reais dos produtos (hoje: gradientes + emoji)
