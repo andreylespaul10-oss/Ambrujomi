@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Checkout | Bliss Glow</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body data-page="checkout">
+
+<div id="site-header"></div>
+
+<div class="container">
+  <div class="checkout-steps">Bag <span>→</span> <b>Checkout</b> <span>→</span> Confirmation</div>
+
+  <form id="checkout-form" novalidate>
+    <div class="checkout-layout">
+      <div>
+        <div class="co-section">
+          <h3>1 · Contact information</h3>
+          <p class="co-sub">We'll only use this to send order updates. Checking out as a guest is fine.</p>
+          <div class="form-grid">
+            <div class="field full">
+              <label for="f-email">Email address</label>
+              <input id="f-email" type="email" required autocomplete="email" placeholder="you@example.com">
+              <span class="err-msg"></span>
+            </div>
+            <div class="field full">
+              <label for="f-phone">Phone (optional)</label>
+              <input id="f-phone" type="tel" autocomplete="tel" placeholder="+44 7700 900000">
+              <span class="err-msg"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="co-section">
+          <h3>2 · Delivery address</h3>
+          <p class="co-sub">United Kingdom delivery only (for now!).</p>
+          <div class="form-grid">
+            <div class="field">
+              <label for="f-first">First name</label>
+              <input id="f-first" required autocomplete="given-name">
+              <span class="err-msg"></span>
+            </div>
+            <div class="field">
+              <label for="f-last">Last name</label>
+              <input id="f-last" required autocomplete="family-name">
+              <span class="err-msg"></span>
+            </div>
+            <div class="field full">
+              <label for="f-address">Address line 1</label>
+              <input id="f-address" required autocomplete="address-line1" placeholder="House number and street">
+              <span class="err-msg"></span>
+            </div>
+            <div class="field full">
+              <label for="f-address2">Address line 2 (optional)</label>
+              <input id="f-address2" autocomplete="address-line2">
+              <span class="err-msg"></span>
+            </div>
+            <div class="field">
+              <label for="f-city">Town / City</label>
+              <input id="f-city" required autocomplete="address-level2">
+              <span class="err-msg"></span>
+            </div>
+            <div class="field">
+              <label for="f-postcode">Postcode</label>
+              <input id="f-postcode" required autocomplete="postal-code" placeholder="e.g. SW1A 1AA">
+              <span class="err-msg"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="co-section">
+          <h3>3 · Payment</h3>
+          <p class="co-sub">All transactions are encrypted. This prototype does not charge real cards.</p>
+          <div class="pay-opts">
+            <label><input type="radio" name="pay" checked> 💳 Credit / debit card</label>
+            <label><input type="radio" name="pay"> 🅿️ PayPal</label>
+            <label><input type="radio" name="pay">  Apple Pay</label>
+            <label><input type="radio" name="pay"> 🇬 Google Pay</label>
+          </div>
+          <div class="form-grid" style="margin-top:14px">
+            <div class="field full">
+              <label for="f-card">Card number</label>
+              <input id="f-card" inputmode="numeric" placeholder="1234 5678 9012 3456" required>
+              <span class="err-msg"></span>
+            </div>
+            <div class="field">
+              <label for="f-expiry">Expiry</label>
+              <input id="f-expiry" placeholder="MM/YY" required>
+              <span class="err-msg"></span>
+            </div>
+            <div class="field">
+              <label for="f-cvc">Security code</label>
+              <input id="f-cvc" inputmode="numeric" placeholder="CVC" required>
+              <span class="err-msg"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="summary-card">
+          <h3>Order summary</h3>
+          <ul class="mini-order-list" id="co-items"></ul>
+          <div class="sum-row"><span>Subtotal</span><span id="co-subtotal">£0.00</span></div>
+          <div class="sum-row" id="co-discount-row" style="display:none"><span>Discount</span><span id="co-discount"></span></div>
+          <div class="sum-row"><span>Delivery</span><span id="co-delivery">£0.00</span></div>
+          <div class="sum-row total"><span>Total</span><span id="co-total">£0.00</span></div>
+          <div class="terms-row">
+            <input type="checkbox" id="terms">
+            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</label>
+          </div>
+          <button class="btn btn-primary btn-block" id="place-order" type="submit">Place order · secure 🔒</button>
+          <p class="mc-note text-center" style="margin-top:12px">VAT included · 30-day free returns</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,57 +1,61 @@
-# Bliss Glow — Beauty & Wellness Store (UK)
+# Bliss Glow — Premium Beauty & Wellness Store (UK)
 
-Projeto de e-commerce (dropshipping) em construção. **Mercado-alvo: Reino
-Unido** — site em inglês, preços em libras (GBP). O protótipo é desenvolvido
-neste repositório e, quando aprovado, será integrado ao **Wix** (Wix Studio /
-Velo) com pagamentos e sincronização de pedidos.
+E-commerce premium de beleza e bem-estar. **Mercado-alvo: Reino Unido** —
+site em inglês britânico, preços em libras (GBP, com VAT incluído).
+Modelo de negócio: dropshipping via **DSers + AliExpress**.
+Destino final: **Wix** (Wix Stores + Velo), usando este protótipo como
+referência visual e funcional.
 
-## Decisões do projeto
+## 📁 Estrutura
 
-- **Mercado:** Reino Unido (site 100% em inglês, moeda £)
-- **Nicho:** beleza e saúde (beauty & wellness)
-- **Frete:** Standard £3.99 / Express £7.99, grátis (standard) acima de £40
-- **Pagamentos:** cartão + PayPal (Pix não existe no Reino Unido)
-- **Fornecimento:** dropshipping via DSers + AliExpress
-- **Plataforma final:** Wix Stores, com customizações em Velo
+```
+├── index.html          Home (herói, categorias, best sellers, reviews, FAQ...)
+├── shop.html           Vitrine com filtros e ordenação (?category=, ?sort=)
+├── product.html        Página de produto (?id=) — galeria, variantes, abas
+├── cart.html           Sacola completa: cupom, frete, resumo, recomendados
+├── checkout.html       Checkout de página única com validação
+├── confirmation.html   Confirmação do pedido
+├── account.html        Login + painel do cliente (pedidos, dados, preferências)
+├── wishlist.html       Lista de desejos
+├── assets/
+│   ├── css/main.css    Design system (rose gold / ivory / champagne)
+│   └── js/
+│       ├── data.js     Catálogo (13 produtos, 4 categorias, reviews, FAQs)
+│       └── app.js      Motor da loja: carrinho, wishlist, busca, mini-cart
+└── docs/               Especificação completa (Partes 1–24 + master prompt)
+```
 
-## Estado atual
+## ✅ O que o protótipo já faz
 
-**Fase 1 — Protótipo visual (em andamento)**
+- Navegação completa entre todas as páginas (menu, breadcrumbs, cards)
+- Carrinho persistente (localStorage) com mini-carrinho lateral
+- Wishlist persistente com contador no header
+- Busca instantânea com miniaturas
+- Filtros por categoria/oferta/estoque + 5 ordenações
+- Página de produto: galeria, variantes, quantidade, abas (descrição,
+  especificações, avaliações, entrega), produtos relacionados
+- Cupons: `GLOW10` (10%) e `WELCOME15` (15%)
+- Frete UK: Standard £3.99 / Express £7.99 — grátis acima de £40
+- Checkout com validação em tempo real e pedido salvo no painel do cliente
+- Design responsivo (desktop → mobile), acessibilidade básica (ARIA, foco)
 
-- [x] Vitrine de produtos em inglês (`index.html`)
-- [x] Carrinho com quantidade, frete UK e frete grátis acima de £40 (`cart.html` + `script.js`)
-- [x] Identidade visual Bliss Glow (rosa/vinho + dourado) (`style.css`)
-- [ ] Produtos reais (aguardando lista com nomes, preços e fornecedores)
-- [ ] Fotos reais dos produtos (hoje são placeholders em gradiente)
-- [ ] Páginas extras (About, Shipping & Returns, Contact)
+## 🔎 Como visualizar
 
-## Próximas fases
+Abra `index.html` em qualquer navegador — não precisa de servidor.
 
-**Fase 2 — Conteúdo real**
-Substituir os produtos de teste pelo catálogo definitivo (nomes, preços em £,
-descrições em inglês, fotos), com base nos documentos do projeto Bliss Glow.
+## 🚧 Próximos passos
 
-**Fase 3 — Pagamentos e operação**
-- Checkout com cartão e PayPal (via Wix Payments/Stripe quando migrar)
-- Número de WhatsApp da loja (variável `WHATSAPP` no `script.js`, DDI +44)
-- Estratégia de dropshipping com DSers + AliExpress (envio para o Reino Unido)
+1. Fotos reais dos produtos (hoje: gradientes + emoji)
+2. Produtos definitivos do AliExpress/DSers (editar `assets/js/data.js`)
+3. Migração para o Wix: catálogo → Wix Stores, pagamentos → Wix Payments
+   (cartão, PayPal, Apple/Google Pay), impostos → VAT UK 20%
+4. Conta real de cliente, e-mails transacionais e rastreamento (nativos no Wix)
 
-**Fase 4 — Migração para o Wix**
-- Recriar a loja no Wix usando o Wix Stores (carrinho, checkout e frete nativos)
-- Catálogo de produtos no CMS do Wix
-- Moeda GBP e região Reino Unido nas configurações da loja
-- Lógica customizada com Velo (Wix dev) quando necessário
-- Este protótipo serve como referência visual e funcional
+## 📚 Especificação
 
-## Configurações pendentes (antes de publicar)
+A pasta `docs/` contém a especificação técnica completa em 24 partes
+(visão, arquitetura, design system, componentes, páginas, banco de dados,
+API, SEO, performance, segurança, integrações DSers/AliExpress, testes,
+deploy e checklist de lançamento) + o master prompt de implementação.
 
-| Item | Onde | Status |
-|---|---|---|
-| Número do WhatsApp (+44) | `script.js`, variável `WHATSAPP` | placeholder `440000000000` |
-| Link de pagamento com cartão | `cart.html` | placeholder `#` |
-| Link do PayPal | `cart.html` | placeholder `#` |
-| Fotos dos produtos | `index.html` | gradientes provisórios |
-
-## Como visualizar o protótipo
-
-Abra o arquivo `index.html` em qualquer navegador — não precisa de servidor.
+Nota: a Parte 19 não foi recebida (numeração pula da 18 para a 20).

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product | Bliss Glow</title>
+<meta name="description" content="Bliss Glow premium beauty and wellness product — free UK delivery over £40, 30-day free returns.">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body data-page="product">
+
+<div id="site-header"></div>
+
+<div class="container">
+  <nav class="breadcrumbs" id="pd-crumbs" aria-label="Breadcrumb"></nav>
+
+  <div class="pd-layout">
+    <div>
+      <div class="pd-gallery-main" id="pd-main"></div>
+      <div class="pd-thumbs" id="pd-thumbs"></div>
+    </div>
+    <div class="pd-info">
+      <span class="eyebrow" id="pd-cat"></span>
+      <h1 id="pd-name"></h1>
+      <div class="pd-rating" id="pd-rating"></div>
+      <div class="pd-price" id="pd-price"></div>
+      <p class="vat-note">Price includes VAT · Free UK delivery over £40</p>
+      <p class="pd-short" id="pd-short"></p>
+      <div id="pd-stock"></div>
+      <div id="pd-variants"></div>
+      <div class="qty-row">
+        <div class="qty-box">
+          <button id="qty-minus" aria-label="Decrease quantity">−</button>
+          <span id="pd-qty">1</span>
+          <button id="qty-plus" aria-label="Increase quantity">+</button>
+        </div>
+        <button class="btn btn-primary" id="pd-add" style="flex:1">Add to bag</button>
+        <button class="icon-btn" id="pd-wish" aria-label="Save to wishlist" style="border:1.5px solid var(--line);border-radius:999px">♡</button>
+      </div>
+      <button class="btn btn-secondary btn-block" id="pd-buy">Buy it now</button>
+      <div class="pd-trust">
+        <div>🔒 Secure encrypted checkout</div>
+        <div>🚚 Ships within 24 hours</div>
+        <div>↩️ Free 30-day returns</div>
+        <div>💬 UK-based support</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pd-tabs">
+    <div class="pd-tab-buttons" role="tablist">
+      <button class="active" data-tab="description">Description</button>
+      <button data-tab="specs">Specifications</button>
+      <button data-tab="reviews">Reviews</button>
+      <button data-tab="delivery">Delivery &amp; returns</button>
+    </div>
+    <div class="pd-tab-panel active" id="tab-description"></div>
+    <div class="pd-tab-panel" id="tab-specs"></div>
+    <div class="pd-tab-panel" id="tab-reviews"></div>
+    <div class="pd-tab-panel" id="tab-delivery"></div>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <div><span class="eyebrow">Complete the ritual</span><h2>You may also like</h2></div>
+    </div>
+    <div class="product-grid" id="pd-related"></div>
+  </section>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

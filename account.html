@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account | Bliss Glow</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body data-page="account">
+
+<div id="site-header"></div>
+
+<div class="container">
+
+  <div id="auth-view">
+    <div class="auth-box">
+      <span class="eyebrow">Welcome back</span>
+      <h1>Sign in</h1>
+      <p class="co-sub">Access your orders, wishlist and details. (Prototype: any email and password will work.)</p>
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="login-email">Email address</label>
+          <input id="login-email" type="email" required autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="login-pass">Password</label>
+          <input id="login-pass" type="password" required autocomplete="current-password" placeholder="••••••••">
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+      <p class="auth-alt">New to Bliss Glow? <a href="#" onclick="qs('#login-email').focus();return false">Create your account above</a> · <a href="#" onclick="toast('Password reset link sent (prototype)','success');return false">Forgot password?</a></p>
+    </div>
+  </div>
+
+  <div id="dash-view" class="hidden">
+    <div class="page-hero">
+      <span class="eyebrow">My account</span>
+      <h1>Hello, <span id="dash-name">there</span> 👋</h1>
+      <p>Manage your orders, details and preferences.</p>
+    </div>
+    <div class="account-layout">
+      <nav class="account-nav" aria-label="Account sections">
+        <button class="active" data-panel="orders">📦 Orders</button>
+        <button data-panel="details">👤 My details</button>
+        <button data-panel="addresses">🏠 Addresses</button>
+        <button data-panel="prefs">✉️ Preferences</button>
+        <button id="logout-btn">↪ Sign out</button>
+      </nav>
+      <div>
+        <div class="account-panel active" id="panel-orders">
+          <h3 style="margin-top:0">Order history</h3>
+          <div id="orders-list"></div>
+        </div>
+        <div class="account-panel" id="panel-details">
+          <h3 style="margin-top:0">My details</h3>
+          <div class="form-grid">
+            <div class="field"><label>First name</label><input placeholder="First name"></div>
+            <div class="field"><label>Last name</label><input placeholder="Last name"></div>
+            <div class="field full"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+          </div>
+          <button class="btn btn-primary mt-2" onclick="toast('Details saved','success')">Save changes</button>
+        </div>
+        <div class="account-panel" id="panel-addresses">
+          <h3 style="margin-top:0">Saved addresses</h3>
+          <div class="empty-state"><div class="big">🏠</div><h3>No saved addresses</h3><p>Addresses used at checkout will appear here.</p></div>
+        </div>
+        <div class="account-panel" id="panel-prefs">
+          <h3 style="margin-top:0">Communication preferences</h3>
+          <div class="filter-group" style="border:none">
+            <label><input type="checkbox" checked> Email me about new arrivals</label>
+            <label><input type="checkbox" checked> Exclusive offers and discounts</label>
+            <label><input type="checkbox"> SMS order updates</label>
+          </div>
+          <button class="btn btn-primary mt-2" onclick="toast('Preferences updated','success')">Save preferences</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

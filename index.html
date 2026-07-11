@@ -2,61 +2,104 @@
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
-<title>Bliss Glow | Beauty &amp; Wellness</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+<title>Bliss Glow | Premium Beauty &amp; Wellness</title>
+<meta name="description" content="Premium beauty and wellness essentials delivered across the UK. Skincare, beauty tools and self-care rituals — free delivery over £40.">
+<link rel="stylesheet" href="assets/css/main.css">
 </head>
-<body>
-<div class="aviso">Free UK delivery on orders over &pound;40 &bull; Secure checkout</div>
+<body data-page="home">
 
-<header>
-  <h1>Bliss<span>Glow</span></h1>
-  <nav>
-    <a href="index.html">Shop</a>
-    <a href="cart.html">Cart <span class="badge-carrinho" id="badge">0</span></a>
-  </nav>
-</header>
+<div id="site-header"></div>
 
 <section class="hero">
-  <p class="rotulo">Beauty &amp; wellness</p>
-  <h2>Everyday essentials for your glow-up ritual</h2>
-  <p class="sub">Carefully selected beauty and self-care products, delivered across the UK. Add to cart and check out in under a minute.</p>
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow">Premium beauty &amp; wellness</span>
+      <h1>Glow is a ritual, not a chance.</h1>
+      <p class="lead">Thoughtfully selected skincare, beauty tools and self-care essentials — delivered across the UK with free shipping over £40.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="shop.html">Shop now</a>
+        <a class="btn btn-secondary" href="shop.html?category=skincare">Explore skincare</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">✨</div>
+  </div>
 </section>
 
-<main class="container grid">
-  <div class="card">
-    <div class="foto foto-1" aria-hidden="true">✨</div>
-    <div class="info">
-      <h3>LED Light Therapy Mask</h3>
-      <p class="desc">Red and blue light therapy for smoother, clearer-looking skin. 7 light modes, USB rechargeable.</p>
-      <p class="price">&pound;39.99<small>Free UK delivery over &pound;40</small></p>
-      <button onclick="add('LED Light Therapy Mask',39.99)">Add to cart</button>
-    </div>
+<section class="benefits">
+  <div class="container benefits-grid">
+    <div class="benefit"><div class="b-icon">💎</div><h3>Premium quality</h3><p>Curated, tested, loved</p></div>
+    <div class="benefit"><div class="b-icon">🚚</div><h3>Fast UK delivery</h3><p>Free over £40</p></div>
+    <div class="benefit"><div class="b-icon">🔒</div><h3>Secure checkout</h3><p>SSL encrypted payments</p></div>
+    <div class="benefit"><div class="b-icon">↩️</div><h3>Easy returns</h3><p>30 days, free</p></div>
+    <div class="benefit"><div class="b-icon">💬</div><h3>Real support</h3><p>We reply within 24h</p></div>
   </div>
+</section>
 
-  <div class="card">
-    <div class="foto foto-2" aria-hidden="true">🫧</div>
-    <div class="info">
-      <h3>Sonic Facial Cleansing Brush</h3>
-      <p class="desc">Soft silicone sonic brush for a deep yet gentle cleanse. Waterproof and travel-sized.</p>
-      <p class="price">&pound;19.99<small>Free UK delivery over &pound;40</small></p>
-      <button onclick="add('Sonic Facial Cleansing Brush',19.99)">Add to cart</button>
-    </div>
+<section class="section container">
+  <div class="section-head">
+    <div><span class="eyebrow">Curated for you</span><h2>Shop by category</h2></div>
   </div>
+  <div class="cat-grid" id="home-categories"></div>
+</section>
 
-  <div class="card">
-    <div class="foto foto-3" aria-hidden="true">💆</div>
-    <div class="info">
-      <h3>Neck &amp; Shoulder Massager</h3>
-      <p class="desc">Eases tension after long days. 4 intensity levels, heat function, USB rechargeable.</p>
-      <p class="price">&pound;29.99<small>Free UK delivery over &pound;40</small></p>
-      <button onclick="add('Neck & Shoulder Massager',29.99)">Add to cart</button>
-    </div>
+<section class="section container">
+  <div class="section-head">
+    <div><span class="eyebrow">Customer favourites</span><h2>Best sellers</h2></div>
+    <a class="link-more" href="shop.html?sort=rating">View all →</a>
   </div>
-</main>
+  <div class="product-grid" id="home-best"></div>
+</section>
 
-<footer>Bliss Glow &mdash; test version. Product photos and payment links coming soon.</footer>
+<section class="section container">
+  <div class="promo">
+    <div>
+      <span class="eyebrow">Limited time</span>
+      <h2>10% off your first ritual</h2>
+      <p>Use code <code>GLOW10</code> at checkout and start your self-care journey with a treat. Free standard delivery on orders over £40.</p>
+    </div>
+    <a class="btn btn-gold" href="shop.html">Claim the offer</a>
+  </div>
+</section>
 
-<script src="script.js"></script>
+<section class="section container">
+  <div class="section-head">
+    <div><span class="eyebrow">Just landed</span><h2>New arrivals</h2></div>
+    <a class="link-more" href="shop.html?sort=new">View all →</a>
+  </div>
+  <div class="product-grid" id="home-new"></div>
+</section>
+
+<section class="section container">
+  <div class="section-head">
+    <div><span class="eyebrow">Loved across the UK</span><h2>What our customers say</h2></div>
+  </div>
+  <div class="review-grid" id="home-reviews"></div>
+</section>
+
+<section class="section container">
+  <div class="newsletter">
+    <span class="eyebrow">Join the glow list</span>
+    <h2>15% off your first order</h2>
+    <p>Beauty tips, early access to new arrivals and subscriber-only offers. No spam, ever.</p>
+    <form>
+      <input type="email" placeholder="Your email address" aria-label="Email address" required>
+      <button class="btn btn-primary" type="submit">Subscribe</button>
+    </form>
+    <p class="fine">By subscribing you agree to our privacy policy. Unsubscribe at any time.</p>
+  </div>
+</section>
+
+<section class="section container" id="faq">
+  <div class="section-head">
+    <div><span class="eyebrow">Good to know</span><h2>Frequently asked questions</h2></div>
+  </div>
+  <div class="faq" id="home-faq"></div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>

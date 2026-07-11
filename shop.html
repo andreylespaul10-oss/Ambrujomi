@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop | Bliss Glow</title>
+<meta name="description" content="Browse the full Bliss Glow collection — skincare, beauty tools, wellness and hair & body essentials with free UK delivery over £40.">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body data-page="shop">
+
+<div id="site-header"></div>
+
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="index.html">Home</a><span class="sep">›</span><span id="crumb-here">Shop</span>
+  </nav>
+  <div class="page-hero">
+    <span class="eyebrow">The collection</span>
+    <h1 id="shop-title">All Products</h1>
+    <p id="shop-desc">Every Bliss Glow essential, in one place.</p>
+  </div>
+</div>
+
+<div class="container section" style="padding-top:30px">
+  <div class="shop-layout">
+    <aside class="filters" aria-label="Product filters">
+      <div class="filter-group">
+        <h4>Category</h4>
+        <div id="filter-cats"></div>
+      </div>
+      <div class="filter-group">
+        <h4>Offers</h4>
+        <label><input type="checkbox" id="f-sale"> On sale</label>
+        <label><input type="checkbox" id="f-stock"> In stock only</label>
+      </div>
+    </aside>
+    <div>
+      <div class="shop-toolbar">
+        <span class="result-count" id="result-count"></span>
+        <select id="sort-select" aria-label="Sort products">
+          <option value="featured">Sort: Featured</option>
+          <option value="newest">Newest</option>
+          <option value="rating">Highest rated</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+        </select>
+      </div>
+      <div class="product-grid" id="shop-grid"></div>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
