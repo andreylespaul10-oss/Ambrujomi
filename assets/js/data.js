@@ -155,7 +155,7 @@ const BG_REVIEWS = {
 };
 
 const BG_FAQS = [
-  { q: "How long does delivery take?", a: "Standard delivery takes 3–5 working days across the UK (£3.99, free on orders over £40). Express delivery arrives in 1–2 working days (£7.99)." },
+  { q: "How long does delivery take?", a: "Delivery is FREE on every UK order and takes 2–4 working days. You will receive a tracking link as soon as your parcel ships." },
   { q: "What is your returns policy?", a: "You have 30 days from delivery to return any unused item in its original packaging for a full refund — no questions asked. Returns are free for UK customers." },
   { q: "Which payment methods do you accept?", a: "We accept all major credit and debit cards, PayPal, Apple Pay and Google Pay. All payments are processed over encrypted, secure connections." },
   { q: "Are your products cruelty-free?", a: "Yes. We only source products that are cruelty-free, and our silk and stone tools are responsibly sourced." },
@@ -163,10 +163,9 @@ const BG_FAQS = [
 ];
 
 const BG_DELIVERY = {
-  freeOver: 40,
+  freeOver: 0,
   options: [
-    { id: "standard", name: "Standard Delivery", eta: "3–5 working days", price: 3.99 },
-    { id: "express",  name: "Express Delivery",  eta: "1–2 working days", price: 7.99 }
+    { id: "standard", name: "Free UK Delivery", eta: "2–4 working days", price: 0 }
   ]
 };
 

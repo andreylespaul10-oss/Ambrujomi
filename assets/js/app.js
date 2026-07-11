@@ -86,7 +86,7 @@ function renderChrome() {
   const headerHost = qs("#site-header");
   if (headerHost) headerHost.innerHTML = `
     <div class="announce" id="announce">
-      Free UK delivery on orders over <b>£40</b> &nbsp;•&nbsp; Use code <b>GLOW10</b> for 10% off
+      FREE UK delivery on every order &nbsp;•&nbsp; Use code <b>GLOW10</b> for 10% off
       <button class="announce-close" aria-label="Dismiss announcement" onclick="this.parentElement.remove()">×</button>
     </div>
     <header class="site-header">
@@ -389,8 +389,7 @@ function initProduct() {
     <div class="review-item"><span class="stars">${"★".repeat(r.stars)}</span>
       <p>“${esc(r.text)}”</p><span class="who"><b>${esc(r.name)}</b> · <span class="verified">✓ Verified purchase</span></span></div>`).join("");
   qs("#tab-delivery").innerHTML = `
-    <ul><li><b>Standard delivery</b> — 3–5 working days, £3.99 (free over £40)</li>
-    <li><b>Express delivery</b> — 1–2 working days, £7.99</li>
+    <ul><li><b>Free UK delivery</b> — every order, 2–4 working days</li>
     <li><b>Returns</b> — free 30-day returns, no questions asked</li></ul>`;
 
   qsa(".pd-tab-buttons button").forEach(b => b.addEventListener("click", () => {
