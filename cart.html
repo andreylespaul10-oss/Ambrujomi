@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<title>Cart | Bliss Glow</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="aviso">Free UK delivery on orders over &pound;40 &bull; Secure checkout</div>
+
+<header>
+  <h1>Bliss<span>Glow</span></h1>
+  <nav>
+    <a href="index.html">Shop</a>
+    <a href="cart.html">Cart <span class="badge-carrinho" id="badge">0</span></a>
+  </nav>
+</header>
+
+<main class="container card carrinho-box">
+  <div class="info">
+    <h2>Your cart</h2>
+    <ul id="lista"></ul>
+
+    <label for="estado">Delivery</label>
+    <select id="estado" onchange="render()">
+      <option value="3.99">Standard (3&ndash;5 working days) &mdash; &pound;3.99</option>
+      <option value="7.99">Express (1&ndash;2 working days) &mdash; &pound;7.99</option>
+    </select>
+    <p class="nota-frete" id="nota-frete"></p>
+
+    <div class="resumo">
+      <p>Subtotal <span>&pound;<span id="subtotal">0.00</span></span></p>
+      <p>Delivery <span>&pound;<span id="frete">0.00</span></span></p>
+      <h3>Total <span>&pound;<span id="total">0.00</span></span></h3>
+    </div>
+
+    <div class="pagamentos">
+      <a class="btn cardpay" href="#">Pay by card</a>
+      <a class="btn paypal" href="#">Pay with PayPal</a>
+      <a class="btn whatsapp" id="zap" href="#">Order via WhatsApp</a>
+    </div>
+  </div>
+</main>
+
+<footer>Bliss Glow &mdash; test version. Payment links will be connected to your accounts.</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

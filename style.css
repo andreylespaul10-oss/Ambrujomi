@@ -166,8 +166,9 @@ button:focus-visible,.btn:focus-visible,select:focus-visible{
   outline:3px solid var(--rosa-claro);
   outline-offset:2px;
 }
-.btn.pix{background:var(--rosa)}
 .btn.cardpay{background:var(--tinta)}
+.btn.paypal{background:#26417A}
+.btn.paypal:hover{background:#1D3260}
 .btn.whatsapp{background:#1FA855}
 .btn.whatsapp:hover{background:#178A45}
 
@@ -233,6 +234,14 @@ select{
 }
 
 .pagamentos{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+
+.nota-frete{
+  color:var(--dourado);
+  font-size:13px;
+  font-weight:600;
+  margin:8px 0 0;
+  min-height:1em;
+}
 
 /* ---------- Rodapé ---------- */
 footer{

@@ -1,6 +1,8 @@
-// Carrinho da Bliss Glow — salvo no navegador via localStorage.
-// Configurar antes de publicar: número do WhatsApp com DDI+DDD, ex.: 5511999999999
-var WHATSAPP = "5500000000000";
+// Bliss Glow cart — stored in the browser via localStorage.
+// Configure before launch: WhatsApp number with country code, e.g. 447700900000
+var WHATSAPP = "440000000000";
+var FREE_DELIVERY_OVER = 40;
+var STANDARD_DELIVERY = 3.99;
 
 function lerCarrinho() {
   try {
@@ -46,18 +48,18 @@ function alterarQtd(nome, delta) {
 }
 
 function formatar(valor) {
-  return valor.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return valor.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function render() {
   var lista = document.getElementById("lista");
-  if (!lista) return; // não estamos na página do carrinho
+  if (!lista) return; // not on the cart page
 
   var itens = lerCarrinho();
   lista.innerHTML = "";
 
   if (itens.length === 0) {
-    lista.innerHTML = '<li class="vazio">Seu carrinho está vazio. Volte à página de produtos para adicionar itens.</li>';
+    lista.innerHTML = '<li class="vazio">Your cart is empty. Head back to the shop to add products.</li>';
   }
 
   var subtotal = 0;
@@ -73,13 +75,13 @@ function render() {
     qtd.className = "qtd";
     var menos = document.createElement("button");
     menos.textContent = "−";
-    menos.setAttribute("aria-label", "Diminuir quantidade de " + item.nome);
+    menos.setAttribute("aria-label", "Decrease quantity of " + item.nome);
     menos.onclick = function () { alterarQtd(item.nome, -1); };
     var num = document.createElement("span");
     num.textContent = item.qtd;
     var mais = document.createElement("button");
     mais.textContent = "+";
-    mais.setAttribute("aria-label", "Aumentar quantidade de " + item.nome);
+    mais.setAttribute("aria-label", "Increase quantity of " + item.nome);
     mais.onclick = function () { alterarQtd(item.nome, 1); };
     qtd.appendChild(menos);
     qtd.appendChild(num);
@@ -87,7 +89,7 @@ function render() {
 
     var valor = document.createElement("span");
     valor.className = "valor";
-    valor.textContent = "R$ " + formatar(item.preco * item.qtd);
+    valor.textContent = "£" + formatar(item.preco * item.qtd);
 
     li.appendChild(nome);
     li.appendChild(qtd);
@@ -95,7 +97,25 @@ function render() {
     lista.appendChild(li);
   });
 
-  var frete = itens.length > 0 ? Number(document.getElementById("estado").value) : 0;
+  var seletor = document.getElementById("estado");
+  var frete = itens.length > 0 ? Number(seletor.value) : 0;
+
+  // Free standard delivery over the threshold
+  var nota = document.getElementById("nota-frete");
+  var freteGratis = subtotal >= FREE_DELIVERY_OVER && Number(seletor.value) === STANDARD_DELIVERY;
+  if (freteGratis) frete = 0;
+  if (nota) {
+    if (itens.length === 0) {
+      nota.textContent = "";
+    } else if (freteGratis) {
+      nota.textContent = "You've unlocked free standard delivery!";
+    } else if (subtotal < FREE_DELIVERY_OVER) {
+      nota.textContent = "Spend £" + formatar(FREE_DELIVERY_OVER - subtotal) + " more for free standard delivery.";
+    } else {
+      nota.textContent = "";
+    }
+  }
+
   var total = subtotal + frete;
 
   document.getElementById("subtotal").textContent = formatar(subtotal);
@@ -105,11 +125,11 @@ function render() {
   var zap = document.getElementById("zap");
   if (zap) {
     var linhas = itens.map(function (i) {
-      return "- " + i.qtd + "x " + i.nome + " (R$ " + formatar(i.preco * i.qtd) + ")";
+      return "- " + i.qtd + "x " + i.nome + " (£" + formatar(i.preco * i.qtd) + ")";
     });
-    var msg = "Olá! Quero finalizar meu pedido:\n" + linhas.join("\n") +
-      "\nFrete: R$ " + formatar(frete) +
-      "\nTotal: R$ " + formatar(total);
+    var msg = "Hi! I'd like to place an order:\n" + linhas.join("\n") +
+      "\nDelivery: £" + formatar(frete) +
+      "\nTotal: £" + formatar(total);
     zap.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
   }
 }
