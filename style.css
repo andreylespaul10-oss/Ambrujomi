@@ -1,13 +1,14 @@
 :root{
-  --verde:#0E6B5C;
-  --verde-escuro:#0A5347;
-  --ambar:#C77E1E;
-  --tinta:#1C2321;
-  --fundo:#F5F6F2;
+  --rosa:#A8496B;
+  --rosa-escuro:#8C3A58;
+  --rosa-claro:#E8B4C4;
+  --dourado:#B07E2E;
+  --tinta:#2E2228;
+  --fundo:#FAF6F4;
   --superficie:#FFFFFF;
-  --borda:#E3E6DF;
-  --texto-suave:#5C665F;
-  --sombra:0 4px 18px rgba(28,35,33,.08);
+  --borda:#EDE2DE;
+  --texto-suave:#75626B;
+  --sombra:0 4px 18px rgba(46,34,40,.08);
 }
 
 *{box-sizing:border-box}
@@ -36,11 +37,11 @@ header{
 header h1{
   margin:0;
   font-size:22px;
-  letter-spacing:.12em;
+  letter-spacing:.14em;
   text-transform:uppercase;
   font-weight:800;
 }
-header h1 span{color:#7FC8B9}
+header h1 span{color:var(--rosa-claro);font-weight:400}
 nav{display:flex;gap:20px;align-items:center}
 nav a{
   color:#fff;
@@ -49,9 +50,9 @@ nav a{
   font-size:14px;
   letter-spacing:.04em;
 }
-nav a:hover{color:#7FC8B9}
+nav a:hover{color:var(--rosa-claro)}
 .badge-carrinho{
-  background:var(--verde);
+  background:var(--rosa);
   border-radius:999px;
   padding:2px 9px;
   font-size:12px;
@@ -61,7 +62,7 @@ nav a:hover{color:#7FC8B9}
 
 /* ---------- Faixa de aviso ---------- */
 .aviso{
-  background:var(--verde);
+  background:var(--rosa);
   color:#fff;
   text-align:center;
   font-size:13px;
@@ -80,7 +81,7 @@ nav a:hover{color:#7FC8B9}
   letter-spacing:.18em;
   font-size:12px;
   font-weight:700;
-  color:var(--verde);
+  color:var(--rosa);
   margin:0 0 6px;
 }
 .hero h2{
@@ -114,7 +115,7 @@ nav a:hover{color:#7FC8B9}
   flex-direction:column;
   transition:transform .15s ease,box-shadow .15s ease;
 }
-.card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(28,35,33,.13)}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(46,34,40,.13)}
 .card .foto{
   height:170px;
   display:flex;
@@ -123,9 +124,9 @@ nav a:hover{color:#7FC8B9}
   font-size:56px;
   color:#fff;
 }
-.foto-1{background:linear-gradient(135deg,#0E6B5C,#1B9C86)}
-.foto-2{background:linear-gradient(135deg,#26332E,#4E6B60)}
-.foto-3{background:linear-gradient(135deg,#B8781C,#E8A13D)}
+.foto-1{background:linear-gradient(135deg,#A8496B,#D97A9A)}
+.foto-2{background:linear-gradient(135deg,#3D2B36,#75626B)}
+.foto-3{background:linear-gradient(135deg,#B07E2E,#DCAB58)}
 .card .info{padding:18px;display:flex;flex-direction:column;gap:6px;flex:1}
 .card h3{margin:0;font-size:17px;font-weight:700}
 .card .desc{color:var(--texto-suave);font-size:13.5px;margin:0;flex:1}
@@ -138,7 +139,7 @@ nav a:hover{color:#7FC8B9}
 }
 .price small{
   display:block;
-  color:var(--verde);
+  color:var(--dourado);
   font-size:12px;
   font-weight:600;
   letter-spacing:.03em;
@@ -147,7 +148,7 @@ nav a:hover{color:#7FC8B9}
 /* ---------- Botões ---------- */
 button,.btn{
   display:inline-block;
-  background:var(--verde);
+  background:var(--rosa);
   color:#fff;
   border:none;
   padding:12px 16px;
@@ -160,13 +161,13 @@ button,.btn{
   letter-spacing:.02em;
   transition:background .15s ease;
 }
-button:hover,.btn:hover{background:var(--verde-escuro)}
+button:hover,.btn:hover{background:var(--rosa-escuro)}
 button:focus-visible,.btn:focus-visible,select:focus-visible{
-  outline:3px solid #7FC8B9;
+  outline:3px solid var(--rosa-claro);
   outline-offset:2px;
 }
-.btn.pix{background:#0E6B5C}
-.btn.cardpay{background:#1C2321}
+.btn.pix{background:var(--rosa)}
+.btn.cardpay{background:var(--tinta)}
 .btn.whatsapp{background:#1FA855}
 .btn.whatsapp:hover{background:#178A45}
 

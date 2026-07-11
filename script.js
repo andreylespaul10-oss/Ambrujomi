@@ -1,4 +1,4 @@
-// Carrinho da Anbrujomi — salvo no navegador via localStorage.
+// Carrinho da Bliss Glow — salvo no navegador via localStorage.
 // Configurar antes de publicar: número do WhatsApp com DDI+DDD, ex.: 5511999999999
 var WHATSAPP = "5500000000000";
 
