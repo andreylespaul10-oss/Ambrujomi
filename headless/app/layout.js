@@ -46,8 +46,10 @@ export default function RootLayout({ children }) {
             </div>
             <div>
               <h4>Help</h4>
-              <Link href="/">Delivery — free, 2–4 days</Link>
-              <Link href="/">30-day returns</Link>
+              <Link href="/delivery">Delivery — free, 2–4 days</Link>
+              <Link href="/refunds">30-day returns</Link>
+              <Link href="/terms">Terms &amp; Conditions</Link>
+              <Link href="/privacy">Privacy Policy</Link>
             </div>
           </div>
           <div className="fin">© 2026 Bliss Glow · blissglow.store · Prices include VAT</div>
