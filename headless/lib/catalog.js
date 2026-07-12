@@ -1,5 +1,14 @@
 import { serverClient, imageUrl } from "./wix";
 
+// Em ambientes onde o navegador não alcança o CDN do Wix (PROXY_IMAGES=1),
+// as imagens passam pelo nosso servidor via /api/img.
+function img(url) {
+  if (!url) return null;
+  return process.env.PROXY_IMAGES === "1"
+    ? "/api/img?u=" + encodeURIComponent(url)
+    : url;
+}
+
 function money(v) {
   const n = Number(v || 0);
   return "£" + n.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -16,7 +25,7 @@ function mapProduct(p) {
     priceFmt: money(price),
     compareAt: compare > price ? compare : null,
     compareAtFmt: compare > price ? money(compare) : null,
-    image: imageUrl(p.media?.main?.image, 800, 800),
+    image: img(imageUrl(p.media?.main?.image, 800, 800)),
     imageAlt: p.media?.main?.altText || p.name,
     description: p.plainDescription || "",
     ribbon: p.ribbon?.name || null,
