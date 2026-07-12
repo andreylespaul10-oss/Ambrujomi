@@ -56,9 +56,10 @@ Domínio blissglow.store apontará para o Vercel.
 (Next.js + PostgreSQL na Vercel, seguindo a documentação abaixo).
 Este protótipo é a semente do trilho B.
 
-Status: **documentação completa recebida (13 documentos)** — extraída da
-conversa do ChatGPT em 12/07/2026 e salva em `docs/`. Aguardando o OK da
-Ana para iniciar a implementação.
+Status (12/07/2026): **documentação completa (20 documentos)** em `docs/`
+e **storefront headless iniciado em `headless/`** (Next.js + Wix SDK,
+puxando o catálogo real do site BlissGlow — ver `headless/README.md`
+para o passo a passo de deploy na Vercel).
 
 ## 🚧 Próximos passos
 
