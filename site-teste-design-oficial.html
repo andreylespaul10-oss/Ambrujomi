@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Bliss Glow — Site Teste (Design System Oficial)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>
@@ -193,6 +194,14 @@ body.cart-open .drawer{transform:none}
 .done{max-width:560px;margin:0 auto;text-align:center;padding:3.5rem 0}
 .done .tick{width:74px;height:74px;border-radius:50%;background:var(--mint);color:var(--success);font-size:2.2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem}
 
+/* ---------- legal pages ---------- */
+.legal{max-width:70ch;margin:0 auto;padding:2.4rem 0 1rem}
+.legal h1{font-size:clamp(1.7rem,5vw,2.3rem);margin-bottom:.2rem}
+.legal .upd{font-size:.78rem;color:var(--grey);margin-bottom:1.4rem}
+.legal h3{margin-top:1.6rem;color:var(--rose-deep);font-size:.98rem}
+.legal p,.legal li{font-size:.92rem}
+.legal ul{padding-left:1.2rem}
+
 .hide{display:none!important}
 @media (max-width:840px){
   .hero .wrap{grid-template-columns:1fr}
@@ -232,8 +241,8 @@ body.cart-open .drawer{transform:none}
       <p style="font-size:.84rem;max-width:30ch;margin:0">Premium beauty &amp; wellness, delivered free across the United Kingdom.</p>
     </div>
     <div><h4>Shop</h4><a href="#/shop/skincare">Skincare</a><a href="#/shop/beauty-tools">Beauty Tools</a><a href="#/shop/wellness">Wellness</a><a href="#/shop/hair-body">Hair &amp; Body</a></div>
-    <div><h4>Help</h4><a href="#/home">Delivery — free, 2–4 days</a><a href="#/home">30-day returns</a><a href="#/home">Contact us</a><a href="#/home">FAQs</a></div>
-    <div><h4>Legal</h4><a href="#/home">Terms &amp; Conditions</a><a href="#/home">Privacy Policy</a><a href="#/home">Refund Policy</a></div>
+    <div><h4>Help</h4><a href="#/delivery">Delivery — free, 2–4 days</a><a href="#/refunds">30-day returns</a><a href="#/delivery">Contact us</a><a href="#/home">FAQs</a></div>
+    <div><h4>Legal</h4><a href="#/terms">Terms &amp; Conditions</a><a href="#/privacy">Privacy Policy</a><a href="#/refunds">Refund Policy</a></div>
   </div>
   <div class="fin">© 2026 Bliss Glow · blissglow.store · Prices include VAT · Site teste — protótipo do site próprio (não é o site Wix)</div>
 </footer>
@@ -553,6 +562,54 @@ function viewDone(order){
   </div>`;
 }
 
+/* ===== legal pages ===== */
+const LEGAL = {
+  terms: {title:"Terms & Conditions", body:`
+<h3>1. About us</h3>
+<p>Bliss Glow (blissglow.store) is an online retailer of beauty and wellness products serving customers in the United Kingdom. By placing an order you agree to these terms.</p>
+<h3>2. Orders & payment</h3>
+<p>All prices are shown in pounds sterling (GBP) and include VAT. Payment is taken securely at checkout via encrypted connection — we accept major credit and debit cards, PayPal, Apple Pay and Google Pay. We never see or store your full card details.</p>
+<h3>3. Delivery</h3>
+<p>Delivery is free on every UK order and typically takes 2–4 working days. You will receive a tracking link by email as soon as your parcel ships.</p>
+<h3>4. Your rights</h3>
+<p>Nothing in these terms affects your statutory rights under the Consumer Rights Act 2015 and the Consumer Contracts Regulations 2013, including your 14-day right to cancel — which our 30-day return policy exceeds.</p>
+<h3>5. Product information</h3>
+<p>Our products are cosmetic and wellness items, not medical devices. Always read the included instructions and discontinue use if irritation occurs. If you have a medical skin condition, consult a GP or dermatologist first.</p>
+<h3>6. Contact</h3>
+<p>Questions about these terms? Message us any time via the site chat or email — we reply within 24 hours, Monday to Saturday.</p>`},
+  privacy: {title:"Privacy Policy", body:`
+<h3>What we collect</h3>
+<p>When you shop with us we collect the information needed to fulfil your order: your name, delivery address, email address and order history. Payment details are processed by our payment provider and never stored by us.</p>
+<h3>How we use it</h3>
+<ul><li>To process and deliver your orders and send tracking updates</li>
+<li>To answer support questions</li>
+<li>To send offers and news — only if you opt in, and you can unsubscribe at any time with one click</li></ul>
+<h3>Your rights (UK GDPR)</h3>
+<p>You may request a copy of your data, ask us to correct it, or ask us to delete it at any time. We respond to all requests within 30 days. We never sell your personal data to third parties.</p>
+<h3>Cookies</h3>
+<p>We use essential cookies to keep your basket working, and analytics cookies (with your consent) to improve the shop. You can withdraw consent at any time.</p>`},
+  refunds: {title:"Refund & Return Policy", body:`
+<h3>30-day returns, no questions asked</h3>
+<p>If you are not completely happy with your purchase, you have 30 days from delivery to return any unused item in its original packaging for a full refund.</p>
+<h3>How to start a return</h3>
+<p>Message us via the site chat or email with your order number. We will send you return instructions the same day. Returns are free for UK customers.</p>
+<h3>Damaged or incorrect items</h3>
+<p>If anything arrives damaged or incorrect, send us a photo within 48 hours of delivery and we will ship a free replacement or issue an immediate full refund — you will not need to return the item.</p>
+<h3>Refund timing</h3>
+<p>Refunds are issued to your original payment method within 3–5 working days of approval. Your statutory rights are not affected.</p>`},
+  delivery: {title:"Delivery & Contact", body:`
+<h3>Free UK delivery on every order</h3>
+<p>Standard delivery is free on all UK orders with no minimum spend, and typically takes 2–4 working days. Every parcel is tracked — your tracking link arrives by email as soon as it ships.</p>
+<h3>Order processing</h3>
+<p>Orders are processed within 24 hours, Monday to Saturday. During busy periods (such as holiday sales) please allow one extra day.</p>
+<h3>Contact us</h3>
+<p>Our beauty assistant is available 24/7 via the site chat. For anything else, email us and a real person — Ana from BlissGlow — replies within 24 hours, Monday to Saturday.</p>`}
+};
+function viewLegal(kind){
+  const pg = LEGAL[kind];
+  return '<div class="wrap"><div class="legal"><h1>'+pg.title+'</h1><p class="upd">Last updated: July 2026 · Bliss Glow · blissglow.store</p>'+pg.body+'<p style="margin-top:2rem"><a class="btn btn-ghost" href="#/home">← Back to shop</a></p></div></div>';
+}
+
 /* ===== router ===== */
 let lastOrder = null;
 function render(){
@@ -564,6 +621,7 @@ function render(){
   else if(route==="shop"){ app.innerHTML = viewShop(arg); nav = arg==="skincare"||arg==="wellness" ? arg : "shop"; }
   else if(route==="checkout"){ app.innerHTML = viewCheckout(); initCheckout(); }
   else if(route==="done" && lastOrder){ app.innerHTML = viewDone(lastOrder); }
+  else if(LEGAL[route]){ app.innerHTML = viewLegal(route); nav=""; }
   else { app.innerHTML = viewHome(); nav="home"; }
   document.querySelectorAll("[data-nav]").forEach(a=>a.setAttribute("aria-current", a.dataset.nav===nav));
   window.scrollTo(0,0);
