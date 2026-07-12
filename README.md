@@ -51,8 +51,14 @@ usando o site Wix "BlissGlow" como motor de comércio por trás
 (catálogo, carrinho, checkout com Stripe, pedidos e DSers continuam no Wix).
 Domínio blissglow.store apontará para o Vercel.
 
-Status: **aguardando o envio da especificação "Série 2"** pela Ana
-(novas partes com tudo do site). Quando ela der o OK, iniciar a implementação.
+**Atualização (12/07/2026): a Ana quer os DOIS entregáveis** —
+(A) o site Wix/Wix-Headless e (B) um site 100% do zero
+(Next.js + PostgreSQL na Vercel, seguindo a documentação abaixo).
+Este protótipo é a semente do trilho B.
+
+Status: **documentação completa recebida (13 documentos)** — extraída da
+conversa do ChatGPT em 12/07/2026 e salva em `docs/`. Aguardando o OK da
+Ana para iniciar a implementação.
 
 ## 🚧 Próximos passos
 
@@ -69,3 +75,25 @@ A pasta `docs/` contém a especificação técnica completa em 24 partes
 API, SEO, performance, segurança, integrações DSers/AliExpress, recursos
 premium/IA, testes, deploy e checklist de lançamento) + o master prompt
 de implementação.
+
+### Documentação complementar (Séries 2+, extraída do ChatGPT em 12/07/2026)
+
+| Pasta | Documento | Capítulos |
+|---|---|---|
+| `docs/database/` | Database Schema (PostgreSQL) | 15 |
+| `docs/api/` | API Documentation (REST) | 15 |
+| `docs/design-system/` | Design System | 20 |
+| `docs/security-infrastructure/` | Security & Infrastructure | 20 |
+| `docs/seo-content-strategy/` | SEO & Content Strategy | 20 |
+| `docs/testing-qa/` | Testing & Quality Assurance | 20 |
+| `docs/cms/` | CMS & Content Management | 20 |
+| `docs/analytics/` | Analytics & Tracking | 20 |
+| `docs/marketing-crm/` | Marketing Automation & CRM | 20 |
+| `docs/business-rules/` | Business Rules | 20 |
+| `docs/devops/` | Deployment & DevOps | 20 |
+| `docs/developer-handbook/` | Developer Handbook | 20 |
+| `docs/operations-manual/` | Operations Manual | 20 |
+
+Nota: o ChatGPT ainda recomendou documentos 14–20 (Monitoring &
+Observability … Master Documentation Index), que não haviam sido gerados
+até a extração.
