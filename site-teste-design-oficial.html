@@ -1,10 +1,11 @@
 <meta charset="utf-8">
-<title>Bliss Glow — Site Teste (Design System Oficial)</title>
+<title>Bliss Glow — Site Teste (UK · Ireland · Europe)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>
 /* ============================================================
    BLISS GLOW — Official Design System v1.0
    Colours: Ch.3 | Type: Ch.4 (Playfair Display + Inter)
+   Phases: 1 UK (GBP) · 2 Ireland (EUR) · 3 Europe (EUR + i18n)
    ============================================================ */
 :root{
   --rose:#E8B4C7; --rose-deep:#C97C98; --blush:#F8EAF0;
@@ -35,14 +36,16 @@ button{font-family:var(--ui);cursor:pointer}
 .announce{background:linear-gradient(90deg,var(--rose-deep),var(--rose));color:#fff;text-align:center;font-size:.78rem;letter-spacing:.06em;padding:.5rem 1rem}
 .announce b{color:#FFF3C9}
 header.site{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
-.bar{display:flex;align-items:center;gap:1rem;padding:.8rem 0}
+.bar{display:flex;align-items:center;gap:.7rem;padding:.8rem 0;flex-wrap:wrap}
 .logo{font-family:var(--display);font-weight:700;font-size:1.35rem;color:var(--ink);text-decoration:none;letter-spacing:.01em}
 .logo em{font-style:normal;color:var(--rose-deep)}
 nav.main{display:flex;gap:1.1rem;margin-left:auto}
 nav.main a{color:var(--body);text-decoration:none;font-size:.86rem;font-weight:500;padding:.25rem 0;border-bottom:2px solid transparent}
 nav.main a[aria-current="true"]{color:var(--rose-deep);border-bottom-color:var(--rose)}
-.cartbtn{margin-left:auto;position:relative;background:none;border:1.5px solid var(--line);border-radius:999px;padding:.5rem .95rem;color:var(--ink);font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:.4rem}
-nav.main + .cartbtn{margin-left:0}
+.rsel{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:.45rem .7rem;font-size:.8rem;font-weight:600;font-family:var(--ui)}
+.rgroup{display:flex;gap:.4rem;margin-left:auto}
+nav.main ~ .rgroup{margin-left:0}
+.cartbtn{position:relative;background:none;border:1.5px solid var(--line);border-radius:999px;padding:.5rem .95rem;color:var(--ink);font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:.4rem}
 .cartbtn .n{background:var(--rose-deep);color:#fff;border-radius:999px;font-size:.68rem;min-width:1.15rem;height:1.15rem;display:inline-flex;align-items:center;justify-content:center;padding:0 .25rem}
 
 /* ---------- hero ---------- */
@@ -217,18 +220,30 @@ body.cart-open .drawer{transform:none}
 }
 </style>
 
-<div class="announce">FREE UK delivery on every order &nbsp;•&nbsp; Use code <b>GLOW10</b> for 10% off</div>
+<div class="announce" id="announce"></div>
 
 <header class="site">
   <div class="wrap bar">
     <a class="logo" href="#/home">Bliss <em>Glow</em></a>
     <nav class="main" aria-label="Main">
-      <a href="#/home" data-nav="home">Home</a>
-      <a href="#/shop" data-nav="shop">Shop</a>
-      <a href="#/shop/skincare" data-nav="skincare">Skincare</a>
-      <a href="#/shop/wellness" data-nav="wellness">Wellness</a>
+      <a href="#/home" data-nav="home" data-t="nav_home"></a>
+      <a href="#/shop" data-nav="shop" data-t="nav_shop"></a>
+      <a href="#/shop/skincare" data-nav="skincare" data-t="nav_skin"></a>
+      <a href="#/shop/wellness" data-nav="wellness" data-t="nav_well"></a>
     </nav>
-    <button class="cartbtn" id="openCart" aria-label="Open basket">Basket <span class="n" id="cartN">0</span></button>
+    <div class="rgroup">
+      <select class="rsel" id="regionSel" aria-label="Region">
+        <option value="uk">🇬🇧 UK · £</option>
+        <option value="ie">🇮🇪 Ireland · €</option>
+        <option value="eu">🇪🇺 Europe · €</option>
+      </select>
+      <select class="rsel hide" id="langSel" aria-label="Language">
+        <option value="en">EN</option><option value="de">DE</option>
+        <option value="fr">FR</option><option value="es">ES</option>
+        <option value="it">IT</option>
+      </select>
+      <button class="cartbtn" id="openCart" aria-label="Open basket"><span data-t="basket"></span> <span class="n" id="cartN">0</span></button>
+    </div>
   </div>
 </header>
 
@@ -238,36 +253,36 @@ body.cart-open .drawer{transform:none}
   <div class="wrap">
     <div>
       <div class="logo" style="margin-bottom:.5rem;color:#fff">Bliss <em style="color:#FFE1EE">Glow</em></div>
-      <p style="font-size:.84rem;max-width:30ch;margin:0">Premium beauty &amp; wellness, delivered free across the United Kingdom.</p>
+      <p style="font-size:.84rem;max-width:30ch;margin:0" id="footTag"></p>
     </div>
     <div><h4>Shop</h4><a href="#/shop/skincare">Skincare</a><a href="#/shop/beauty-tools">Beauty Tools</a><a href="#/shop/wellness">Wellness</a><a href="#/shop/hair-body">Hair &amp; Body</a></div>
-    <div><h4>Help</h4><a href="#/delivery">Delivery — free, 2–4 days</a><a href="#/refunds">30-day returns</a><a href="#/delivery">Contact us</a><a href="#/home">FAQs</a></div>
+    <div><h4>Help</h4><a href="#/delivery" id="footDel"></a><a href="#/refunds">30-day returns</a><a href="#/delivery">Contact us</a><a href="#/home">FAQs</a></div>
     <div><h4>Legal</h4><a href="#/terms">Terms &amp; Conditions</a><a href="#/privacy">Privacy Policy</a><a href="#/refunds">Refund Policy</a></div>
   </div>
-  <div class="fin">© 2026 Bliss Glow · blissglow.store · Prices include VAT · Site teste — protótipo do site próprio (não é o site Wix)</div>
+  <div class="fin">© 2026 Bliss Glow · blissglow.store · <span id="footVat"></span> · Site teste — protótipo do site próprio</div>
 </footer>
 
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" role="dialog" aria-label="Basket" aria-modal="true">
-  <header><b>Your basket</b><button class="dclose" id="closeCart" aria-label="Close basket">×</button></header>
+  <header><b data-t="your_basket"></b><button class="dclose" id="closeCart" aria-label="Close basket">×</button></header>
   <div class="dlines" id="dlines"></div>
   <div class="dfoot">
     <div class="coupon">
       <input id="coupon" placeholder="Discount code" aria-label="Discount code">
-      <button class="btn btn-ghost" id="applyCoupon" style="padding:.5rem 1.1rem">Apply</button>
+      <button class="btn btn-ghost" id="applyCoupon" style="padding:.5rem 1.1rem">OK</button>
     </div>
     <div id="couponMsg"></div>
-    <div class="sumrow"><span>Subtotal</span><span id="sub"></span></div>
-    <div class="sumrow" id="discRow" style="color:var(--success)"><span>Discount</span><span id="disc"></span></div>
-    <div class="sumrow"><span>Delivery</span><span style="color:var(--success);font-weight:600">FREE</span></div>
-    <div class="sumrow total"><span>Total</span><span id="tot"></span></div>
-    <a class="btn btn-primary" href="#/checkout" id="toCheckout" style="width:100%">Checkout securely</a>
+    <div class="sumrow"><span data-t="subtotal"></span><span id="sub"></span></div>
+    <div class="sumrow" id="discRow" style="color:var(--success)"><span data-t="discount"></span><span id="disc"></span></div>
+    <div class="sumrow"><span data-t="delivery"></span><span style="color:var(--success);font-weight:600" data-t="free"></span></div>
+    <div class="sumrow total"><span data-t="total"></span><span id="tot"></span></div>
+    <a class="btn btn-primary" href="#/checkout" id="toCheckout" style="width:100%" data-t="checkout_btn"></a>
   </div>
 </aside>
 
 <script>
 "use strict";
-/* ===== catalogue (from assets/js/data.js — GBP, VAT inclusive) ===== */
+/* ===== catalogue (base prices GBP, VAT inclusive) ===== */
 const CATS = [
   {id:"skincare",name:"Skincare",desc:"Serums, masks & glow essentials",e:"🧴",c:"c-rose"},
   {id:"beauty-tools",name:"Beauty Tools",desc:"Pro tools for your routine",e:"💎",c:"c-gold"},
@@ -321,22 +336,157 @@ const TESTI = [
  {name:"Charlotte B.",where:"Bristol",stars:4,text:"The neck massager is my evening ritual now. Heat function is bliss after a desk day."}
 ];
 const FAQS = [
- {q:"How long does delivery take?",a:"Delivery is FREE on every UK order and takes 2–4 working days. You will receive a tracking link as soon as your parcel ships."},
+ {q:"How long does delivery take?",a:"Delivery is FREE on every order. UK: 2–4 working days. Ireland: 3–6 working days. Rest of Europe: 5–9 working days. You will receive a tracking link as soon as your parcel ships."},
  {q:"What is your returns policy?",a:"You have 30 days from delivery to return any unused item in its original packaging for a full refund — no questions asked."},
  {q:"Which payment methods do you accept?",a:"We accept all major credit and debit cards, PayPal, Apple Pay and Google Pay. All payments are processed over encrypted, secure connections."},
- {q:"Are your products cruelty-free?",a:"Yes. We only stock products that are cruelty-free, and we clearly label vegan-friendly items on each product page."}
+ {q:"Do I pay customs or import fees?",a:"No. Prices include VAT for your region, so there are no surprise charges on delivery — what you see at checkout is exactly what you pay."}
 ];
 const COUPONS = {GLOW10:.10, WELCOME15:.15};
 
+/* ===== phases: region, currency & language ===== */
+let region = "uk";       /* Phase 1: uk (£) · Phase 2: ie (€) · Phase 3: eu (€ + languages) */
+let lang = "en";
+const RATE_EUR = 1.17;
+const REGION = {
+  uk:{cur:"GBP", days:"2–4", place:{en:"the UK"}, locale:"en-GB"},
+  ie:{cur:"EUR", days:"3–6", place:{en:"Ireland"}, locale:"en-IE"},
+  eu:{cur:"EUR", days:"5–9", place:{en:"Europe",de:"Europa",fr:"toute l'Europe",es:"toda Europa",it:"tutta Europa"}, locale:"en-IE"}
+};
+const LOCALES = {en:"en-IE",de:"de-DE",fr:"fr-FR",es:"es-ES",it:"it-IT"};
+
+/* price of a GBP value in the active region */
+const cv = v => region==="uk" ? v : Math.ceil(v*RATE_EUR) - 0.01;
+const fmt = v => region==="uk"
+  ? "£" + v.toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2})
+  : v.toLocaleString(LOCALES[lang],{style:"currency",currency:"EUR"});
+
+/* ===== interface translations (Phase 3) ===== */
+const I18N = {
+en:{nav_home:"Home",nav_shop:"Shop",nav_skin:"Skincare",nav_well:"Wellness",basket:"Basket",
+ announce:"FREE delivery to {place} on every order • Use code <b>GLOW10</b> for 10% off",
+ hero_eyebrow:"Premium beauty & wellness · {place}",
+ hero_title:"Glow is a ritual,<br>not a chance.",
+ hero_lead:"Salon-grade skincare tools and self-care essentials, hand-picked and delivered free to your door anywhere in {place}.",
+ cta_shop:"Shop the collection",cta_skin:"Explore skincare",
+ t1a:"Free delivery",t1b:"on every order",t2a:"{days} working days",t2b:"tracked shipping",
+ t3a:"30-day returns",t3b:"no questions asked",t4a:"Secure checkout",t4b:"Stripe · Apple Pay",
+ cat_eyebrow:"Curated for you",cat_title:"Shop by category",
+ best_eyebrow:"Customer favourites",best_title:"Best sellers",
+ new_eyebrow:"Just landed",new_title:"New arrivals",view_all:"View all →",
+ promo_eyebrow:"Welcome offer",promo_title:"10% off your first ritual",promo_sub:"Applied at checkout. Free delivery included, as always.",
+ rev_eyebrow:"4.7★ average from 1,800+ orders",rev_title:"Loved by our customers",
+ faq_eyebrow:"Good to know",faq_title:"Questions, answered",
+ news_title:"Join the glow list",news_sub:"15% off your first order with <b>WELCOME15</b> — plus early access to new arrivals.",news_btn:"Subscribe",news_ph:"Your email address",news_ok:"You're on the list! Use WELCOME15 at checkout. 💌",
+ add:"Add to basket",your_basket:"Your basket",empty:"Your basket is empty.<br>Every order ships free. ✨",
+ subtotal:"Subtotal",discount:"Discount",delivery:"Delivery",free:"FREE",total:"Total",
+ checkout_btn:"Checkout securely",remove:"Remove",save:"Save",
+ freeline:"✓ FREE delivery to {place}, {days} working days · 30-day returns",
+ also_eyebrow:"Complete the ritual",also_title:"You may also like",
+ all:"All",products_n:"products · free delivery",pay:"Pay",
+ foot_tag:"Premium beauty & wellness, delivered free across {place}.",foot_del:"Delivery — free, {days} days",foot_vat:"Prices include VAT"},
+de:{nav_home:"Start",nav_shop:"Shop",nav_skin:"Hautpflege",nav_well:"Wellness",basket:"Warenkorb",
+ announce:"KOSTENLOSER Versand nach {place} • Code <b>GLOW10</b> = 10% Rabatt",
+ hero_eyebrow:"Premium-Beauty & Wellness · {place}",
+ hero_title:"Strahlen ist ein Ritual,<br>kein Zufall.",
+ hero_lead:"Hochwertige Beauty-Tools und Selfcare-Essentials — handverlesen und kostenlos zu dir nach Hause geliefert, überall in {place}.",
+ cta_shop:"Kollektion entdecken",cta_skin:"Hautpflege ansehen",
+ t1a:"Kostenloser Versand",t1b:"bei jeder Bestellung",t2a:"{days} Werktage",t2b:"mit Sendungsverfolgung",
+ t3a:"30 Tage Rückgabe",t3b:"ohne Wenn und Aber",t4a:"Sicher bezahlen",t4b:"Stripe · Apple Pay",
+ cat_eyebrow:"Für dich ausgewählt",cat_title:"Nach Kategorie shoppen",
+ best_eyebrow:"Kundenlieblinge",best_title:"Bestseller",
+ new_eyebrow:"Neu eingetroffen",new_title:"Neuheiten",view_all:"Alle ansehen →",
+ promo_eyebrow:"Willkommensangebot",promo_title:"10% auf dein erstes Ritual",promo_sub:"Wird an der Kasse angewendet. Versand immer kostenlos.",
+ rev_eyebrow:"4,7★ Durchschnitt aus 1.800+ Bestellungen",rev_title:"Von unseren Kundinnen geliebt",
+ faq_eyebrow:"Gut zu wissen",faq_title:"Fragen & Antworten",
+ news_title:"Trag dich in die Glow-Liste ein",news_sub:"15% auf deine erste Bestellung mit <b>WELCOME15</b> — plus Frühzugang zu Neuheiten.",news_btn:"Abonnieren",news_ph:"Deine E-Mail-Adresse",news_ok:"Du bist dabei! Nutze WELCOME15 an der Kasse. 💌",
+ add:"In den Warenkorb",your_basket:"Dein Warenkorb",empty:"Dein Warenkorb ist leer.<br>Jede Bestellung versandkostenfrei. ✨",
+ subtotal:"Zwischensumme",discount:"Rabatt",delivery:"Versand",free:"GRATIS",total:"Gesamt",
+ checkout_btn:"Sicher zur Kasse",remove:"Entfernen",save:"Spare",
+ freeline:"✓ GRATIS Versand nach {place}, {days} Werktage · 30 Tage Rückgabe",
+ also_eyebrow:"Ritual vervollständigen",also_title:"Das könnte dir gefallen",
+ all:"Alle",products_n:"Produkte · kostenloser Versand",pay:"Bezahlen",
+ foot_tag:"Premium-Beauty & Wellness, kostenlos geliefert in {place}.",foot_del:"Versand — gratis, {days} Tage",foot_vat:"Preise inkl. MwSt."},
+fr:{nav_home:"Accueil",nav_shop:"Boutique",nav_skin:"Soins",nav_well:"Bien-être",basket:"Panier",
+ announce:"Livraison GRATUITE dans {place} • Code <b>GLOW10</b> : -10%",
+ hero_eyebrow:"Beauté & bien-être premium · {place}",
+ hero_title:"L'éclat est un rituel,<br>pas un hasard.",
+ hero_lead:"Des outils de soin professionnels et des essentiels bien-être, sélectionnés avec soin et livrés gratuitement chez vous, partout dans {place}.",
+ cta_shop:"Découvrir la collection",cta_skin:"Explorer les soins",
+ t1a:"Livraison gratuite",t1b:"sur chaque commande",t2a:"{days} jours ouvrés",t2b:"suivi inclus",
+ t3a:"Retours sous 30 jours",t3b:"sans conditions",t4a:"Paiement sécurisé",t4b:"Stripe · Apple Pay",
+ cat_eyebrow:"Choisi pour vous",cat_title:"Acheter par catégorie",
+ best_eyebrow:"Favoris des clientes",best_title:"Meilleures ventes",
+ new_eyebrow:"Nouveautés",new_title:"Nouveaux arrivages",view_all:"Tout voir →",
+ promo_eyebrow:"Offre de bienvenue",promo_title:"-10% sur votre premier rituel",promo_sub:"Appliqué au paiement. Livraison toujours gratuite.",
+ rev_eyebrow:"4,7★ de moyenne sur 1 800+ commandes",rev_title:"Adoré par nos clientes",
+ faq_eyebrow:"Bon à savoir",faq_title:"Vos questions, nos réponses",
+ news_title:"Rejoignez la glow list",news_sub:"-15% sur votre première commande avec <b>WELCOME15</b> — et accès anticipé aux nouveautés.",news_btn:"S'abonner",news_ph:"Votre adresse e-mail",news_ok:"C'est noté ! Utilisez WELCOME15 au paiement. 💌",
+ add:"Ajouter au panier",your_basket:"Votre panier",empty:"Votre panier est vide.<br>Livraison gratuite sur chaque commande. ✨",
+ subtotal:"Sous-total",discount:"Remise",delivery:"Livraison",free:"GRATUITE",total:"Total",
+ checkout_btn:"Paiement sécurisé",remove:"Retirer",save:"Économisez",
+ freeline:"✓ Livraison GRATUITE dans {place}, {days} jours ouvrés · Retours sous 30 jours",
+ also_eyebrow:"Complétez le rituel",also_title:"Vous aimerez aussi",
+ all:"Tout",products_n:"produits · livraison gratuite",pay:"Payer",
+ foot_tag:"Beauté & bien-être premium, livrés gratuitement dans {place}.",foot_del:"Livraison — gratuite, {days} jours",foot_vat:"Prix TTC"},
+es:{nav_home:"Inicio",nav_shop:"Tienda",nav_skin:"Cuidado facial",nav_well:"Bienestar",basket:"Cesta",
+ announce:"Envío GRATIS a {place} en cada pedido • Código <b>GLOW10</b>: 10% de descuento",
+ hero_eyebrow:"Belleza y bienestar premium · {place}",
+ hero_title:"El brillo es un ritual,<br>no una casualidad.",
+ hero_lead:"Herramientas de cuidado facial profesionales y esenciales de autocuidado, seleccionados a mano y enviados gratis a tu puerta en {place}.",
+ cta_shop:"Ver la colección",cta_skin:"Explorar cuidado facial",
+ t1a:"Envío gratis",t1b:"en cada pedido",t2a:"{days} días laborables",t2b:"envío con seguimiento",
+ t3a:"Devoluciones 30 días",t3b:"sin preguntas",t4a:"Pago seguro",t4b:"Stripe · Apple Pay",
+ cat_eyebrow:"Seleccionado para ti",cat_title:"Comprar por categoría",
+ best_eyebrow:"Favoritos de las clientas",best_title:"Más vendidos",
+ new_eyebrow:"Recién llegados",new_title:"Novedades",view_all:"Ver todo →",
+ promo_eyebrow:"Oferta de bienvenida",promo_title:"10% en tu primer ritual",promo_sub:"Se aplica al pagar. Envío gratis incluido, como siempre.",
+ rev_eyebrow:"4,7★ de media en más de 1.800 pedidos",rev_title:"Nuestras clientas lo adoran",
+ faq_eyebrow:"Bueno saberlo",faq_title:"Preguntas frecuentes",
+ news_title:"Únete a la glow list",news_sub:"15% en tu primer pedido con <b>WELCOME15</b> — y acceso anticipado a novedades.",news_btn:"Suscribirme",news_ph:"Tu correo electrónico",news_ok:"¡Ya estás dentro! Usa WELCOME15 al pagar. 💌",
+ add:"Añadir a la cesta",your_basket:"Tu cesta",empty:"Tu cesta está vacía.<br>Envío gratis en cada pedido. ✨",
+ subtotal:"Subtotal",discount:"Descuento",delivery:"Envío",free:"GRATIS",total:"Total",
+ checkout_btn:"Pagar de forma segura",remove:"Quitar",save:"Ahorra",
+ freeline:"✓ Envío GRATIS a {place}, {days} días laborables · Devoluciones 30 días",
+ also_eyebrow:"Completa el ritual",also_title:"También te puede gustar",
+ all:"Todo",products_n:"productos · envío gratis",pay:"Pagar",
+ foot_tag:"Belleza y bienestar premium, con envío gratis a {place}.",foot_del:"Envío — gratis, {days} días",foot_vat:"Precios con IVA"},
+it:{nav_home:"Home",nav_shop:"Negozio",nav_skin:"Skincare",nav_well:"Benessere",basket:"Carrello",
+ announce:"Spedizione GRATUITA in {place} su ogni ordine • Codice <b>GLOW10</b>: -10%",
+ hero_eyebrow:"Bellezza e benessere premium · {place}",
+ hero_title:"La luminosità è un rituale,<br>non un caso.",
+ hero_lead:"Strumenti skincare professionali ed essenziali per la cura di sé, selezionati a mano e consegnati gratis a casa tua in {place}.",
+ cta_shop:"Scopri la collezione",cta_skin:"Esplora la skincare",
+ t1a:"Spedizione gratuita",t1b:"su ogni ordine",t2a:"{days} giorni lavorativi",t2b:"con tracciamento",
+ t3a:"Resi entro 30 giorni",t3b:"senza domande",t4a:"Pagamento sicuro",t4b:"Stripe · Apple Pay",
+ cat_eyebrow:"Scelto per te",cat_title:"Acquista per categoria",
+ best_eyebrow:"I preferiti delle clienti",best_title:"Best seller",
+ new_eyebrow:"Appena arrivati",new_title:"Novità",view_all:"Vedi tutto →",
+ promo_eyebrow:"Offerta di benvenuto",promo_title:"-10% sul tuo primo rituale",promo_sub:"Applicato al pagamento. Spedizione sempre gratuita.",
+ rev_eyebrow:"4,7★ di media su oltre 1.800 ordini",rev_title:"Amato dalle nostre clienti",
+ faq_eyebrow:"Buono a sapersi",faq_title:"Domande e risposte",
+ news_title:"Iscriviti alla glow list",news_sub:"-15% sul primo ordine con <b>WELCOME15</b> — e accesso anticipato alle novità.",news_btn:"Iscrivimi",news_ph:"La tua email",news_ok:"Sei dentro! Usa WELCOME15 al pagamento. 💌",
+ add:"Aggiungi al carrello",your_basket:"Il tuo carrello",empty:"Il tuo carrello è vuoto.<br>Spedizione gratuita su ogni ordine. ✨",
+ subtotal:"Subtotale",discount:"Sconto",delivery:"Spedizione",free:"GRATIS",total:"Totale",
+ checkout_btn:"Vai al pagamento sicuro",remove:"Rimuovi",save:"Risparmi",
+ freeline:"✓ Spedizione GRATUITA in {place}, {days} giorni lavorativi · Resi entro 30 giorni",
+ also_eyebrow:"Completa il rituale",also_title:"Potrebbe piacerti anche",
+ all:"Tutto",products_n:"prodotti · spedizione gratuita",pay:"Paga",
+ foot_tag:"Bellezza e benessere premium, consegnati gratis in {place}.",foot_del:"Spedizione — gratis, {days} giorni",foot_vat:"Prezzi IVA inclusa"}
+};
+function t(key){
+  const r = REGION[region];
+  const place = r.place[lang] || r.place.en;
+  const s = (I18N[lang] && I18N[lang][key]) || I18N.en[key] || key;
+  return s.replace(/\{place\}/g, place).replace(/\{days\}/g, r.days);
+}
+
 /* ===== state ===== */
-const fmt = v => "£" + v.toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2});
-let cart = [];   // {id, variant, qty}
+let cart = [];
 let coupon = null;
 const byId = id => P.find(p => p.id === id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-
 function cartCount(){ return cart.reduce((n,l)=>n+l.qty,0); }
-function cartSubtotal(){ return cart.reduce((s,l)=>s+byId(l.id).price*l.qty,0); }
+function cartSubtotal(){ return cart.reduce((s,l)=>s+cv(byId(l.id).price)*l.qty,0); }
 
 function addToCart(id, variant, qty){
   qty = qty || 1;
@@ -351,14 +501,14 @@ function syncCart(){
   document.getElementById("cartN").textContent = cartCount();
   const box = document.getElementById("dlines");
   if(!cart.length){
-    box.innerHTML = '<p style="color:var(--grey);font-size:.86rem;text-align:center;margin-top:2rem">Your basket is empty.<br>Every order ships free across the UK. ✨</p>';
+    box.innerHTML = '<p style="color:var(--grey);font-size:.86rem;text-align:center;margin-top:2rem">'+t("empty")+'</p>';
   } else {
     box.innerHTML = cart.map((l,i)=>{
       const p = byId(l.id);
       return '<div class="dline">'
         + '<div class="th '+p.g+'">'+p.e+'</div>'
-        + '<div><b>'+esc(p.name)+'</b><small>'+(l.variant?esc(l.variant)+" · ":"")+l.qty+' × '+fmt(p.price)+'</small><br><button class="rm" data-rm="'+i+'">Remove</button></div>'
-        + '<b style="font-variant-numeric:tabular-nums;color:var(--ink)">'+fmt(p.price*l.qty)+'</b></div>';
+        + '<div><b>'+esc(p.name)+'</b><small>'+(l.variant?esc(l.variant)+" · ":"")+l.qty+' × '+fmt(cv(p.price))+'</small><br><button class="rm" data-rm="'+i+'">'+t("remove")+'</button></div>'
+        + '<b style="font-variant-numeric:tabular-nums;color:var(--ink)">'+fmt(cv(p.price)*l.qty)+'</b></div>';
     }).join("");
   }
   const sub = cartSubtotal();
@@ -375,8 +525,8 @@ document.getElementById("dlines").addEventListener("click", e=>{
 document.getElementById("applyCoupon").addEventListener("click", ()=>{
   const v = document.getElementById("coupon").value.trim().toUpperCase();
   const msg = document.getElementById("couponMsg");
-  if(COUPONS[v]){ coupon = v; msg.innerHTML = '<span class="okmsg">Code '+v+' applied — '+(COUPONS[v]*100)+'% off ✓</span>'; }
-  else { coupon = null; msg.innerHTML = '<span class="errmsg">That code isn\'t valid. Try GLOW10.</span>'; }
+  if(COUPONS[v]){ coupon = v; msg.innerHTML = '<span class="okmsg">'+v+' ✓ −'+(COUPONS[v]*100)+'%</span>'; }
+  else { coupon = null; msg.innerHTML = '<span class="errmsg">GLOW10? WELCOME15?</span>'; }
   syncCart();
 });
 function openCart(){ document.body.classList.add("cart-open"); }
@@ -386,6 +536,26 @@ document.getElementById("closeCart").addEventListener("click", closeCart);
 document.getElementById("scrim").addEventListener("click", closeCart);
 document.getElementById("toCheckout").addEventListener("click", closeCart);
 
+/* ===== region & language switching ===== */
+function applyChrome(){
+  document.getElementById("announce").innerHTML = t("announce");
+  document.querySelectorAll("[data-t]").forEach(el=>{ el.innerHTML = t(el.dataset.t); });
+  document.getElementById("footTag").textContent = t("foot_tag");
+  document.getElementById("footDel").textContent = t("foot_del");
+  document.getElementById("footVat").textContent = t("foot_vat");
+  document.documentElement.lang = lang;
+}
+document.getElementById("regionSel").addEventListener("change", e=>{
+  region = e.target.value;
+  const ls = document.getElementById("langSel");
+  if(region!=="eu"){ lang = "en"; ls.value = "en"; ls.classList.add("hide"); }
+  else ls.classList.remove("hide");
+  applyChrome(); syncCart(); render();
+});
+document.getElementById("langSel").addEventListener("change", e=>{
+  lang = e.target.value; applyChrome(); syncCart(); render();
+});
+
 /* ===== rendering helpers ===== */
 function starRow(p){
   return '<div class="stars">'+"★".repeat(Math.round(p.rating))+"☆".repeat(5-Math.round(p.rating))+' <span>'+p.rating+' ('+p.reviews+')</span></div>';
@@ -393,11 +563,11 @@ function starRow(p){
 function card(p){
   const b = p.badge ? '<span class="badge '+(p.badge==="Sale"?"b-sale":p.badge==="New"?"b-new":"b-best")+'">'+p.badge+'</span>' : "";
   return '<article class="pcard">'
-    + '<button class="part '+p.g+'" data-go="#/product/'+p.id+'" aria-label="View '+esc(p.name)+'">'+b+p.e+'</button>'
+    + '<button class="part '+p.g+'" data-go="#/product/'+p.id+'" aria-label="'+esc(p.name)+'">'+b+p.e+'</button>'
     + '<div class="pbody"><h3><button data-go="#/product/'+p.id+'">'+esc(p.name)+'</button></h3>'
     + starRow(p)
-    + '<div class="pricing"><span class="now">'+fmt(p.price)+'</span>'+(p.was?'<span class="was">'+fmt(p.was)+'</span>':"")+'</div>'
-    + '<button class="add" data-add="'+p.id+'">Add to basket</button></div></article>';
+    + '<div class="pricing"><span class="now">'+fmt(cv(p.price))+'</span>'+(p.was?'<span class="was">'+fmt(cv(p.was))+'</span>':"")+'</div>'
+    + '<button class="add" data-add="'+p.id+'">'+t("add")+'</button></div></article>';
 }
 function grid(list){ return '<div class="grid">'+list.map(card).join("")+'</div>'; }
 
@@ -408,61 +578,61 @@ function viewHome(){
   return `
   <section class="hero"><div class="wrap">
     <div>
-      <span class="eyebrow">Premium beauty &amp; wellness · UK</span>
-      <h1>Glow is a ritual,<br>not a chance.</h1>
-      <p class="lead">Salon-grade skincare tools and self-care essentials, hand-picked and delivered free to your door anywhere in the UK.</p>
+      <span class="eyebrow">${t("hero_eyebrow")}</span>
+      <h1>${t("hero_title")}</h1>
+      <p class="lead">${t("hero_lead")}</p>
       <div class="cta">
-        <a class="btn btn-primary" href="#/shop">Shop the collection</a>
-        <a class="btn btn-ghost" href="#/shop/skincare">Explore skincare</a>
+        <a class="btn btn-primary" href="#/shop">${t("cta_shop")}</a>
+        <a class="btn btn-ghost" href="#/shop/skincare">${t("cta_skin")}</a>
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">✨</div>
   </div></section>
 
   <div class="trust"><div class="wrap">
-    <div><b>Free UK delivery</b><span>on every order</span></div>
-    <div><b>2–4 working days</b><span>tracked shipping</span></div>
-    <div><b>30-day returns</b><span>no questions asked</span></div>
-    <div><b>Secure checkout</b><span>Stripe · Apple Pay</span></div>
+    <div><b>${t("t1a")}</b><span>${t("t1b")}</span></div>
+    <div><b>${t("t2a")}</b><span>${t("t2b")}</span></div>
+    <div><b>${t("t3a")}</b><span>${t("t3b")}</span></div>
+    <div><b>${t("t4a")}</b><span>${t("t4b")}</span></div>
   </div></div>
 
   <section class="blk"><div class="wrap">
-    <div class="sec-head"><div><span class="eyebrow">Curated for you</span><h2>Shop by category</h2></div></div>
+    <div class="sec-head"><div><span class="eyebrow">${t("cat_eyebrow")}</span><h2>${t("cat_title")}</h2></div></div>
     <div class="cats">${CATS.map(c=>'<button class="cat '+c.c+'" data-go="#/shop/'+c.id+'"><span class="e">'+c.e+'</span><b>'+c.name+'</b><span>'+c.desc+'</span></button>').join("")}</div>
   </div></section>
 
   <section class="blk alt"><div class="wrap">
-    <div class="sec-head"><div><span class="eyebrow">Customer favourites</span><h2>Best sellers</h2></div><a href="#/shop">View all →</a></div>
+    <div class="sec-head"><div><span class="eyebrow">${t("best_eyebrow")}</span><h2>${t("best_title")}</h2></div><a href="#/shop">${t("view_all")}</a></div>
     ${grid(best)}
   </div></section>
 
   <section class="blk"><div class="wrap">
     <div class="promo">
-      <div><span class="eyebrow" style="color:#FBE9F1">Welcome offer</span><h2>10% off your first ritual</h2><p style="margin:.3rem 0 0;font-size:.9rem">Applied at checkout. Free delivery included, as always.</p></div>
+      <div><span class="eyebrow" style="color:#FBE9F1">${t("promo_eyebrow")}</span><h2>${t("promo_title")}</h2><p style="margin:.3rem 0 0;font-size:.9rem">${t("promo_sub")}</p></div>
       <div class="code">GLOW10</div>
     </div>
   </div></section>
 
   <section class="blk"><div class="wrap">
-    <div class="sec-head"><div><span class="eyebrow">Just landed</span><h2>New arrivals</h2></div><a href="#/shop">View all →</a></div>
+    <div class="sec-head"><div><span class="eyebrow">${t("new_eyebrow")}</span><h2>${t("new_title")}</h2></div><a href="#/shop">${t("view_all")}</a></div>
     ${grid(news)}
   </div></section>
 
   <section class="blk alt"><div class="wrap">
-    <div class="sec-head"><div><span class="eyebrow">4.7★ average from 1,800+ orders</span><h2>Loved across the UK</h2></div></div>
-    <div class="tgrid">${TESTI.map(t=>'<div class="tcard"><div class="stars">'+"★".repeat(t.stars)+'</div><p>“'+t.text+'”</p><footer>'+t.name+' · '+t.where+'</footer></div>').join("")}</div>
+    <div class="sec-head"><div><span class="eyebrow">${t("rev_eyebrow")}</span><h2>${t("rev_title")}</h2></div></div>
+    <div class="tgrid">${TESTI.map(x=>'<div class="tcard"><div class="stars">'+"★".repeat(x.stars)+'</div><p>“'+x.text+'”</p><footer>'+x.name+' · '+x.where+'</footer></div>').join("")}</div>
   </div></section>
 
   <section class="blk"><div class="wrap" style="max-width:760px">
-    <div class="sec-head"><div><span class="eyebrow">Good to know</span><h2>Questions, answered</h2></div></div>
+    <div class="sec-head"><div><span class="eyebrow">${t("faq_eyebrow")}</span><h2>${t("faq_title")}</h2></div></div>
     ${FAQS.map(f=>'<details><summary>'+f.q+'</summary><p>'+f.a+'</p></details>').join("")}
   </div></section>
 
   <section class="blk"><div class="wrap">
     <div class="news">
-      <h2>Join the glow list</h2>
-      <p style="margin:.2rem 0 0;font-size:.9rem">15% off your first order with <b>WELCOME15</b> — plus early access to new arrivals.</p>
-      <form data-news><input type="email" required placeholder="Your email address" aria-label="Email address"><button class="btn btn-dark">Subscribe</button></form>
+      <h2>${t("news_title")}</h2>
+      <p style="margin:.2rem 0 0;font-size:.9rem">${t("news_sub")}</p>
+      <form data-news><input type="email" required placeholder="${t("news_ph")}" aria-label="Email"><button class="btn btn-dark">${t("news_btn")}</button></form>
     </div>
   </div></section>`;
 }
@@ -472,10 +642,10 @@ function viewShop(catId){
   const list = c ? P.filter(p=>p.cat===catId) : P;
   return `
   <section class="blk"><div class="wrap">
-    <p class="crumb"><a href="#/home">Home</a> / Shop${c?" / "+c.name:""}</p>
-    <div class="sec-head"><div><span class="eyebrow">${list.length} products · free UK delivery</span><h2>${c?c.name:"All products"}</h2></div></div>
+    <p class="crumb"><a href="#/home">${t("nav_home")}</a> / ${t("nav_shop")}${c?" / "+c.name:""}</p>
+    <div class="sec-head"><div><span class="eyebrow">${list.length} ${t("products_n")}</span><h2>${c?c.name:t("nav_shop")}</h2></div></div>
     <div class="filters">
-      <button class="chip" data-go="#/shop" aria-pressed="${!c}">All</button>
+      <button class="chip" data-go="#/shop" aria-pressed="${!c}">${t("all")}</button>
       ${CATS.map(x=>'<button class="chip" data-go="#/shop/'+x.id+'" aria-pressed="'+(catId===x.id)+'">'+x.name+'</button>').join("")}
     </div>
     ${grid(list)}
@@ -487,67 +657,69 @@ function viewProduct(id){
   const rel = P.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,4);
   return `
   <div class="wrap">
-    <p class="crumb"><a href="#/home">Home</a> / <a href="#/shop/${p.cat}">${CATS.find(c=>c.id===p.cat).name}</a> / ${esc(p.name)}</p>
+    <p class="crumb"><a href="#/home">${t("nav_home")}</a> / <a href="#/shop/${p.cat}">${CATS.find(c=>c.id===p.cat).name}</a> / ${esc(p.name)}</p>
     <div class="pd">
       <div class="pd-art ${p.g}">${p.e}</div>
       <div>
         ${p.badge?'<span class="badge '+(p.badge==="Sale"?"b-sale":p.badge==="New"?"b-new":"b-best")+'" style="position:static;display:inline-block;margin-bottom:.6rem">'+p.badge+'</span>':""}
         <h1 style="font-size:clamp(1.5rem,4.5vw,2.1rem)">${esc(p.name)}</h1>
         ${starRow(p)}
-        <div class="pricing" style="margin:.7rem 0"><span class="now">${fmt(p.price)}</span>${p.was?'<span class="was">'+fmt(p.was)+'</span><span class="okmsg">Save '+fmt(p.was-p.price)+'</span>':""}</div>
+        <div class="pricing" style="margin:.7rem 0"><span class="now">${fmt(cv(p.price))}</span>${p.was?'<span class="was">'+fmt(cv(p.was))+'</span><span class="okmsg">'+t("save")+' '+fmt(cv(p.was)-cv(p.price))+'</span>':""}</div>
         <p style="max-width:52ch">${esc(p.short)}</p>
         <ul>${p.feats.map(f=>"<li>"+esc(f)+"</li>").join("")}</ul>
         ${p.vars?'<div><b style="font-size:.8rem;color:var(--ink)">'+p.vars.label+':</b><div class="vars">'+p.vars.opts.map((o,i)=>'<button class="chip" data-var="'+esc(o)+'" aria-pressed="'+(i===0)+'">'+esc(o)+'</button>').join("")+'</div></div>':""}
         <div style="margin-top:.6rem">
-          <span class="qty"><button data-q="-1" aria-label="Decrease quantity">−</button><output id="q">1</output><button data-q="1" aria-label="Increase quantity">+</button></span>
-          <button class="btn btn-primary" id="pdAdd" data-pid="${p.id}">Add to basket — <span id="pdTot">${fmt(p.price)}</span></button>
+          <span class="qty"><button data-q="-1" aria-label="−">−</button><output id="q">1</output><button data-q="1" aria-label="+">+</button></span>
+          <button class="btn btn-primary" id="pdAdd" data-pid="${p.id}">${t("add")} — <span id="pdTot">${fmt(cv(p.price))}</span></button>
         </div>
-        <div class="freeline">✓ FREE UK delivery, 2–4 working days · 30-day returns</div>
+        <div class="freeline">${t("freeline")}</div>
       </div>
     </div>
-    <section class="blk"><div class="sec-head"><div><span class="eyebrow">Complete the ritual</span><h2>You may also like</h2></div></div>${grid(rel)}</section>
+    <section class="blk"><div class="sec-head"><div><span class="eyebrow">${t("also_eyebrow")}</span><h2>${t("also_title")}</h2></div></div>${grid(rel)}</section>
   </div>`;
 }
 
 function viewCheckout(){
-  if(!cart.length) return '<div class="done"><h2>Your basket is empty</h2><p>Add something lovely first ✨</p><a class="btn btn-primary" href="#/shop">Back to shop</a></div>';
+  if(!cart.length) return '<div class="done"><h2>'+t("empty").replace("<br>"," ")+'</h2><a class="btn btn-primary" href="#/shop">'+t("cta_shop")+'</a></div>';
   const sub = cartSubtotal(); const off = coupon?sub*COUPONS[coupon]:0;
+  const isUK = region==="uk";
   return `
   <div class="wrap"><div class="co">
     <form id="coForm" novalidate>
       <fieldset><legend>Contact</legend>
-        <div class="fld"><label for="f-em">Email</label><input id="f-em" type="email" required placeholder="you@example.co.uk"></div>
+        <div class="fld"><label for="f-em">Email</label><input id="f-em" type="email" required placeholder="you@example.com"></div>
       </fieldset>
-      <fieldset><legend>Delivery address</legend>
+      <fieldset><legend>${t("delivery")}</legend>
         <div class="two">
           <div class="fld"><label for="f-fn">First name</label><input id="f-fn" required></div>
           <div class="fld"><label for="f-ln">Last name</label><input id="f-ln" required></div>
         </div>
-        <div class="fld"><label for="f-ad">Address</label><input id="f-ad" required placeholder="House number and street"></div>
+        <div class="fld"><label for="f-ad">Address</label><input id="f-ad" required></div>
         <div class="two">
           <div class="fld"><label for="f-ct">City</label><input id="f-ct" required></div>
-          <div class="fld"><label for="f-pc">Postcode</label><input id="f-pc" required placeholder="SW1A 1AA"></div>
+          <div class="fld"><label for="f-pc">${isUK?"Postcode":"Postal code"}</label><input id="f-pc" required placeholder="${isUK?"SW1A 1AA":""}"></div>
         </div>
+        ${region==="eu"?`<div class="fld"><label for="f-co">Country</label><select id="f-co"><option>Germany</option><option>France</option><option>Spain</option><option>Italy</option><option>Netherlands</option><option>Belgium</option><option>Portugal</option><option>Austria</option><option>Poland</option><option>Sweden</option></select></div>`:""}
       </fieldset>
       <fieldset><legend>Payment</legend>
-        <div class="paybox">🔒 <span><b>Secure card payment</b> — Visa, Mastercard, Amex, Apple Pay &amp; Google Pay. Processed by Stripe. <em>(Demo — no real charge.)</em></span></div>
+        <div class="paybox">🔒 <span><b>${t("t4a")}</b> — Visa, Mastercard, Amex, Apple Pay &amp; Google Pay · Stripe. <em>(Demo)</em></span></div>
         <div class="fld"><label for="f-cc">Card number</label><input id="f-cc" inputmode="numeric" required placeholder="4242 4242 4242 4242"></div>
         <div class="two">
           <div class="fld"><label for="f-ex">Expiry</label><input id="f-ex" required placeholder="MM/YY"></div>
           <div class="fld"><label for="f-cv">CVC</label><input id="f-cv" inputmode="numeric" required placeholder="123"></div>
         </div>
       </fieldset>
-      <button class="btn btn-primary" style="width:100%;font-size:1rem">Pay ${fmt(sub-off)}</button>
-      <p style="font-size:.74rem;color:var(--grey);text-align:center;margin:0">Prices include VAT · Free UK delivery · 30-day returns</p>
+      <button class="btn btn-primary" style="width:100%;font-size:1rem">${t("pay")} ${fmt(sub-off)}</button>
+      <p style="font-size:.74rem;color:var(--grey);text-align:center;margin:0">${t("foot_vat")} · ${t("t1a")} · ${t("t3a")}</p>
     </form>
     <aside class="side">
-      <h3 style="font-family:var(--display);font-size:1.15rem">Order summary</h3>
-      ${cart.map(l=>{const p=byId(l.id);return '<div class="sumrow" style="margin:.4rem 0"><span>'+l.qty+' × '+esc(p.name)+(l.variant?' <small style="color:var(--grey)">('+esc(l.variant)+')</small>':"")+'</span><span>'+fmt(p.price*l.qty)+'</span></div>';}).join("")}
+      <h3 style="font-family:var(--display);font-size:1.15rem">${t("your_basket")}</h3>
+      ${cart.map(l=>{const p=byId(l.id);return '<div class="sumrow" style="margin:.4rem 0"><span>'+l.qty+' × '+esc(p.name)+(l.variant?' <small style="color:var(--grey)">('+esc(l.variant)+')</small>':"")+'</span><span>'+fmt(cv(p.price)*l.qty)+'</span></div>';}).join("")}
       <hr style="border:none;border-top:1px solid var(--line)">
-      <div class="sumrow"><span>Subtotal</span><span>${fmt(sub)}</span></div>
+      <div class="sumrow"><span>${t("subtotal")}</span><span>${fmt(sub)}</span></div>
       ${coupon?'<div class="sumrow" style="color:var(--success)"><span>'+coupon+'</span><span>−'+fmt(off)+'</span></div>':""}
-      <div class="sumrow"><span>Delivery</span><span style="color:var(--success)">FREE</span></div>
-      <div class="sumrow total" style="margin-top:.4rem"><span>Total</span><span>${fmt(sub-off)}</span></div>
+      <div class="sumrow"><span>${t("delivery")}</span><span style="color:var(--success)">${t("free")}</span></div>
+      <div class="sumrow total" style="margin-top:.4rem"><span>${t("total")}</span><span>${fmt(sub-off)}</span></div>
     </aside>
   </div></div>`;
 }
@@ -556,25 +728,25 @@ function viewDone(order){
   return `<div class="done">
     <div class="tick">✓</div>
     <h1 style="font-size:2rem">Thank you, ${esc(order.name)}!</h1>
-    <p>Your order <b style="color:var(--ink)">${order.ref}</b> is confirmed. A confirmation email is on its way to <b style="color:var(--ink)">${esc(order.email)}</b>, and your tracking link will follow as soon as it ships.</p>
-    <p class="okmsg">Total paid: ${fmt(order.total)} · FREE UK delivery, 2–4 working days</p>
-    <a class="btn btn-primary" href="#/shop" style="margin-top:1rem">Continue shopping</a>
+    <p>Order <b style="color:var(--ink)">${order.ref}</b> confirmed. A confirmation email is on its way to <b style="color:var(--ink)">${esc(order.email)}</b>, and your tracking link will follow as soon as it ships.</p>
+    <p class="okmsg">${t("total")}: ${order.totalFmt} · ${t("t1a")}, ${t("t2a")}</p>
+    <a class="btn btn-primary" href="#/shop" style="margin-top:1rem">${t("cta_shop")}</a>
   </div>`;
 }
 
-/* ===== legal pages ===== */
+/* ===== legal pages (EN) ===== */
 const LEGAL = {
   terms: {title:"Terms & Conditions", body:`
 <h3>1. About us</h3>
-<p>Bliss Glow (blissglow.store) is an online retailer of beauty and wellness products serving customers in the United Kingdom. By placing an order you agree to these terms.</p>
+<p>Bliss Glow (blissglow.store) is an online retailer of beauty and wellness products serving customers in the United Kingdom, Ireland and the European Union. By placing an order you agree to these terms.</p>
 <h3>2. Orders & payment</h3>
-<p>All prices are shown in pounds sterling (GBP) and include VAT. Payment is taken securely at checkout via encrypted connection — we accept major credit and debit cards, PayPal, Apple Pay and Google Pay. We never see or store your full card details.</p>
+<p>Prices are shown in pounds sterling (GBP) for UK customers and in euro (EUR) for customers in Ireland and the EU, and always include VAT. Payment is taken securely at checkout — we accept major credit and debit cards, PayPal, Apple Pay and Google Pay. We never see or store your full card details.</p>
 <h3>3. Delivery</h3>
-<p>Delivery is free on every UK order and typically takes 2–4 working days. You will receive a tracking link by email as soon as your parcel ships.</p>
+<p>Delivery is free on every order: 2–4 working days in the UK, 3–6 to Ireland and 5–9 across the rest of Europe. Prices include VAT for your region, so there are no surprise customs charges on delivery.</p>
 <h3>4. Your rights</h3>
-<p>Nothing in these terms affects your statutory rights under the Consumer Rights Act 2015 and the Consumer Contracts Regulations 2013, including your 14-day right to cancel — which our 30-day return policy exceeds.</p>
+<p>Nothing in these terms affects your statutory rights — under the Consumer Rights Act 2015 (UK) or the Consumer Rights Directive (EU), including the 14-day right of withdrawal, which our 30-day return policy exceeds.</p>
 <h3>5. Product information</h3>
-<p>Our products are cosmetic and wellness items, not medical devices. Always read the included instructions and discontinue use if irritation occurs. If you have a medical skin condition, consult a GP or dermatologist first.</p>
+<p>Our products are cosmetic and wellness items, not medical devices. Always read the included instructions and discontinue use if irritation occurs. If you have a medical skin condition, consult a doctor first.</p>
 <h3>6. Contact</h3>
 <p>Questions about these terms? Message us any time via the site chat or email — we reply within 24 hours, Monday to Saturday.</p>`},
   privacy: {title:"Privacy Policy", body:`
@@ -584,22 +756,24 @@ const LEGAL = {
 <ul><li>To process and deliver your orders and send tracking updates</li>
 <li>To answer support questions</li>
 <li>To send offers and news — only if you opt in, and you can unsubscribe at any time with one click</li></ul>
-<h3>Your rights (UK GDPR)</h3>
+<h3>Your rights (UK GDPR & EU GDPR)</h3>
 <p>You may request a copy of your data, ask us to correct it, or ask us to delete it at any time. We respond to all requests within 30 days. We never sell your personal data to third parties.</p>
 <h3>Cookies</h3>
 <p>We use essential cookies to keep your basket working, and analytics cookies (with your consent) to improve the shop. You can withdraw consent at any time.</p>`},
   refunds: {title:"Refund & Return Policy", body:`
 <h3>30-day returns, no questions asked</h3>
-<p>If you are not completely happy with your purchase, you have 30 days from delivery to return any unused item in its original packaging for a full refund.</p>
+<p>If you are not completely happy with your purchase, you have 30 days from delivery to return any unused item in its original packaging for a full refund — beyond the 14 days required by UK and EU law.</p>
 <h3>How to start a return</h3>
-<p>Message us via the site chat or email with your order number. We will send you return instructions the same day. Returns are free for UK customers.</p>
+<p>Message us via the site chat or email with your order number. We will send you return instructions the same day.</p>
 <h3>Damaged or incorrect items</h3>
 <p>If anything arrives damaged or incorrect, send us a photo within 48 hours of delivery and we will ship a free replacement or issue an immediate full refund — you will not need to return the item.</p>
 <h3>Refund timing</h3>
 <p>Refunds are issued to your original payment method within 3–5 working days of approval. Your statutory rights are not affected.</p>`},
   delivery: {title:"Delivery & Contact", body:`
-<h3>Free UK delivery on every order</h3>
-<p>Standard delivery is free on all UK orders with no minimum spend, and typically takes 2–4 working days. Every parcel is tracked — your tracking link arrives by email as soon as it ships.</p>
+<h3>Free delivery on every order</h3>
+<p>Delivery is free with no minimum spend: <b>United Kingdom</b> 2–4 working days · <b>Ireland</b> 3–6 working days · <b>rest of Europe</b> 5–9 working days. Every parcel is tracked — your tracking link arrives by email as soon as it ships.</p>
+<h3>No customs surprises</h3>
+<p>Prices include VAT for your region (IOSS for EU orders), so what you see at checkout is exactly what you pay — nothing extra on delivery.</p>
 <h3>Order processing</h3>
 <p>Orders are processed within 24 hours, Monday to Saturday. During busy periods (such as holiday sales) please allow one extra day.</p>
 <h3>Contact us</h3>
@@ -607,18 +781,19 @@ const LEGAL = {
 };
 function viewLegal(kind){
   const pg = LEGAL[kind];
-  return '<div class="wrap"><div class="legal"><h1>'+pg.title+'</h1><p class="upd">Last updated: July 2026 · Bliss Glow · blissglow.store</p>'+pg.body+'<p style="margin-top:2rem"><a class="btn btn-ghost" href="#/home">← Back to shop</a></p></div></div>';
+  return '<div class="wrap"><div class="legal"><h1>'+pg.title+'</h1><p class="upd">Last updated: July 2026 · Bliss Glow · blissglow.store</p>'+pg.body+'<p style="margin-top:2rem"><a class="btn btn-ghost" href="#/home">← '+t("nav_home")+'</a></p></div></div>';
 }
 
 /* ===== router ===== */
 let lastOrder = null;
 function render(){
   const h = location.hash || "#/home";
-  const [,route,arg] = h.split("/");
+  const parts = h.split("/");
+  const route = parts[1], arg = parts[2];
   const app = document.getElementById("app");
   let nav = route;
   if(route==="product"){ app.innerHTML = viewProduct(arg); initProduct(); nav="shop"; }
-  else if(route==="shop"){ app.innerHTML = viewShop(arg); nav = arg==="skincare"||arg==="wellness" ? arg : "shop"; }
+  else if(route==="shop"){ app.innerHTML = viewShop(arg); nav = (arg==="skincare"||arg==="wellness") ? arg : "shop"; }
   else if(route==="checkout"){ app.innerHTML = viewCheckout(); initCheckout(); }
   else if(route==="done" && lastOrder){ app.innerHTML = viewDone(lastOrder); }
   else if(LEGAL[route]){ app.innerHTML = viewLegal(route); nav=""; }
@@ -642,13 +817,13 @@ document.getElementById("app").addEventListener("click", e=>{
     const n = Math.min(9, Math.max(1, (+out.value||1) + (+q.dataset.q)));
     out.value = n;
     const p = byId(document.getElementById("pdAdd").dataset.pid);
-    document.getElementById("pdTot").textContent = fmt(p.price*n);
+    document.getElementById("pdTot").textContent = fmt(cv(p.price)*n);
   }
 });
 document.getElementById("app").addEventListener("submit", e=>{
   if(e.target.matches("[data-news]")){
     e.preventDefault();
-    e.target.innerHTML = '<p class="okmsg" style="font-size:.9rem">You\'re on the list! Use WELCOME15 at checkout. 💌</p>';
+    e.target.innerHTML = '<p class="okmsg" style="font-size:.9rem">'+t("news_ok")+'</p>';
   }
 });
 function initProduct(){
@@ -669,13 +844,14 @@ function initCheckout(){
       ref: "BG-2026-" + String(Math.floor(1000+Math.random()*9000)),
       name: document.getElementById("f-fn").value.trim() || "friend",
       email: document.getElementById("f-em").value.trim(),
-      total: sub-off
+      totalFmt: fmt(sub-off)
     };
     cart = []; coupon = null; syncCart();
     location.hash = "#/done";
   });
 }
 
+applyChrome();
 syncCart();
 render();
 </script>
