@@ -1,5 +1,6 @@
 import "./globals.css";
 import Link from "next/link";
+import ChatWidget from "@/components/ChatWidget";
 
 export const metadata = {
   title: "Bliss Glow — Premium Beauty & Wellness",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
           </div>
         </header>
         <main>{children}</main>
+        <ChatWidget />
         <footer className="site">
           <div className="wrap">
             <div>

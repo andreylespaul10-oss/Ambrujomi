@@ -15,7 +15,26 @@ carrinho, checkout (Stripe), pedidos e DSers — este projeto é a vitrine.
 - ✅ Checkout: redireciona para o **checkout seguro hospedado pelo Wix**
   (Stripe, Apple Pay, cupons GLOW10/WELCOME15 funcionam lá) e volta ao site
 - ✅ Design System oficial (Rose #E8B4C7, Playfair Display + Inter)
+- ✅ Chat com IA avançada (Claude Opus 4.8) — ver seção abaixo
 - ✅ Build de produção passando (`next build`)
+
+## 💬 Chat com IA avançada (Claude)
+
+O site tem um chat próprio ("Ana from BlissGlow") movido pelo **Claude Opus 4.8**,
+o modelo mais avançado da Anthropic:
+
+- Conhece o catálogo REAL da loja (puxa os produtos do Wix a cada 5 min)
+- Sabe as políticas: frete grátis UK, devolução 30 dias, cupons GLOW10/WELCOME15
+- Responde em inglês britânico (ou no idioma do cliente), 24/7
+- Nunca dá conselho médico; encaminha para e-mail quando não sabe
+- Sem a chave configurada, mostra uma mensagem educada (o site nunca quebra)
+
+### Para ativar
+
+1. Crie uma conta em https://console.anthropic.com e gere uma **API key**
+   (paga por uso: centavos por conversa).
+2. Na Vercel: *Project → Settings → Environment Variables* → adicione
+   `ANTHROPIC_API_KEY = sk-ant-...` e faça redeploy.
 
 ## Como rodar localmente
 
