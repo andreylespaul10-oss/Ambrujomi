@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getProducts } from "@/lib/catalog";
+import { wixMediaUrl, HERO_IMAGE_ID } from "@/lib/wix";
 import ProductCard from "@/components/ProductCard";
 
 export const revalidate = 300; // atualiza o catálogo a cada 5 minutos
@@ -12,39 +13,23 @@ export default async function HomePage() {
     console.error("Wix catalogue unavailable:", e?.message);
   }
   const featured = products.slice(0, 8);
-  const heroImg =
-    products.find((p) => p.slug === "led-light-therapy-mask")?.image ||
-    products.find((p) => p.image)?.image ||
-    null;
+  const heroBanner = wixMediaUrl(HERO_IMAGE_ID, 1600, 970);
 
   return (
     <>
-      <section className="hero">
+      <section className="hero-banner">
         <div className="wrap">
-          <div>
-            <span className="eyebrow">Premium beauty &amp; wellness · UK</span>
-            <h1>
-              Glow is a ritual,
-              <br />
-              not a chance.
-            </h1>
-            <p className="lead">
-              Salon-grade skincare tools and self-care essentials, hand-picked and
-              delivered free to your door anywhere in the UK.
-            </p>
-            <div className="cta">
-              <Link className="btn btn-primary" href="/shop">
-                Shop the collection
-              </Link>
-            </div>
-          </div>
-          <div className="hero-art" aria-hidden="true">
-            {heroImg ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={heroImg} alt="" />
-            ) : (
-              "✨"
-            )}
+          {heroBanner ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img className="hero-banner-img" src={heroBanner} alt="Bliss Glow — Skincare, Beauty & Wellness. Care that reveals your best glow." />
+          ) : null}
+          <div className="hero-banner-cta">
+            <Link className="btn btn-primary" href="/shop">
+              Shop the collection
+            </Link>
+            <Link className="btn btn-ghost" href="/shop">
+              Free UK delivery on every order
+            </Link>
           </div>
         </div>
       </section>

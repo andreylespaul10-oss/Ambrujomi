@@ -80,6 +80,16 @@ nav.main + .cartbtn { margin-left: 0; }
   overflow: hidden;
 }
 .hero-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* hero banner (foto oficial da marca) */
+.hero-banner { background: linear-gradient(180deg, var(--blush), var(--bg)); padding: 1.6rem 0 2rem; }
+.hero-banner .wrap { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+.hero-banner-img {
+  width: 100%; max-width: 1000px; border-radius: 22px;
+  box-shadow: var(--shadow); display: block;
+}
+.hero-banner-cta { display: flex; gap: 0.7rem; flex-wrap: wrap; justify-content: center; }
+
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
   border-radius: 999px; padding: 0.78rem 1.6rem; font-weight: 600; font-size: 0.9rem;
@@ -113,7 +123,10 @@ section.blk.alt { background: var(--bg-alt); }
 }
 .pcard:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
 .pcard a.part { aspect-ratio: 1 / 1; display: block; position: relative; background: var(--blush); }
-.pcard a.part img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pcard a.part img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.35s, transform 0.4s; }
+.pcard a.part img.alt { position: absolute; inset: 0; opacity: 0; }
+.pcard:hover a.part img.main { transform: scale(1.05); }
+.pcard:hover a.part img.alt { opacity: 1; }
 .badge {
   position: absolute; top: 0.6rem; left: 0.6rem; font-size: 0.62rem; font-weight: 700;
   letter-spacing: 0.08em; text-transform: uppercase; border-radius: 999px;

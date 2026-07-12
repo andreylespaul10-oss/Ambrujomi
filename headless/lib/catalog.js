@@ -27,6 +27,12 @@ function mapProduct(p) {
     compareAtFmt: compare > price ? money(compare) : null,
     image: img(imageUrl(p.media?.main?.image, 800, 800)),
     imageAlt: p.media?.main?.altText || p.name,
+    // 2ª foto da galeria (se a Ana adicionar no Wix) → efeito hover
+    image2: (() => {
+      const items = p.media?.itemsInfo?.items || [];
+      const gallery = items.filter((i) => i.image).map((i) => i.image);
+      return gallery.length > 1 ? img(imageUrl(gallery[1], 800, 800)) : null;
+    })(),
     description: p.plainDescription || "",
     ribbon: p.ribbon?.name || null,
     inStock: p.inventory?.availabilityStatus !== "OUT_OF_STOCK",
@@ -37,17 +43,21 @@ function mapProduct(p) {
   };
 }
 
-/** Todos os produtos visíveis da loja (a Bliss Glow tem ~13, cabe numa página). */
+// MEDIA_ITEMS_INFO traz a galeria completa de fotos (não só a principal),
+// necessária para o efeito de trocar a foto ao passar o mouse.
+const WITH_GALLERY = { fields: ["MEDIA_ITEMS_INFO"] };
+
+/** Todos os produtos visíveis da loja. */
 export async function getProducts(limit = 100) {
   const client = serverClient();
-  const res = await client.productsV3.queryProducts().limit(limit).find();
+  const res = await client.productsV3.queryProducts(WITH_GALLERY).limit(limit).find();
   return res.items.map(mapProduct);
 }
 
 export async function getProductBySlug(slug) {
   const client = serverClient();
   const res = await client.productsV3
-    .queryProducts()
+    .queryProducts(WITH_GALLERY)
     .eq("slug", slug)
     .limit(1)
     .find();

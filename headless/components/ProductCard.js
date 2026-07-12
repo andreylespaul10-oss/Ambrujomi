@@ -7,7 +7,11 @@ export default function ProductCard({ p }) {
         {p.ribbon ? <span className="badge">{p.ribbon}</span> : null}
         {p.image ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={p.image} alt={p.imageAlt} loading="lazy" />
+          <img className="main" src={p.image} alt={p.imageAlt} loading="lazy" />
+        ) : null}
+        {p.image2 ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="alt" src={p.image2} alt="" aria-hidden="true" loading="lazy" />
         ) : null}
       </Link>
       <div className="pbody">
