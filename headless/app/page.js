@@ -12,6 +12,10 @@ export default async function HomePage() {
     console.error("Wix catalogue unavailable:", e?.message);
   }
   const featured = products.slice(0, 8);
+  const heroImg =
+    products.find((p) => p.slug === "led-light-therapy-mask")?.image ||
+    products.find((p) => p.image)?.image ||
+    null;
 
   return (
     <>
@@ -35,7 +39,12 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="hero-art" aria-hidden="true">
-            ✨
+            {heroImg ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={heroImg} alt="" />
+            ) : (
+              "✨"
+            )}
           </div>
         </div>
       </section>
