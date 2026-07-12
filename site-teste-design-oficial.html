@@ -1,0 +1,643 @@
+<title>Bliss Glow — Site Teste (Design System Oficial)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+/* ============================================================
+   BLISS GLOW — Official Design System v1.0
+   Colours: Ch.3 | Type: Ch.4 (Playfair Display + Inter)
+   ============================================================ */
+:root{
+  --rose:#E8B4C7; --rose-deep:#C97C98; --blush:#F8EAF0;
+  --gold:#D8B36A; --lavender:#E9E2F7; --mint:#DFF3EA;
+  --ink:#151515; --body:#2D2D2D; --grey:#5A5A5A; --grey-mid:#BDBDBD;
+  --bg:#FFFFFF; --bg-alt:#FAFAFA; --card:#FFFFFF; --line:#EBDDE3;
+  --success:#2E8B57; --error:#D64545; --warn:#F4B740;
+  --on-rose:#FFFFFF; --shadow:0 10px 30px rgba(201,124,152,.14);
+  --display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --ui:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --blush:#2A2125; --ink:#F5EDF1; --body:#E8DDE2; --grey:#B49CA7;
+  --grey-mid:#6E5F66; --bg:#1A1517; --bg-alt:#211B1E; --card:#251E21;
+  --line:#3A2F34; --on-rose:#2A161E; --shadow:0 10px 30px rgba(0,0,0,.4);
+  --lavender:#2B2536; --mint:#1F2E27;
+}}
+:root[data-theme="dark"]{
+  --blush:#2A2125; --ink:#F5EDF1; --body:#E8DDE2; --grey:#B49CA7;
+  --grey-mid:#6E5F66; --bg:#1A1517; --bg-alt:#211B1E; --card:#251E21;
+  --line:#3A2F34; --on-rose:#2A161E; --shadow:0 10px 30px rgba(0,0,0,.4);
+  --lavender:#2B2536; --mint:#1F2E27;
+}
+:root[data-theme="light"]{
+  --rose:#E8B4C7; --rose-deep:#C97C98; --blush:#F8EAF0;
+  --gold:#D8B36A; --lavender:#E9E2F7; --mint:#DFF3EA;
+  --ink:#151515; --body:#2D2D2D; --grey:#5A5A5A; --grey-mid:#BDBDBD;
+  --bg:#FFFFFF; --bg-alt:#FAFAFA; --card:#FFFFFF; --line:#EBDDE3;
+  --on-rose:#FFFFFF; --shadow:0 10px 30px rgba(201,124,152,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--body);font-family:var(--ui);line-height:1.6;font-size:15.5px}
+h1,h2,h3{color:var(--ink);line-height:1.18;text-wrap:balance;margin:0 0 .5rem}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2rem,6.5vw,3rem)}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(1.45rem,4.5vw,2rem)}
+h3{font-size:1.02rem;font-weight:600}
+a{color:var(--rose-deep)}
+img{max-width:100%}
+button{font-family:var(--ui);cursor:pointer}
+:focus-visible{outline:2px solid var(--rose-deep);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.1rem}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-deep)}
+
+/* ---------- chrome ---------- */
+.announce{background:var(--ink);color:#F8EAF0;text-align:center;font-size:.78rem;letter-spacing:.06em;padding:.5rem 1rem}
+.announce b{color:var(--rose)}
+header.site{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:1rem;padding:.8rem 0}
+.logo{font-family:var(--display);font-weight:700;font-size:1.35rem;color:var(--ink);text-decoration:none;letter-spacing:.01em}
+.logo em{font-style:normal;color:var(--rose-deep)}
+nav.main{display:flex;gap:1.1rem;margin-left:auto}
+nav.main a{color:var(--body);text-decoration:none;font-size:.86rem;font-weight:500;padding:.25rem 0;border-bottom:2px solid transparent}
+nav.main a[aria-current="true"]{color:var(--rose-deep);border-bottom-color:var(--rose)}
+.cartbtn{margin-left:auto;position:relative;background:none;border:1.5px solid var(--line);border-radius:999px;padding:.5rem .95rem;color:var(--ink);font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:.4rem}
+nav.main + .cartbtn{margin-left:0}
+.cartbtn .n{background:var(--rose-deep);color:#fff;border-radius:999px;font-size:.68rem;min-width:1.15rem;height:1.15rem;display:inline-flex;align-items:center;justify-content:center;padding:0 .25rem}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(150deg,var(--rose) 0%,var(--blush) 62%,var(--bg) 100%);padding:3.4rem 0 3rem;overflow:hidden}
+.hero .wrap{display:grid;gap:1.6rem;grid-template-columns:1.15fr .85fr;align-items:center}
+.hero p.lead{max-width:38ch;font-size:1.02rem;color:var(--body)}
+.hero-art{aspect-ratio:1/1.08;border-radius:46% 54% 52% 48%/54% 46% 54% 46%;background:
+  radial-gradient(circle at 32% 28%,rgba(255,255,255,.75),transparent 42%),
+  linear-gradient(160deg,var(--rose-deep),var(--rose) 55%,var(--gold));
+  display:flex;align-items:center;justify-content:center;font-size:clamp(3rem,9vw,5rem);box-shadow:var(--shadow)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border-radius:999px;padding:.78rem 1.6rem;font-weight:600;font-size:.9rem;text-decoration:none;border:1.5px solid transparent;transition:background .18s,color .18s,border-color .18s}
+.btn-primary{background:var(--rose);color:var(--on-rose)}
+.btn-primary:hover{background:var(--rose-deep);color:#fff}
+.btn-ghost{background:transparent;border-color:var(--rose);color:var(--rose-deep)}
+.btn-ghost:hover{border-color:var(--rose-deep)}
+.btn-dark{background:var(--ink);color:var(--bg)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.hero .cta{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.2rem}
+
+/* ---------- trust strip ---------- */
+.trust{border-block:1px solid var(--line);background:var(--bg-alt)}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;padding-block:.9rem;text-align:center}
+.trust b{display:block;font-size:.8rem;color:var(--ink)}
+.trust span{font-size:.72rem;color:var(--grey)}
+
+/* ---------- sections ---------- */
+section.blk{padding:2.7rem 0}
+section.blk.alt{background:var(--bg-alt)}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1.3rem}
+.sec-head a{font-size:.84rem;font-weight:600;text-decoration:none}
+
+/* ---------- categories ---------- */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
+.cat{border:none;border-radius:18px;padding:1.1rem .9rem;text-align:left;display:flex;flex-direction:column;gap:.15rem;color:var(--ink);transition:transform .18s}
+.cat:hover{transform:translateY(-3px)}
+.cat .e{font-size:1.6rem}
+.cat b{font-size:.92rem}
+.cat span{font-size:.74rem;color:var(--grey)}
+.c-rose{background:var(--blush)}.c-gold{background:color-mix(in srgb,var(--gold) 18%,var(--bg))}
+.c-lav{background:var(--lavender)}.c-mint{background:var(--mint)}
+
+/* ---------- product grid ---------- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s}
+.pcard:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.part{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-size:2.6rem;position:relative;cursor:pointer;border:none;padding:0}
+.g-rose{background:linear-gradient(140deg,var(--blush),var(--rose))}
+.g-gold{background:linear-gradient(140deg,#FBF3E4,var(--gold))}
+.g-plum{background:linear-gradient(140deg,var(--lavender),var(--rose-deep))}
+.g-mauve{background:linear-gradient(140deg,var(--blush),var(--lavender))}
+.g-blush{background:linear-gradient(140deg,var(--bg-alt),var(--blush))}
+.g-bronze{background:linear-gradient(140deg,var(--mint),var(--gold))}
+:root[data-theme="dark"] .g-gold,:root[data-theme="dark"] .g-bronze{filter:saturate(.8) brightness(.9)}
+.badge{position:absolute;top:.6rem;left:.6rem;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.22rem .6rem;background:var(--ink);color:#fff}
+.badge.b-sale{background:var(--error)}
+.badge.b-new{background:var(--rose-deep)}
+.badge.b-best{background:var(--gold);color:#3A2A10}
+.pbody{padding:.85rem .9rem 1rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
+.pbody h3{font-size:.88rem;margin:0;font-weight:600}
+.pbody h3 button{all:unset;cursor:pointer;color:var(--ink)}
+.pbody h3 button:hover{color:var(--rose-deep)}
+.stars{color:var(--gold);font-size:.78rem;letter-spacing:.05em}
+.stars span{color:var(--grey);font-size:.72rem;letter-spacing:0}
+.pricing{display:flex;align-items:baseline;gap:.5rem;margin-top:auto;font-variant-numeric:tabular-nums}
+.pricing .now{font-weight:700;color:var(--ink);font-size:1.02rem}
+.pricing .was{color:var(--grey);text-decoration:line-through;font-size:.8rem}
+.add{border:1.5px solid var(--rose);background:transparent;color:var(--rose-deep);border-radius:999px;padding:.5rem;font-weight:600;font-size:.8rem;transition:background .15s,color .15s}
+.add:hover{background:var(--rose);color:var(--on-rose)}
+
+/* ---------- promo ---------- */
+.promo{background:linear-gradient(120deg,var(--rose-deep),var(--rose));color:#fff;border-radius:22px;padding:2rem 1.6rem;display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem;justify-content:space-between}
+.promo h2{color:#fff}
+.promo .code{background:rgba(255,255,255,.18);border:1.5px dashed rgba(255,255,255,.65);border-radius:12px;padding:.55rem 1.1rem;font-weight:700;letter-spacing:.18em;font-size:1.05rem}
+
+/* ---------- reviews / faq ---------- */
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.15rem}
+.tcard p{margin:.5rem 0;font-size:.88rem}
+.tcard footer{font-size:.76rem;color:var(--grey)}
+details{border:1px solid var(--line);border-radius:14px;background:var(--card);margin-bottom:.6rem}
+summary{cursor:pointer;padding:.85rem 1rem;font-weight:600;font-size:.9rem;color:var(--ink);list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::after{content:"+";color:var(--rose-deep);font-size:1.1rem}
+details[open] summary::after{content:"–"}
+details p{margin:0;padding:0 1rem .9rem;font-size:.87rem;max-width:70ch}
+
+/* ---------- newsletter / footer ---------- */
+.news{background:var(--blush);border-radius:22px;padding:2rem 1.6rem;text-align:center}
+.news form{display:flex;gap:.6rem;max-width:430px;margin:1rem auto 0}
+.news input{flex:1;border:1.5px solid var(--line);background:var(--bg);border-radius:999px;padding:.7rem 1.1rem;font-size:.88rem;color:var(--body)}
+footer.site{background:var(--ink);color:#CDBEC6;margin-top:2.6rem}
+footer.site .wrap{padding:2.4rem 1.1rem 1.6rem;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:1.4rem}
+footer.site h4{color:#fff;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 .6rem}
+footer.site a{color:#CDBEC6;text-decoration:none;display:block;font-size:.84rem;padding:.16rem 0}
+footer.site a:hover{color:var(--rose)}
+.fin{border-top:1px solid #322A2E;text-align:center;font-size:.74rem;padding:.9rem;color:#9A8B93}
+
+/* ---------- shop view ---------- */
+.filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--body);border-radius:999px;padding:.42rem 1rem;font-size:.8rem;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+/* ---------- product view ---------- */
+.pd{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;padding-top:2rem}
+.pd-art{aspect-ratio:1/1;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:5.5rem;box-shadow:var(--shadow)}
+.pd .pricing .now{font-size:1.5rem}
+.pd ul{padding-left:1.1rem;font-size:.9rem}
+.pd ul li{margin:.25rem 0}
+.vars{display:flex;gap:.5rem;flex-wrap:wrap;margin:.4rem 0 .9rem}
+.qty{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;margin-right:.7rem;vertical-align:middle}
+.qty button{width:2.3rem;height:2.55rem;border:none;background:transparent;color:var(--ink);font-size:1rem}
+.qty output{width:2.1rem;display:flex;align-items:center;justify-content:center;font-weight:600;font-variant-numeric:tabular-nums}
+.freeline{display:flex;gap:.5rem;align-items:center;font-size:.82rem;color:var(--success);font-weight:600;margin-top:.9rem}
+.crumb{font-size:.78rem;color:var(--grey);padding-top:1.2rem}
+.crumb a{text-decoration:none}
+
+/* ---------- drawer / cart ---------- */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:60;opacity:0;pointer-events:none;transition:opacity .2s}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,92vw);background:var(--bg);z-index:61;transform:translateX(105%);transition:transform .25s;display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(0,0,0,.18)}
+body.cart-open .scrim{opacity:1;pointer-events:auto}
+body.cart-open .drawer{transform:none}
+.drawer header{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.1rem;border-bottom:1px solid var(--line)}
+.drawer header b{font-family:var(--display);font-size:1.1rem;color:var(--ink)}
+.dclose{background:none;border:none;font-size:1.3rem;color:var(--grey)}
+.dlines{flex:1;overflow-y:auto;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.9rem}
+.dline{display:grid;grid-template-columns:56px 1fr auto;gap:.7rem;align-items:center}
+.dline .th{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.dline b{font-size:.82rem;color:var(--ink);display:block}
+.dline small{color:var(--grey);font-size:.72rem}
+.dline .rm{background:none;border:none;color:var(--grey);font-size:.72rem;text-decoration:underline;padding:0}
+.dfoot{border-top:1px solid var(--line);padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.6rem}
+.coupon{display:flex;gap:.5rem}
+.coupon input{flex:1;border:1.5px solid var(--line);border-radius:999px;padding:.55rem .95rem;font-size:.82rem;text-transform:uppercase;background:var(--bg);color:var(--body)}
+.sumrow{display:flex;justify-content:space-between;font-size:.86rem;font-variant-numeric:tabular-nums}
+.sumrow.total{font-weight:700;color:var(--ink);font-size:1rem}
+.okmsg{font-size:.78rem;color:var(--success);font-weight:600}
+.errmsg{font-size:.78rem;color:var(--error);font-weight:600}
+
+/* ---------- checkout ---------- */
+.co{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;padding-top:2rem;align-items:start}
+.co form{display:grid;gap:.8rem}
+.co fieldset{border:none;padding:0;margin:0;display:grid;gap:.8rem}
+.co legend{font-family:var(--display);font-weight:700;color:var(--ink);font-size:1.15rem;padding:0;margin:.6rem 0 .2rem}
+.fld input,.fld select{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:.72rem .9rem;font-size:.9rem;background:var(--card);color:var(--body)}
+.fld label{display:block;font-size:.76rem;font-weight:600;color:var(--ink);margin-bottom:.25rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.paybox{border:1.5px solid var(--line);border-radius:14px;padding:.9rem;display:flex;gap:.6rem;align-items:center;font-size:.86rem}
+.side{background:var(--bg-alt);border:1px solid var(--line);border-radius:18px;padding:1.2rem;position:sticky;top:80px}
+
+/* ---------- confirmation ---------- */
+.done{max-width:560px;margin:0 auto;text-align:center;padding:3.5rem 0}
+.done .tick{width:74px;height:74px;border-radius:50%;background:var(--mint);color:var(--success);font-size:2.2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem}
+
+.hide{display:none!important}
+@media (max-width:840px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-art{max-width:280px;margin:0 auto;order:-1}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .cats{grid-template-columns:repeat(2,1fr)}
+  .tgrid{grid-template-columns:1fr}
+  .trust .wrap{grid-template-columns:repeat(2,1fr)}
+  nav.main{display:none}
+  .pd,.co{grid-template-columns:1fr}
+  footer.site .wrap{grid-template-columns:1fr 1fr}
+  .side{position:static}
+}
+</style>
+
+<div class="announce">FREE UK delivery on every order &nbsp;•&nbsp; Use code <b>GLOW10</b> for 10% off</div>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="logo" href="#/home">Bliss <em>Glow</em></a>
+    <nav class="main" aria-label="Main">
+      <a href="#/home" data-nav="home">Home</a>
+      <a href="#/shop" data-nav="shop">Shop</a>
+      <a href="#/shop/skincare" data-nav="skincare">Skincare</a>
+      <a href="#/shop/wellness" data-nav="wellness">Wellness</a>
+    </nav>
+    <button class="cartbtn" id="openCart" aria-label="Open basket">Basket <span class="n" id="cartN">0</span></button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <div class="logo" style="margin-bottom:.5rem">Bliss <em>Glow</em></div>
+      <p style="font-size:.84rem;max-width:30ch;margin:0">Premium beauty &amp; wellness, delivered free across the United Kingdom.</p>
+    </div>
+    <div><h4>Shop</h4><a href="#/shop/skincare">Skincare</a><a href="#/shop/beauty-tools">Beauty Tools</a><a href="#/shop/wellness">Wellness</a><a href="#/shop/hair-body">Hair &amp; Body</a></div>
+    <div><h4>Help</h4><a href="#/home">Delivery — free, 2–4 days</a><a href="#/home">30-day returns</a><a href="#/home">Contact us</a><a href="#/home">FAQs</a></div>
+    <div><h4>Legal</h4><a href="#/home">Terms &amp; Conditions</a><a href="#/home">Privacy Policy</a><a href="#/home">Refund Policy</a></div>
+  </div>
+  <div class="fin">© 2026 Bliss Glow · blissglow.store · Prices include VAT · Site teste — protótipo do site próprio (não é o site Wix)</div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" role="dialog" aria-label="Basket" aria-modal="true">
+  <header><b>Your basket</b><button class="dclose" id="closeCart" aria-label="Close basket">×</button></header>
+  <div class="dlines" id="dlines"></div>
+  <div class="dfoot">
+    <div class="coupon">
+      <input id="coupon" placeholder="Discount code" aria-label="Discount code">
+      <button class="btn btn-ghost" id="applyCoupon" style="padding:.5rem 1.1rem">Apply</button>
+    </div>
+    <div id="couponMsg"></div>
+    <div class="sumrow"><span>Subtotal</span><span id="sub"></span></div>
+    <div class="sumrow" id="discRow" style="color:var(--success)"><span>Discount</span><span id="disc"></span></div>
+    <div class="sumrow"><span>Delivery</span><span style="color:var(--success);font-weight:600">FREE</span></div>
+    <div class="sumrow total"><span>Total</span><span id="tot"></span></div>
+    <a class="btn btn-primary" href="#/checkout" id="toCheckout" style="width:100%">Checkout securely</a>
+  </div>
+</aside>
+
+<script>
+"use strict";
+/* ===== catalogue (from assets/js/data.js — GBP, VAT inclusive) ===== */
+const CATS = [
+  {id:"skincare",name:"Skincare",desc:"Serums, masks & glow essentials",e:"🧴",c:"c-rose"},
+  {id:"beauty-tools",name:"Beauty Tools",desc:"Pro tools for your routine",e:"💎",c:"c-gold"},
+  {id:"wellness",name:"Wellness",desc:"Relax, restore and unwind",e:"🌸",c:"c-lav"},
+  {id:"hair-body",name:"Hair & Body",desc:"Head-to-toe self-care",e:"✨",c:"c-mint"}
+];
+const P = [
+ {id:"led-mask",name:"LED Light Therapy Mask",cat:"skincare",price:39.99,was:54.99,badge:"Best Seller",rating:4.8,reviews:214,e:"✨",g:"g-rose",
+  short:"Red and blue light therapy for smoother, clearer-looking skin — a spa treatment at home.",
+  feats:["7 light therapy modes","Rechargeable via USB-C","Comfortable, lightweight fit","10-minute daily sessions"],vars:null},
+ {id:"gua-sha-set",name:"Jade Facial Roller & Gua Sha Set",cat:"skincare",price:14.99,was:19.99,badge:"Sale",rating:4.7,reviews:189,e:"💚",g:"g-plum",
+  short:"Sculpt, de-puff and boost circulation with the classic two-piece jade ritual.",
+  feats:["100% natural stone","Cooling and calming","Reduces morning puffiness","Gift-ready box"],vars:{label:"Stone",opts:["Jade","Rose Quartz"]}},
+ {id:"vitamin-c-serum",name:"Vitamin C Brightening Serum",cat:"skincare",price:18.99,was:null,badge:"New",rating:4.6,reviews:96,e:"🍊",g:"g-gold",
+  short:"A daily glow shot — 15% vitamin C with hyaluronic acid for brighter, plumper skin.",
+  feats:["15% stabilised vitamin C","With hyaluronic acid","Fragrance free","Suitable for daily use"],vars:null},
+ {id:"eye-patches",name:"Collagen Under-Eye Patches (30 pairs)",cat:"skincare",price:12.99,was:16.99,badge:"Sale",rating:4.5,reviews:143,e:"👁️",g:"g-blush",
+  short:"Cooling hydrogel patches that brighten tired eyes in 15 minutes.",
+  feats:["30 pairs per jar","Collagen + hyaluronic acid","Cooling hydrogel","Fits all face shapes"],vars:null},
+ {id:"cleansing-brush",name:"Sonic Facial Cleansing Brush",cat:"beauty-tools",price:19.99,was:null,badge:null,rating:4.7,reviews:167,e:"🫧",g:"g-blush",
+  short:"Soft silicone sonic brush for a deep yet gentle cleanse — waterproof and travel-sized.",
+  feats:["8000 sonic pulses/min","Medical-grade silicone","100% waterproof","1 charge = 90 uses"],vars:{label:"Colour",opts:["Blush Pink","Ivory","Sage"]}},
+ {id:"facial-steamer",name:"Nano Ionic Facial Steamer",cat:"beauty-tools",price:29.99,was:39.99,badge:"Sale",rating:4.6,reviews:88,e:"♨️",g:"g-mauve",
+  short:"Open pores and prep skin with fine nano-ionic steam — the perfect pre-mask step.",
+  feats:["Nano-ionic warm mist","Ready in 30 seconds","Auto shut-off","Quiet operation"],vars:null},
+ {id:"ice-roller",name:"Ice Roller for Face & Eyes",cat:"beauty-tools",price:11.99,was:null,badge:null,rating:4.4,reviews:121,e:"🧊",g:"g-plum",
+  short:"Instantly de-puff, calm and tighten — keep it in the freezer for a morning reset.",
+  feats:["Stays cold for 20+ min","Soothes and de-puffs","Detachable head","Easy-grip handle"],vars:null},
+ {id:"led-brush",name:"Scalp Massager & Serum Applicator",cat:"beauty-tools",price:13.99,was:null,badge:"New",rating:4.5,reviews:54,e:"💆",g:"g-gold",
+  short:"Massage serums into the scalp and boost circulation for healthier-looking hair.",
+  feats:["Soft silicone bristles","Built-in serum reservoir","Relaxing scalp massage","Use wet or dry"],vars:null},
+ {id:"neck-massager",name:"Neck & Shoulder Heat Massager",cat:"wellness",price:29.99,was:44.99,badge:"Best Seller",rating:4.8,reviews:262,e:"🤍",g:"g-rose",
+  short:"Deep-kneading shiatsu massage with gentle heat — melt away the day in 15 minutes.",
+  feats:["Shiatsu deep kneading","Soothing heat function","4 intensity levels","USB rechargeable"],vars:null},
+ {id:"diffuser",name:"Aromatherapy Ultrasonic Diffuser",cat:"wellness",price:24.99,was:null,badge:null,rating:4.7,reviews:178,e:"🌫️",g:"g-mauve",
+  short:"Whisper-quiet ultrasonic mist with warm ambient light — your nightly wind-down ritual.",
+  feats:["300 ml tank (8h mist)","7-colour ambient light","Whisper quiet","Auto shut-off"],vars:{label:"Finish",opts:["Light Wood","Dark Wood"]}},
+ {id:"sleep-mask",name:"Silk Sleep Mask & Scrunchie Set",cat:"wellness",price:9.99,was:13.99,badge:"Sale",rating:4.6,reviews:133,e:"🌙",g:"g-blush",
+  short:"Pure mulberry silk that's kind to skin and hair — wake up glowing, not creased.",
+  feats:["100% mulberry silk","Kind to skin & lashes","Includes 2 scrunchies","Gift-ready pouch"],vars:{label:"Colour",opts:["Champagne","Blush","Charcoal"]}},
+ {id:"heatless-curls",name:"Heatless Curling Ribbon Kit",cat:"hair-body",price:13.99,was:17.99,badge:null,rating:4.4,reviews:109,e:"🎀",g:"g-rose",
+  short:"Overnight curls with zero heat damage — soft satin ribbon, salon-worthy waves.",
+  feats:["Zero heat damage","Soft satin finish","Works on all hair lengths","Includes 2 scrunchies + clips"],vars:{label:"Colour",opts:["Blush","Ivory"]}},
+ {id:"body-brush",name:"Dry Body Brush with Natural Bristles",cat:"hair-body",price:10.99,was:null,badge:null,rating:4.5,reviews:87,e:"🌿",g:"g-bronze",
+  short:"Daily dry brushing to smooth, exfoliate and energise — a classic ritual done right.",
+  feats:["Natural sisal bristles","Ergonomic wooden handle","Gentle exfoliation","Vegan friendly"],vars:null}
+];
+const TESTI = [
+ {name:"Sophie M.",where:"London",stars:5,text:"The LED mask has genuinely changed my skin. Two weeks in and my texture is noticeably smoother."},
+ {name:"Amelia R.",where:"Manchester",stars:5,text:"Beautiful packaging, fast delivery and the gua sha set feels far more premium than the price."},
+ {name:"Charlotte B.",where:"Bristol",stars:4,text:"The neck massager is my evening ritual now. Heat function is bliss after a desk day."}
+];
+const FAQS = [
+ {q:"How long does delivery take?",a:"Delivery is FREE on every UK order and takes 2–4 working days. You will receive a tracking link as soon as your parcel ships."},
+ {q:"What is your returns policy?",a:"You have 30 days from delivery to return any unused item in its original packaging for a full refund — no questions asked."},
+ {q:"Which payment methods do you accept?",a:"We accept all major credit and debit cards, PayPal, Apple Pay and Google Pay. All payments are processed over encrypted, secure connections."},
+ {q:"Are your products cruelty-free?",a:"Yes. We only stock products that are cruelty-free, and we clearly label vegan-friendly items on each product page."}
+];
+const COUPONS = {GLOW10:.10, WELCOME15:.15};
+
+/* ===== state ===== */
+const fmt = v => "£" + v.toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2});
+let cart = [];   // {id, variant, qty}
+let coupon = null;
+const byId = id => P.find(p => p.id === id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function cartCount(){ return cart.reduce((n,l)=>n+l.qty,0); }
+function cartSubtotal(){ return cart.reduce((s,l)=>s+byId(l.id).price*l.qty,0); }
+
+function addToCart(id, variant, qty){
+  qty = qty || 1;
+  const key = id + "|" + (variant||"");
+  const line = cart.find(l => l.id+"|"+(l.variant||"") === key);
+  if(line) line.qty += qty; else cart.push({id, variant: variant||null, qty});
+  syncCart(); openCart();
+}
+function removeLine(i){ cart.splice(i,1); syncCart(); }
+
+function syncCart(){
+  document.getElementById("cartN").textContent = cartCount();
+  const box = document.getElementById("dlines");
+  if(!cart.length){
+    box.innerHTML = '<p style="color:var(--grey);font-size:.86rem;text-align:center;margin-top:2rem">Your basket is empty.<br>Every order ships free across the UK. ✨</p>';
+  } else {
+    box.innerHTML = cart.map((l,i)=>{
+      const p = byId(l.id);
+      return '<div class="dline">'
+        + '<div class="th '+p.g+'">'+p.e+'</div>'
+        + '<div><b>'+esc(p.name)+'</b><small>'+(l.variant?esc(l.variant)+" · ":"")+l.qty+' × '+fmt(p.price)+'</small><br><button class="rm" data-rm="'+i+'">Remove</button></div>'
+        + '<b style="font-variant-numeric:tabular-nums;color:var(--ink)">'+fmt(p.price*l.qty)+'</b></div>';
+    }).join("");
+  }
+  const sub = cartSubtotal();
+  const off = coupon ? sub*COUPONS[coupon] : 0;
+  document.getElementById("sub").textContent = fmt(sub);
+  document.getElementById("discRow").style.display = coupon ? "flex" : "none";
+  document.getElementById("disc").textContent = "−"+fmt(off)+" ("+ (coupon||"") +")";
+  document.getElementById("tot").textContent = fmt(sub-off);
+  document.getElementById("toCheckout").classList.toggle("hide", !cart.length);
+}
+document.getElementById("dlines").addEventListener("click", e=>{
+  const b = e.target.closest("[data-rm]"); if(b) removeLine(+b.dataset.rm);
+});
+document.getElementById("applyCoupon").addEventListener("click", ()=>{
+  const v = document.getElementById("coupon").value.trim().toUpperCase();
+  const msg = document.getElementById("couponMsg");
+  if(COUPONS[v]){ coupon = v; msg.innerHTML = '<span class="okmsg">Code '+v+' applied — '+(COUPONS[v]*100)+'% off ✓</span>'; }
+  else { coupon = null; msg.innerHTML = '<span class="errmsg">That code isn\'t valid. Try GLOW10.</span>'; }
+  syncCart();
+});
+function openCart(){ document.body.classList.add("cart-open"); }
+function closeCart(){ document.body.classList.remove("cart-open"); }
+document.getElementById("openCart").addEventListener("click", openCart);
+document.getElementById("closeCart").addEventListener("click", closeCart);
+document.getElementById("scrim").addEventListener("click", closeCart);
+document.getElementById("toCheckout").addEventListener("click", closeCart);
+
+/* ===== rendering helpers ===== */
+function starRow(p){
+  return '<div class="stars">'+"★".repeat(Math.round(p.rating))+"☆".repeat(5-Math.round(p.rating))+' <span>'+p.rating+' ('+p.reviews+')</span></div>';
+}
+function card(p){
+  const b = p.badge ? '<span class="badge '+(p.badge==="Sale"?"b-sale":p.badge==="New"?"b-new":"b-best")+'">'+p.badge+'</span>' : "";
+  return '<article class="pcard">'
+    + '<button class="part '+p.g+'" data-go="#/product/'+p.id+'" aria-label="View '+esc(p.name)+'">'+b+p.e+'</button>'
+    + '<div class="pbody"><h3><button data-go="#/product/'+p.id+'">'+esc(p.name)+'</button></h3>'
+    + starRow(p)
+    + '<div class="pricing"><span class="now">'+fmt(p.price)+'</span>'+(p.was?'<span class="was">'+fmt(p.was)+'</span>':"")+'</div>'
+    + '<button class="add" data-add="'+p.id+'">Add to basket</button></div></article>';
+}
+function grid(list){ return '<div class="grid">'+list.map(card).join("")+'</div>'; }
+
+/* ===== views ===== */
+function viewHome(){
+  const best = P.filter(p=>p.badge==="Best Seller").concat(P.filter(p=>p.rating>=4.7&&p.badge!=="Best Seller")).slice(0,4);
+  const news = P.filter(p=>p.badge==="New").concat(P.filter(p=>!p.badge)).slice(0,4);
+  return `
+  <section class="hero"><div class="wrap">
+    <div>
+      <span class="eyebrow">Premium beauty &amp; wellness · UK</span>
+      <h1>Glow is a ritual,<br>not a chance.</h1>
+      <p class="lead">Salon-grade skincare tools and self-care essentials, hand-picked and delivered free to your door anywhere in the UK.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#/shop">Shop the collection</a>
+        <a class="btn btn-ghost" href="#/shop/skincare">Explore skincare</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">✨</div>
+  </div></section>
+
+  <div class="trust"><div class="wrap">
+    <div><b>Free UK delivery</b><span>on every order</span></div>
+    <div><b>2–4 working days</b><span>tracked shipping</span></div>
+    <div><b>30-day returns</b><span>no questions asked</span></div>
+    <div><b>Secure checkout</b><span>Stripe · Apple Pay</span></div>
+  </div></div>
+
+  <section class="blk"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Curated for you</span><h2>Shop by category</h2></div></div>
+    <div class="cats">${CATS.map(c=>'<button class="cat '+c.c+'" data-go="#/shop/'+c.id+'"><span class="e">'+c.e+'</span><b>'+c.name+'</b><span>'+c.desc+'</span></button>').join("")}</div>
+  </div></section>
+
+  <section class="blk alt"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Customer favourites</span><h2>Best sellers</h2></div><a href="#/shop">View all →</a></div>
+    ${grid(best)}
+  </div></section>
+
+  <section class="blk"><div class="wrap">
+    <div class="promo">
+      <div><span class="eyebrow" style="color:#FBE9F1">Welcome offer</span><h2>10% off your first ritual</h2><p style="margin:.3rem 0 0;font-size:.9rem">Applied at checkout. Free delivery included, as always.</p></div>
+      <div class="code">GLOW10</div>
+    </div>
+  </div></section>
+
+  <section class="blk"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Just landed</span><h2>New arrivals</h2></div><a href="#/shop">View all →</a></div>
+    ${grid(news)}
+  </div></section>
+
+  <section class="blk alt"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">4.7★ average from 1,800+ orders</span><h2>Loved across the UK</h2></div></div>
+    <div class="tgrid">${TESTI.map(t=>'<div class="tcard"><div class="stars">'+"★".repeat(t.stars)+'</div><p>“'+t.text+'”</p><footer>'+t.name+' · '+t.where+'</footer></div>').join("")}</div>
+  </div></section>
+
+  <section class="blk"><div class="wrap" style="max-width:760px">
+    <div class="sec-head"><div><span class="eyebrow">Good to know</span><h2>Questions, answered</h2></div></div>
+    ${FAQS.map(f=>'<details><summary>'+f.q+'</summary><p>'+f.a+'</p></details>').join("")}
+  </div></section>
+
+  <section class="blk"><div class="wrap">
+    <div class="news">
+      <h2>Join the glow list</h2>
+      <p style="margin:.2rem 0 0;font-size:.9rem">15% off your first order with <b>WELCOME15</b> — plus early access to new arrivals.</p>
+      <form data-news><input type="email" required placeholder="Your email address" aria-label="Email address"><button class="btn btn-dark">Subscribe</button></form>
+    </div>
+  </div></section>`;
+}
+
+function viewShop(catId){
+  const c = CATS.find(x=>x.id===catId);
+  const list = c ? P.filter(p=>p.cat===catId) : P;
+  return `
+  <section class="blk"><div class="wrap">
+    <p class="crumb"><a href="#/home">Home</a> / Shop${c?" / "+c.name:""}</p>
+    <div class="sec-head"><div><span class="eyebrow">${list.length} products · free UK delivery</span><h2>${c?c.name:"All products"}</h2></div></div>
+    <div class="filters">
+      <button class="chip" data-go="#/shop" aria-pressed="${!c}">All</button>
+      ${CATS.map(x=>'<button class="chip" data-go="#/shop/'+x.id+'" aria-pressed="'+(catId===x.id)+'">'+x.name+'</button>').join("")}
+    </div>
+    ${grid(list)}
+  </div></section>`;
+}
+
+function viewProduct(id){
+  const p = byId(id); if(!p) return viewShop();
+  const rel = P.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,4);
+  return `
+  <div class="wrap">
+    <p class="crumb"><a href="#/home">Home</a> / <a href="#/shop/${p.cat}">${CATS.find(c=>c.id===p.cat).name}</a> / ${esc(p.name)}</p>
+    <div class="pd">
+      <div class="pd-art ${p.g}">${p.e}</div>
+      <div>
+        ${p.badge?'<span class="badge '+(p.badge==="Sale"?"b-sale":p.badge==="New"?"b-new":"b-best")+'" style="position:static;display:inline-block;margin-bottom:.6rem">'+p.badge+'</span>':""}
+        <h1 style="font-size:clamp(1.5rem,4.5vw,2.1rem)">${esc(p.name)}</h1>
+        ${starRow(p)}
+        <div class="pricing" style="margin:.7rem 0"><span class="now">${fmt(p.price)}</span>${p.was?'<span class="was">'+fmt(p.was)+'</span><span class="okmsg">Save '+fmt(p.was-p.price)+'</span>':""}</div>
+        <p style="max-width:52ch">${esc(p.short)}</p>
+        <ul>${p.feats.map(f=>"<li>"+esc(f)+"</li>").join("")}</ul>
+        ${p.vars?'<div><b style="font-size:.8rem;color:var(--ink)">'+p.vars.label+':</b><div class="vars">'+p.vars.opts.map((o,i)=>'<button class="chip" data-var="'+esc(o)+'" aria-pressed="'+(i===0)+'">'+esc(o)+'</button>').join("")+'</div></div>':""}
+        <div style="margin-top:.6rem">
+          <span class="qty"><button data-q="-1" aria-label="Decrease quantity">−</button><output id="q">1</output><button data-q="1" aria-label="Increase quantity">+</button></span>
+          <button class="btn btn-primary" id="pdAdd" data-pid="${p.id}">Add to basket — <span id="pdTot">${fmt(p.price)}</span></button>
+        </div>
+        <div class="freeline">✓ FREE UK delivery, 2–4 working days · 30-day returns</div>
+      </div>
+    </div>
+    <section class="blk"><div class="sec-head"><div><span class="eyebrow">Complete the ritual</span><h2>You may also like</h2></div></div>${grid(rel)}</section>
+  </div>`;
+}
+
+function viewCheckout(){
+  if(!cart.length) return '<div class="done"><h2>Your basket is empty</h2><p>Add something lovely first ✨</p><a class="btn btn-primary" href="#/shop">Back to shop</a></div>';
+  const sub = cartSubtotal(); const off = coupon?sub*COUPONS[coupon]:0;
+  return `
+  <div class="wrap"><div class="co">
+    <form id="coForm" novalidate>
+      <fieldset><legend>Contact</legend>
+        <div class="fld"><label for="f-em">Email</label><input id="f-em" type="email" required placeholder="you@example.co.uk"></div>
+      </fieldset>
+      <fieldset><legend>Delivery address</legend>
+        <div class="two">
+          <div class="fld"><label for="f-fn">First name</label><input id="f-fn" required></div>
+          <div class="fld"><label for="f-ln">Last name</label><input id="f-ln" required></div>
+        </div>
+        <div class="fld"><label for="f-ad">Address</label><input id="f-ad" required placeholder="House number and street"></div>
+        <div class="two">
+          <div class="fld"><label for="f-ct">City</label><input id="f-ct" required></div>
+          <div class="fld"><label for="f-pc">Postcode</label><input id="f-pc" required placeholder="SW1A 1AA"></div>
+        </div>
+      </fieldset>
+      <fieldset><legend>Payment</legend>
+        <div class="paybox">🔒 <span><b>Secure card payment</b> — Visa, Mastercard, Amex, Apple Pay &amp; Google Pay. Processed by Stripe. <em>(Demo — no real charge.)</em></span></div>
+        <div class="fld"><label for="f-cc">Card number</label><input id="f-cc" inputmode="numeric" required placeholder="4242 4242 4242 4242"></div>
+        <div class="two">
+          <div class="fld"><label for="f-ex">Expiry</label><input id="f-ex" required placeholder="MM/YY"></div>
+          <div class="fld"><label for="f-cv">CVC</label><input id="f-cv" inputmode="numeric" required placeholder="123"></div>
+        </div>
+      </fieldset>
+      <button class="btn btn-primary" style="width:100%;font-size:1rem">Pay ${fmt(sub-off)}</button>
+      <p style="font-size:.74rem;color:var(--grey);text-align:center;margin:0">Prices include VAT · Free UK delivery · 30-day returns</p>
+    </form>
+    <aside class="side">
+      <h3 style="font-family:var(--display);font-size:1.15rem">Order summary</h3>
+      ${cart.map(l=>{const p=byId(l.id);return '<div class="sumrow" style="margin:.4rem 0"><span>'+l.qty+' × '+esc(p.name)+(l.variant?' <small style="color:var(--grey)">('+esc(l.variant)+')</small>':"")+'</span><span>'+fmt(p.price*l.qty)+'</span></div>';}).join("")}
+      <hr style="border:none;border-top:1px solid var(--line)">
+      <div class="sumrow"><span>Subtotal</span><span>${fmt(sub)}</span></div>
+      ${coupon?'<div class="sumrow" style="color:var(--success)"><span>'+coupon+'</span><span>−'+fmt(off)+'</span></div>':""}
+      <div class="sumrow"><span>Delivery</span><span style="color:var(--success)">FREE</span></div>
+      <div class="sumrow total" style="margin-top:.4rem"><span>Total</span><span>${fmt(sub-off)}</span></div>
+    </aside>
+  </div></div>`;
+}
+
+function viewDone(order){
+  return `<div class="done">
+    <div class="tick">✓</div>
+    <h1 style="font-size:2rem">Thank you, ${esc(order.name)}!</h1>
+    <p>Your order <b style="color:var(--ink)">${order.ref}</b> is confirmed. A confirmation email is on its way to <b style="color:var(--ink)">${esc(order.email)}</b>, and your tracking link will follow as soon as it ships.</p>
+    <p class="okmsg">Total paid: ${fmt(order.total)} · FREE UK delivery, 2–4 working days</p>
+    <a class="btn btn-primary" href="#/shop" style="margin-top:1rem">Continue shopping</a>
+  </div>`;
+}
+
+/* ===== router ===== */
+let lastOrder = null;
+function render(){
+  const h = location.hash || "#/home";
+  const [,route,arg] = h.split("/");
+  const app = document.getElementById("app");
+  let nav = route;
+  if(route==="product"){ app.innerHTML = viewProduct(arg); initProduct(); nav="shop"; }
+  else if(route==="shop"){ app.innerHTML = viewShop(arg); nav = arg==="skincare"||arg==="wellness" ? arg : "shop"; }
+  else if(route==="checkout"){ app.innerHTML = viewCheckout(); initCheckout(); }
+  else if(route==="done" && lastOrder){ app.innerHTML = viewDone(lastOrder); }
+  else { app.innerHTML = viewHome(); nav="home"; }
+  document.querySelectorAll("[data-nav]").forEach(a=>a.setAttribute("aria-current", a.dataset.nav===nav));
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange", render);
+
+/* ===== per-view wiring ===== */
+document.getElementById("app").addEventListener("click", e=>{
+  const go = e.target.closest("[data-go]");
+  if(go){ location.hash = go.dataset.go; return; }
+  const add = e.target.closest("[data-add]");
+  if(add){ const p=byId(add.dataset.add); addToCart(p.id, p.vars?p.vars.opts[0]:null, 1); return; }
+  const v = e.target.closest("[data-var]");
+  if(v){ v.closest(".vars").querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false")); v.setAttribute("aria-pressed","true"); return; }
+  const q = e.target.closest("[data-q]");
+  if(q){
+    const out = document.getElementById("q");
+    const n = Math.min(9, Math.max(1, (+out.value||1) + (+q.dataset.q)));
+    out.value = n;
+    const p = byId(document.getElementById("pdAdd").dataset.pid);
+    document.getElementById("pdTot").textContent = fmt(p.price*n);
+  }
+});
+document.getElementById("app").addEventListener("submit", e=>{
+  if(e.target.matches("[data-news]")){
+    e.preventDefault();
+    e.target.innerHTML = '<p class="okmsg" style="font-size:.9rem">You\'re on the list! Use WELCOME15 at checkout. 💌</p>';
+  }
+});
+function initProduct(){
+  const btn = document.getElementById("pdAdd");
+  btn.addEventListener("click", ()=>{
+    const p = byId(btn.dataset.pid);
+    const sel = document.querySelector('[data-var][aria-pressed="true"]');
+    addToCart(p.id, sel?sel.dataset.var:null, +document.getElementById("q").value||1);
+  });
+}
+function initCheckout(){
+  const f = document.getElementById("coForm"); if(!f) return;
+  f.addEventListener("submit", e=>{
+    e.preventDefault();
+    if(!f.checkValidity()){ f.reportValidity(); return; }
+    const sub = cartSubtotal(); const off = coupon?sub*COUPONS[coupon]:0;
+    lastOrder = {
+      ref: "BG-2026-" + String(Math.floor(1000+Math.random()*9000)),
+      name: document.getElementById("f-fn").value.trim() || "friend",
+      email: document.getElementById("f-em").value.trim(),
+      total: sub-off
+    };
+    cart = []; coupon = null; syncCart();
+    location.hash = "#/done";
+  });
+}
+
+syncCart();
+render();
+</script>

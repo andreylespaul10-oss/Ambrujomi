@@ -93,7 +93,22 @@ de implementação.
 | `docs/devops/` | Deployment & DevOps | 20 |
 | `docs/developer-handbook/` | Developer Handbook | 20 |
 | `docs/operations-manual/` | Operations Manual | 20 |
+| `docs/monitoring-observability/` | Monitoring & Observability | 20 |
+| `docs/enterprise-governance/` | Enterprise Governance | 20 |
+| `docs/customer-support/` | Customer Support & Success | 20 |
+| `docs/data-governance/` | Data Governance | 20 |
+| `docs/disaster-recovery/` | Disaster Recovery & Business Continuity | 20 |
+| `docs/ai-personalisation/` | AI & Personalisation (v2 expandida) | 20 |
+| `docs/dsers-strategy/` | DSers & AliExpress Dropshipping Strategy | 20 |
+| `docs/master-index/` | Master Documentation Index | 20 |
 
-Nota: o ChatGPT ainda recomendou documentos 14–20 (Monitoring &
-Observability … Master Documentation Index), que não haviam sido gerados
-até a extração.
+Coleção completa: 21 documentos. AI & Personalisation foi expandido
+(v2) e a DSers Strategy foi escrita do zero, pois a versão do ChatGPT
+era apenas um placeholder dentro de um ZIP.
+
+### Site teste (trilho B — site do zero)
+
+`site-teste-design-oficial.html` — protótipo single-file da loja
+seguindo o Design System oficial (Playfair Display + Inter, paleta
+Rose #E8B4C7). Loja completa: home, shop com filtros, página de
+produto, carrinho com cupons, checkout e confirmação.
