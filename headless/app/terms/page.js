@@ -26,11 +26,11 @@ export default function Terms() {
         card. We never see or store your full card details.
       </p>
 
-      <H>3. Loyalty programme</H>
+      <H>3. Welcome discount</H>
       <p>
-        We run a loyalty programme: after your third purchase, you receive a 10%
-        discount on your next order. The discount is applied to the order that
-        follows your third completed, non-refunded purchase.
+        As a welcome, we give 10% off your first order. The discount is applied
+        automatically at checkout (or with the code shown on site) to your first
+        completed purchase — our way of saying thank you for choosing Bliss Glow.
       </p>
 
       <H>4. Delivery</H>
