@@ -15,25 +15,6 @@
   --display:'Playfair Display',Georgia,'Times New Roman',serif;
   --ui:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
 }
-@media (prefers-color-scheme:dark){:root{
-  --blush:#2A2125; --ink:#F5EDF1; --body:#E8DDE2; --grey:#B49CA7;
-  --grey-mid:#6E5F66; --bg:#1A1517; --bg-alt:#211B1E; --card:#251E21;
-  --line:#3A2F34; --on-rose:#2A161E; --shadow:0 10px 30px rgba(0,0,0,.4);
-  --lavender:#2B2536; --mint:#1F2E27;
-}}
-:root[data-theme="dark"]{
-  --blush:#2A2125; --ink:#F5EDF1; --body:#E8DDE2; --grey:#B49CA7;
-  --grey-mid:#6E5F66; --bg:#1A1517; --bg-alt:#211B1E; --card:#251E21;
-  --line:#3A2F34; --on-rose:#2A161E; --shadow:0 10px 30px rgba(0,0,0,.4);
-  --lavender:#2B2536; --mint:#1F2E27;
-}
-:root[data-theme="light"]{
-  --rose:#E8B4C7; --rose-deep:#C97C98; --blush:#F8EAF0;
-  --gold:#D8B36A; --lavender:#E9E2F7; --mint:#DFF3EA;
-  --ink:#151515; --body:#2D2D2D; --grey:#5A5A5A; --grey-mid:#BDBDBD;
-  --bg:#FFFFFF; --bg-alt:#FAFAFA; --card:#FFFFFF; --line:#EBDDE3;
-  --on-rose:#FFFFFF; --shadow:0 10px 30px rgba(201,124,152,.14);
-}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -50,8 +31,8 @@ button{font-family:var(--ui);cursor:pointer}
 .eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-deep)}
 
 /* ---------- chrome ---------- */
-.announce{background:var(--ink);color:#F8EAF0;text-align:center;font-size:.78rem;letter-spacing:.06em;padding:.5rem 1rem}
-.announce b{color:var(--rose)}
+.announce{background:linear-gradient(90deg,var(--rose-deep),var(--rose));color:#fff;text-align:center;font-size:.78rem;letter-spacing:.06em;padding:.5rem 1rem}
+.announce b{color:#FFF3C9}
 header.site{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
 .bar{display:flex;align-items:center;gap:1rem;padding:.8rem 0}
 .logo{font-family:var(--display);font-weight:700;font-size:1.35rem;color:var(--ink);text-decoration:none;letter-spacing:.01em}
@@ -76,7 +57,7 @@ nav.main + .cartbtn{margin-left:0}
 .btn-primary:hover{background:var(--rose-deep);color:#fff}
 .btn-ghost{background:transparent;border-color:var(--rose);color:var(--rose-deep)}
 .btn-ghost:hover{border-color:var(--rose-deep)}
-.btn-dark{background:var(--ink);color:var(--bg)}
+.btn-dark{background:var(--rose-deep);color:#fff}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
 .hero .cta{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.2rem}
 
@@ -113,8 +94,7 @@ section.blk.alt{background:var(--bg-alt)}
 .g-mauve{background:linear-gradient(140deg,var(--blush),var(--lavender))}
 .g-blush{background:linear-gradient(140deg,var(--bg-alt),var(--blush))}
 .g-bronze{background:linear-gradient(140deg,var(--mint),var(--gold))}
-:root[data-theme="dark"] .g-gold,:root[data-theme="dark"] .g-bronze{filter:saturate(.8) brightness(.9)}
-.badge{position:absolute;top:.6rem;left:.6rem;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.22rem .6rem;background:var(--ink);color:#fff}
+.badge{position:absolute;top:.6rem;left:.6rem;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.22rem .6rem;background:var(--rose-deep);color:#fff}
 .badge.b-sale{background:var(--error)}
 .badge.b-new{background:var(--rose-deep)}
 .badge.b-best{background:var(--gold);color:#3A2A10}
@@ -150,17 +130,17 @@ details p{margin:0;padding:0 1rem .9rem;font-size:.87rem;max-width:70ch}
 .news{background:var(--blush);border-radius:22px;padding:2rem 1.6rem;text-align:center}
 .news form{display:flex;gap:.6rem;max-width:430px;margin:1rem auto 0}
 .news input{flex:1;border:1.5px solid var(--line);background:var(--bg);border-radius:999px;padding:.7rem 1.1rem;font-size:.88rem;color:var(--body)}
-footer.site{background:var(--ink);color:#CDBEC6;margin-top:2.6rem}
+footer.site{background:linear-gradient(160deg,#B76E8E,var(--rose-deep));color:#FDEFF5;margin-top:2.6rem}
 footer.site .wrap{padding:2.4rem 1.1rem 1.6rem;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:1.4rem}
 footer.site h4{color:#fff;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 .6rem}
-footer.site a{color:#CDBEC6;text-decoration:none;display:block;font-size:.84rem;padding:.16rem 0}
-footer.site a:hover{color:var(--rose)}
-.fin{border-top:1px solid #322A2E;text-align:center;font-size:.74rem;padding:.9rem;color:#9A8B93}
+footer.site a{color:#FBE3ED;text-decoration:none;display:block;font-size:.84rem;padding:.16rem 0}
+footer.site a:hover{color:#fff}
+.fin{border-top:1px solid rgba(255,255,255,.25);text-align:center;font-size:.74rem;padding:.9rem;color:#F4D7E4}
 
 /* ---------- shop view ---------- */
 .filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
 .chip{border:1.5px solid var(--line);background:var(--card);color:var(--body);border-radius:999px;padding:.42rem 1rem;font-size:.8rem;font-weight:600}
-.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.chip[aria-pressed="true"]{background:var(--rose-deep);border-color:var(--rose-deep);color:#fff}
 
 /* ---------- product view ---------- */
 .pd{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;padding-top:2rem}
@@ -248,7 +228,7 @@ body.cart-open .drawer{transform:none}
 <footer class="site">
   <div class="wrap">
     <div>
-      <div class="logo" style="margin-bottom:.5rem">Bliss <em>Glow</em></div>
+      <div class="logo" style="margin-bottom:.5rem;color:#fff">Bliss <em style="color:#FFE1EE">Glow</em></div>
       <p style="font-size:.84rem;max-width:30ch;margin:0">Premium beauty &amp; wellness, delivered free across the United Kingdom.</p>
     </div>
     <div><h4>Shop</h4><a href="#/shop/skincare">Skincare</a><a href="#/shop/beauty-tools">Beauty Tools</a><a href="#/shop/wellness">Wellness</a><a href="#/shop/hair-body">Hair &amp; Body</a></div>
