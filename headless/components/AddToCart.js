@@ -1,47 +1,58 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { getBrowserClient, persistTokens } from "@/lib/wix-browser";
-import { WIX_STORES_APP_ID } from "@/lib/wix";
 
 export default function AddToCart({ productId }) {
+  const [qty, setQty] = useState(1);
   const [busy, setBusy] = useState(false);
-  const [msg, setMsg] = useState(null);
+  const [err, setErr] = useState(false);
   const router = useRouter();
 
   async function add() {
     setBusy(true);
-    setMsg(null);
+    setErr(false);
     try {
-      const client = getBrowserClient();
-      await client.currentCart.addToCurrentCart({
-        lineItems: [
-          {
-            catalogReference: {
-              appId: WIX_STORES_APP_ID,
-              catalogItemId: productId,
-            },
-            quantity: 1,
-          },
-        ],
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "add", productId, quantity: qty }),
       });
-      persistTokens(client);
-      setMsg("ok");
+      if (!res.ok) throw new Error("add_failed");
       router.push("/cart");
     } catch (e) {
       console.error(e);
-      setMsg("err");
-    } finally {
+      setErr(true);
       setBusy(false);
     }
   }
 
   return (
     <div>
-      <button className="btn btn-primary" onClick={add} disabled={busy}>
-        {busy ? "Adding…" : "Add to basket"}
-      </button>
-      {msg === "err" ? (
+      <div className="buyrow">
+        <div className="qty" aria-label="Quantity">
+          <button
+            type="button"
+            aria-label="Decrease quantity"
+            onClick={() => setQty((q) => Math.max(1, q - 1))}
+            disabled={busy || qty <= 1}
+          >
+            −
+          </button>
+          <span aria-live="polite">{qty}</span>
+          <button
+            type="button"
+            aria-label="Increase quantity"
+            onClick={() => setQty((q) => Math.min(10, q + 1))}
+            disabled={busy || qty >= 10}
+          >
+            +
+          </button>
+        </div>
+        <button className="btn btn-primary" onClick={add} disabled={busy}>
+          {busy ? "Adding…" : "Add to basket"}
+        </button>
+      </div>
+      {err ? (
         <p className="errmsg">Something went wrong — please try again.</p>
       ) : null}
     </div>

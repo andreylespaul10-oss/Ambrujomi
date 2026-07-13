@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { getBrowserClient, persistTokens } from "@/lib/wix-browser";
 
 function money(amount, currency) {
   const n = Number(amount || 0);
@@ -12,39 +11,64 @@ function money(amount, currency) {
 export default function CartPage() {
   const [cart, setCart] = useState(null);
   const [state, setState] = useState("loading"); // loading | ready | empty | error | checkout
+  const [busyLine, setBusyLine] = useState(null);
   const [err, setErr] = useState(null);
 
-  async function load() {
-    try {
-      const client = getBrowserClient();
-      const c = await client.currentCart.getCurrentCart();
-      persistTokens(client);
-      if (!c || !c.lineItems?.length) setState("empty");
-      else {
-        setCart(c);
-        setState("ready");
-      }
-    } catch (e) {
-      // "OWNED_CART_NOT_FOUND" = visitante ainda não tem carrinho
-      if (String(e?.message || e).includes("NOT_FOUND")) setState("empty");
-      else {
-        console.error(e);
-        setState("error");
-      }
+  function applyCart(c) {
+    if (!c || !c.lineItems?.length) {
+      setCart(null);
+      setState("empty");
+    } else {
+      setCart(c);
+      setState("ready");
     }
   }
+
+  async function post(payload) {
+    const res = await fetch("/api/cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("cart_request_failed");
+    return res.json();
+  }
+
   useEffect(() => {
-    load();
+    fetch("/api/cart")
+      .then((r) => {
+        if (!r.ok) throw new Error("load_failed");
+        return r.json();
+      })
+      .then((d) => applyCart(d.cart))
+      .catch((e) => {
+        console.error(e);
+        setState("error");
+      });
   }, []);
 
-  async function removeItem(id) {
+  async function changeQty(line, quantity) {
+    if (quantity < 1 || quantity > 99) return;
+    setBusyLine(line.id);
     try {
-      const client = getBrowserClient();
-      const res = await client.currentCart.removeLineItemsFromCurrentCart([id]);
-      if (!res.cart?.lineItems?.length) setState("empty");
-      else setCart(res.cart);
+      const d = await post({ action: "update", lineItemId: line.id, quantity });
+      applyCart(d.cart);
     } catch (e) {
       console.error(e);
+    } finally {
+      setBusyLine(null);
+    }
+  }
+
+  async function removeItem(line) {
+    setBusyLine(line.id);
+    try {
+      const d = await post({ action: "remove", lineItemId: line.id });
+      applyCart(d.cart);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setBusyLine(null);
     }
   }
 
@@ -52,18 +76,9 @@ export default function CartPage() {
     setState("checkout");
     setErr(null);
     try {
-      const client = getBrowserClient();
-      const { checkoutId } = await client.currentCart.createCheckoutFromCurrentCart({
-        channelType: "WEB",
-      });
-      const { redirectSession } = await client.redirects.createRedirectSession({
-        ecomCheckout: { checkoutId },
-        callbacks: {
-          postFlowUrl: window.location.origin,
-          thankYouPageUrl: window.location.origin + "/?order=success",
-        },
-      });
-      window.location.href = redirectSession.fullUrl;
+      const d = await post({ action: "checkout" });
+      if (!d.checkoutUrl) throw new Error("no_checkout_url");
+      window.location.href = d.checkoutUrl;
     } catch (e) {
       console.error(e);
       setErr("Could not open the secure checkout. Please try again.");
@@ -94,43 +109,59 @@ export default function CartPage() {
       </div>
     );
 
-  const currency = cart.currency || "GBP";
-  const subtotal = cart.subtotal?.amount ?? cart.lineItems.reduce(
-    (s, l) => s + Number(l.price?.amount || 0) * l.quantity,
-    0
-  );
+  const currency = cart.currency;
 
   return (
     <div className="wrap cartpage">
       <h2>Your basket</h2>
       {cart.lineItems.map((l) => (
-        <div className="cline" key={l._id}>
+        <div className="cline" key={l.id}>
           {l.image ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={mediaUrl(l.image)} alt="" />
+            <img src={l.image} alt="" />
           ) : (
             <div />
           )}
           <div>
-            <b>{l.productName?.original || l.productName}</b>
+            <b>{l.name}</b>
             <br />
-            <small>
-              {l.quantity} × {money(l.price?.amount, currency)}
-            </small>
-            <br />
-            <button className="rm" onClick={() => removeItem(l._id)}>
-              Remove
-            </button>
+            <small>{money(l.price, currency)} each</small>
+            <div className="qty qty-sm" aria-label="Quantity">
+              <button
+                type="button"
+                aria-label="Decrease quantity"
+                onClick={() => changeQty(l, l.quantity - 1)}
+                disabled={busyLine === l.id || l.quantity <= 1}
+              >
+                −
+              </button>
+              <span aria-live="polite">{l.quantity}</span>
+              <button
+                type="button"
+                aria-label="Increase quantity"
+                onClick={() => changeQty(l, l.quantity + 1)}
+                disabled={busyLine === l.id}
+              >
+                +
+              </button>
+              <button
+                className="rm"
+                onClick={() => removeItem(l)}
+                disabled={busyLine === l.id}
+              >
+                Remove
+              </button>
+            </div>
           </div>
           <b style={{ color: "var(--ink)" }}>
-            {money(Number(l.price?.amount || 0) * l.quantity, currency)}
+            {money(l.price * l.quantity, currency)}
           </b>
         </div>
       ))}
       <div className="sumbox">
         <div className="sumrow">
           <span>Subtotal</span>
-          <span>{money(subtotal, currency)}</span>
+          <span>{money(cart.subtotal, currency)}</span>
         </div>
         <div className="sumrow">
           <span>Delivery</span>
@@ -138,7 +169,7 @@ export default function CartPage() {
         </div>
         <div className="sumrow total" style={{ marginTop: ".4rem" }}>
           <span>Total</span>
-          <span>{money(subtotal, currency)}</span>
+          <span>{money(cart.subtotal, currency)}</span>
         </div>
         {err ? <p className="errmsg">{err}</p> : null}
         <button
@@ -155,12 +186,4 @@ export default function CartPage() {
       </div>
     </div>
   );
-}
-
-/* Converte wix:image:// em URL https simples */
-function mediaUrl(wixImage) {
-  if (typeof wixImage !== "string") return "";
-  if (wixImage.startsWith("http")) return wixImage;
-  const m = wixImage.match(/^wix:image:\/\/v1\/([^/]+)\//);
-  return m ? `https://static.wixstatic.com/media/${m[1]}` : "";
 }
