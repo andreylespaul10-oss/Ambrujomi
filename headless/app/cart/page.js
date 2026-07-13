@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { getBrowserClient, persistTokens } from "@/lib/wix-browser";
 
 function money(amount, currency) {
   const n = Number(amount || 0);
-  const sym = currency === "GBP" ? "£" : currency === "EUR" ? "€" : "";
+  const sym = currency === "GBP" ? "£" : currency === "EUR" ? "€" : "£";
   return sym + n.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
@@ -14,35 +13,36 @@ export default function CartPage() {
   const [state, setState] = useState("loading"); // loading | ready | empty | error | checkout
   const [err, setErr] = useState(null);
 
-  async function load() {
+  async function refresh() {
     try {
-      const client = getBrowserClient();
-      const c = await client.currentCart.getCurrentCart();
-      persistTokens(client);
-      if (!c || !c.lineItems?.length) setState("empty");
-      else {
-        setCart(c);
+      const r = await fetch("/api/cart", { cache: "no-store" });
+      const data = await r.json();
+      if (!data.items || !data.items.length) {
+        setState("empty");
+      } else {
+        setCart(data);
         setState("ready");
       }
     } catch (e) {
-      // "OWNED_CART_NOT_FOUND" = visitante ainda não tem carrinho
-      if (String(e?.message || e).includes("NOT_FOUND")) setState("empty");
-      else {
-        console.error(e);
-        setState("error");
-      }
+      console.error(e);
+      setState("error");
     }
   }
+
   useEffect(() => {
-    load();
+    refresh();
   }, []);
 
   async function removeItem(id) {
     try {
-      const client = getBrowserClient();
-      const res = await client.currentCart.removeLineItemsFromCurrentCart([id]);
-      if (!res.cart?.lineItems?.length) setState("empty");
-      else setCart(res.cart);
+      const r = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "remove", lineItemId: id }),
+      });
+      const data = await r.json();
+      if (!data.items || !data.items.length) setState("empty");
+      else setCart(data);
     } catch (e) {
       console.error(e);
     }
@@ -52,18 +52,14 @@ export default function CartPage() {
     setState("checkout");
     setErr(null);
     try {
-      const client = getBrowserClient();
-      const { checkoutId } = await client.currentCart.createCheckoutFromCurrentCart({
-        channelType: "WEB",
+      const r = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "checkout", origin: window.location.origin }),
       });
-      const { redirectSession } = await client.redirects.createRedirectSession({
-        ecomCheckout: { checkoutId },
-        callbacks: {
-          postFlowUrl: window.location.origin,
-          thankYouPageUrl: window.location.origin + "/?order=success",
-        },
-      });
-      window.location.href = redirectSession.fullUrl;
+      const data = await r.json();
+      if (!r.ok || !data.ok || !data.url) throw new Error(data.error || "no url");
+      window.location.href = data.url;
     } catch (e) {
       console.error(e);
       setErr("Could not open the secure checkout. Please try again.");
@@ -95,42 +91,36 @@ export default function CartPage() {
     );
 
   const currency = cart.currency || "GBP";
-  const subtotal = cart.subtotal?.amount ?? cart.lineItems.reduce(
-    (s, l) => s + Number(l.price?.amount || 0) * l.quantity,
-    0
-  );
 
   return (
     <div className="wrap cartpage">
       <h2>Your basket</h2>
-      {cart.lineItems.map((l) => (
-        <div className="cline" key={l._id}>
+      {cart.items.map((l) => (
+        <div className="cline" key={l.id}>
           {l.image ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={mediaUrl(l.image)} alt="" />
+            <img src={l.image} alt="" />
           ) : (
             <div />
           )}
           <div>
-            <b>{l.productName?.original || l.productName}</b>
+            <b>{l.name}</b>
             <br />
             <small>
-              {l.quantity} × {money(l.price?.amount, currency)}
+              {l.quantity} × {money(l.price, currency)}
             </small>
             <br />
-            <button className="rm" onClick={() => removeItem(l._id)}>
+            <button className="rm" onClick={() => removeItem(l.id)}>
               Remove
             </button>
           </div>
-          <b style={{ color: "var(--ink)" }}>
-            {money(Number(l.price?.amount || 0) * l.quantity, currency)}
-          </b>
+          <b style={{ color: "var(--ink)" }}>{money(l.price * l.quantity, currency)}</b>
         </div>
       ))}
       <div className="sumbox">
         <div className="sumrow">
           <span>Subtotal</span>
-          <span>{money(subtotal, currency)}</span>
+          <span>{money(cart.subtotal, currency)}</span>
         </div>
         <div className="sumrow">
           <span>Delivery</span>
@@ -138,7 +128,7 @@ export default function CartPage() {
         </div>
         <div className="sumrow total" style={{ marginTop: ".4rem" }}>
           <span>Total</span>
-          <span>{money(subtotal, currency)}</span>
+          <span>{money(cart.subtotal, currency)}</span>
         </div>
         {err ? <p className="errmsg">{err}</p> : null}
         <button
@@ -155,12 +145,4 @@ export default function CartPage() {
       </div>
     </div>
   );
-}
-
-/* Converte wix:image:// em URL https simples */
-function mediaUrl(wixImage) {
-  if (typeof wixImage !== "string") return "";
-  if (wixImage.startsWith("http")) return wixImage;
-  const m = wixImage.match(/^wix:image:\/\/v1\/([^/]+)\//);
-  return m ? `https://static.wixstatic.com/media/${m[1]}` : "";
 }

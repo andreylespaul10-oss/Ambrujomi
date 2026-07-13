@@ -1,47 +1,71 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { getBrowserClient, persistTokens } from "@/lib/wix-browser";
-import { WIX_STORES_APP_ID } from "@/lib/wix";
 
 export default function AddToCart({ productId }) {
+  const [qty, setQty] = useState(1);
   const [busy, setBusy] = useState(false);
-  const [msg, setMsg] = useState(null);
+  const [state, setState] = useState("idle"); // idle | added | error
   const router = useRouter();
 
   async function add() {
     setBusy(true);
-    setMsg(null);
+    setState("idle");
     try {
-      const client = getBrowserClient();
-      await client.currentCart.addToCurrentCart({
-        lineItems: [
-          {
-            catalogReference: {
-              appId: WIX_STORES_APP_ID,
-              catalogItemId: productId,
-            },
-            quantity: 1,
-          },
-        ],
+      const r = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "add", productId, quantity: qty }),
       });
-      persistTokens(client);
-      setMsg("ok");
-      router.push("/cart");
+      const data = await r.json();
+      if (!r.ok || !data.ok) throw new Error(data.error || "failed");
+      setState("added");
+      router.refresh();
     } catch (e) {
       console.error(e);
-      setMsg("err");
+      setState("error");
     } finally {
       setBusy(false);
     }
   }
 
   return (
-    <div>
-      <button className="btn btn-primary" onClick={add} disabled={busy}>
-        {busy ? "Adding…" : "Add to basket"}
-      </button>
-      {msg === "err" ? (
+    <div className="atc">
+      <div className="atc-row">
+        <div className="qty" aria-label="Quantity">
+          <button
+            type="button"
+            onClick={() => setQty((q) => Math.max(1, q - 1))}
+            disabled={busy || qty <= 1}
+            aria-label="Decrease quantity"
+          >
+            −
+          </button>
+          <span aria-live="polite">{qty}</span>
+          <button
+            type="button"
+            onClick={() => setQty((q) => Math.min(20, q + 1))}
+            disabled={busy || qty >= 20}
+            aria-label="Increase quantity"
+          >
+            +
+          </button>
+        </div>
+        <button className="btn btn-primary" onClick={add} disabled={busy}>
+          {busy ? "Adding…" : "Add to basket"}
+        </button>
+      </div>
+
+      {state === "added" ? (
+        <div className="atc-added">
+          <span>✓ Added to your basket</span>
+          <Link className="btn btn-ghost" href="/cart">
+            View basket &amp; checkout →
+          </Link>
+        </div>
+      ) : null}
+      {state === "error" ? (
         <p className="errmsg">Something went wrong — please try again.</p>
       ) : null}
     </div>
