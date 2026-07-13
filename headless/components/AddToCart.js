@@ -50,6 +50,20 @@ export default function AddToCart({ productId, price, compareAt, options = [], v
         quantity: qty,
         variantId: variant?.id,
       });
+      // Sinaliza "adicionou ao carrinho" ao Google Ads/Analytics
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("event", "add_to_cart", {
+          currency: "GBP",
+          value: Number(unitPrice || 0) * qty,
+          items: [
+            {
+              item_id: variant?.id || productId,
+              price: Number(unitPrice || 0),
+              quantity: qty,
+            },
+          ],
+        });
+      }
       router.push("/cart");
     } catch (e) {
       console.error(e);
