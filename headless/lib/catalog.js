@@ -1,4 +1,5 @@
 import { serverClient, imageUrl } from "./wix";
+import { categorize } from "./categories";
 
 // Em ambientes onde o navegador não alcança o CDN do Wix (PROXY_IMAGES=1),
 // as imagens passam pelo nosso servidor via /api/img.
@@ -21,6 +22,7 @@ function mapProduct(p) {
     id: p._id || p.id,
     slug: p.slug,
     name: p.name,
+    category: categorize(p.name),
     price,
     priceFmt: money(price),
     compareAt: compare > price ? compare : null,
@@ -62,4 +64,20 @@ export async function getProductBySlug(slug) {
     .limit(1)
     .find();
   return res.items.length ? mapProduct(res.items[0]) : null;
+}
+
+/** Todos os produtos agrupados por slug de categoria. */
+export async function getProductsGroupedByCategory() {
+  const products = await getProducts();
+  const groups = {};
+  for (const p of products) {
+    (groups[p.category] ||= []).push(p);
+  }
+  return groups;
+}
+
+/** Produtos de uma categoria específica. */
+export async function getProductsByCategory(slug) {
+  const products = await getProducts();
+  return products.filter((p) => p.category === slug);
 }

@@ -316,13 +316,59 @@ footer.site a:hover { color: #fff; }
   border-radius: 6px; padding: 0.28rem 0.5rem;
 }
 
+/* ---------- category navigation + blocks ---------- */
+.catnav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem; }
+.cat-pill {
+  border: 1.5px solid var(--line); border-radius: 999px; padding: 0.5rem 1.05rem;
+  font-size: 0.84rem; font-weight: 600; color: var(--body); text-decoration: none;
+  background: var(--bg); transition: 0.15s;
+}
+.cat-pill:hover { border-color: var(--rose); color: var(--rose-deep); }
+.cat-pill.on { background: var(--rose-deep); border-color: var(--rose-deep); color: #fff; }
+.cat-blurb { color: var(--grey); max-width: 52ch; margin: 0.3rem 0 0; font-size: 0.92rem; }
+.catblock { margin-bottom: 2.4rem; }
+.catblock-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; }
+.catblock-head h3 { font-family: var(--display); font-size: 1.3rem; font-weight: 700; margin: 0; }
+.catblock-head a { font-size: 0.82rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+
+/* ---------- product page: perks + ritual ---------- */
+.perks { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; gap: 0.6rem; }
+.perks li { display: flex; flex-direction: column; padding: 0.7rem 0.9rem; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-alt); }
+.perks b { font-size: 0.85rem; color: var(--ink); }
+.perks span { font-size: 0.76rem; color: var(--grey); }
+.ritual { background: var(--bg-alt); border-block: 1px solid var(--line); margin-top: 2.4rem; padding: 2.6rem 0; }
+.ritual-inner { max-width: 640px; margin: 0 auto; padding: 0 1.1rem; }
+.ritual-inner h2 { margin-bottom: 1rem; }
+.ritual-inner ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.6rem; }
+.ritual-inner ol li { font-size: 0.94rem; padding-left: 0.3rem; }
+.ritual-inner ol li::marker { color: var(--rose-deep); font-weight: 700; }
+.ritual-note { margin-top: 1.2rem; font-size: 0.78rem; color: var(--grey); border-top: 1px dashed var(--line); padding-top: 0.9rem; }
+
+/* ---------- reviews ---------- */
+.reviews { max-width: 760px; margin: 0 auto; padding: 2.6rem 1.1rem 0.5rem; }
+.reviews-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 1rem; margin-bottom: 1.3rem; flex-wrap: wrap; }
+.reviews-score { display: flex; align-items: center; gap: 0.6rem; }
+.stars { display: inline-flex; gap: 2px; }
+.stars svg { fill: var(--line); }
+.stars svg.on { fill: var(--gold); }
+.rscore { display: flex; flex-direction: column; line-height: 1.1; font-family: var(--display); font-weight: 800; font-size: 1.4rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.rscore small { font-family: var(--ui); font-weight: 500; font-size: 0.72rem; color: var(--grey); }
+.review-empty { text-align: center; background: var(--blush); border: 1px dashed var(--rose); border-radius: 18px; padding: 2rem 1.4rem; }
+.re-title { font-family: var(--display); font-weight: 700; font-size: 1.12rem; color: var(--ink); margin: 0 0 0.4rem; }
+.re-sub { color: var(--grey); font-size: 0.88rem; max-width: 46ch; margin: 0 auto; }
+.review-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+.review { border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1rem; background: var(--bg); }
+.review-top { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem; }
+.review-top b { font-size: 0.88rem; color: var(--ink); }
+.verified { font-size: 0.7rem; font-weight: 700; color: var(--success); background: var(--mint); border-radius: 999px; padding: 0.15rem 0.5rem; }
+.review p { margin: 0; font-size: 0.9rem; color: var(--body); }
+
 @media (max-width: 840px) {
   .hamburger { display: flex; }
   nav.main { display: none; }
   .bar { gap: 0.6rem; }
   .logo { margin-right: auto; }
-  .cartbtn { margin-left: 0; }
+  .cartbtn { margin-left: 0; padding: 0.5rem 0.7rem; }
   .cartbtn span { display: none; }
-  .cartbtn { padding: 0.5rem 0.7rem; }
   .promise-grid { grid-template-columns: repeat(2, 1fr); gap: 1.6rem 1rem; }
 }
