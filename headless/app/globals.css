@@ -181,6 +181,17 @@ section.blk.alt { background: var(--bg-alt); }
 .cline b { color: var(--ink); font-size: 0.9rem; }
 .cline small { color: var(--grey); }
 .cline .rm { background: none; border: none; color: var(--grey); font-size: 0.75rem; text-decoration: underline; padding: 0; }
+.opt { margin: 0.9rem 0; }
+.optlabel { display: block; font-size: 0.8rem; color: var(--grey); margin-bottom: 0.4rem; }
+.optlabel b { color: var(--ink); }
+.optpills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.optpill {
+  border: 1.5px solid var(--line); border-radius: 999px; background: var(--bg);
+  padding: 0.42rem 0.9rem; font-size: 0.82rem; color: var(--ink); cursor: pointer;
+}
+.optpill:hover:not(:disabled) { border-color: var(--rose-deep); }
+.optpill.on { border-color: var(--rose-deep); background: var(--blush); font-weight: 700; }
+.optpill.off { opacity: 0.45; text-decoration: line-through; }
 .buyrow { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
 .qty {
   display: inline-flex; align-items: center; gap: 0.15rem;

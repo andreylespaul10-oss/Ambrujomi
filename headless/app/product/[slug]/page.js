@@ -67,7 +67,13 @@ export default async function ProductPage({ params }) {
           ) : null}
           <h1 style={{ fontSize: "clamp(1.5rem,4.5vw,2.1rem)" }}>{p.name}</h1>
           {p.description ? <p style={{ maxWidth: "52ch" }}>{p.description}</p> : null}
-          <AddToCart productId={p.id} price={p.price} compareAt={p.compareAt} />
+          <AddToCart
+            productId={p.id}
+            price={p.price}
+            compareAt={p.compareAt}
+            options={p.options}
+            variants={p.variants}
+          />
           <div className="freeline">
             ✓ FREE UK delivery, 5–12 working days · 30-day returns
           </div>

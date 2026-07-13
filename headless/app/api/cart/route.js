@@ -4,21 +4,29 @@ import { currentCart } from "@wix/ecom";
 import { redirects } from "@wix/redirects";
 import { WIX_CLIENT_ID, WIX_STORES_APP_ID } from "@/lib/wix";
 
-// Carrinho server-side: o navegador só fala com /api/cart e os tokens de
-// visitante ficam num cookie httpOnly — nada de SDK nem localStorage no cliente.
+// Carrinho server-side: o navegador só fala com /api/cart. Os tokens de
+// visitante viajam num cookie httpOnly e, como reforço para navegadores que
+// bloqueiam cookies, também no corpo da resposta (o cliente guarda uma cópia
+// no localStorage e devolve no header x-bg-tokens).
 
 export const dynamic = "force-dynamic";
 
 const TOKENS_COOKIE = "bg_visitor_tokens";
+const TOKENS_HEADER = "x-bg-tokens";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 180; // 180 dias (vida do refresh token)
 
 function readTokens(request) {
-  try {
-    const raw = request.cookies.get(TOKENS_COOKIE)?.value;
-    return raw ? JSON.parse(raw) : undefined;
-  } catch {
-    return undefined;
+  for (const raw of [
+    request.cookies.get(TOKENS_COOKIE)?.value,
+    request.headers.get(TOKENS_HEADER),
+  ]) {
+    if (!raw) continue;
+    try {
+      const t = JSON.parse(raw);
+      if (t) return t;
+    } catch {}
   }
+  return undefined;
 }
 
 function makeClient(tokens) {
@@ -29,8 +37,8 @@ function makeClient(tokens) {
 }
 
 /**
- * Executa `fn(client)` com os tokens do cookie; se os tokens salvos estiverem
- * corrompidos/expirados, tenta uma vez com um visitante novo em vez de travar.
+ * Executa `fn(client)` com os tokens salvos; se estiverem corrompidos ou
+ * expirados, tenta uma vez com um visitante novo em vez de travar.
  */
 async function withVisitor(request, fn) {
   const saved = readTokens(request);
@@ -47,7 +55,10 @@ async function withVisitor(request, fn) {
 }
 
 function respond(payload, tokens, status = 200) {
-  const res = NextResponse.json(payload, { status });
+  const res = NextResponse.json(
+    tokens ? { ...payload, visitorTokens: tokens } : payload,
+    { status, headers: { "Cache-Control": "no-store" } }
+  );
   if (tokens) {
     res.cookies.set(TOKENS_COOKIE, JSON.stringify(tokens), {
       httpOnly: true,
@@ -81,6 +92,12 @@ function publicCart(cart) {
     quantity: l.quantity,
     price: Number(l.price?.amount || 0),
     image: mediaUrl(l.image),
+    // "Color: Citrus 100g" etc. — variação escolhida (produtos DSers)
+    variant:
+      (l.descriptionLines || [])
+        .map((d) => d.plainText?.original)
+        .filter(Boolean)
+        .join(" · ") || null,
   }));
   const subtotal =
     Number(cart.subtotal?.amount) ||
@@ -128,21 +145,25 @@ export async function POST(request) {
       const quantity = Math.min(Math.max(parseInt(body.quantity, 10) || 1, 1), 99);
       if (!body.productId)
         return NextResponse.json({ error: "bad_request" }, { status: 400 });
+      const catalogReference = {
+        appId: WIX_STORES_APP_ID,
+        catalogItemId: body.productId,
+      };
+      // Produtos com variações (ex.: importados do DSers): sem o variantId a
+      // Wix descarta o item silenciosamente — então ele é obrigatório aqui.
+      if (typeof body.variantId === "string" && body.variantId) {
+        catalogReference.options = { variantId: body.variantId };
+      }
       const { data, tokens } = await withVisitor(request, async (client) => {
         const res = await client.currentCart.addToCurrentCart({
-          lineItems: [
-            {
-              catalogReference: {
-                appId: WIX_STORES_APP_ID,
-                catalogItemId: body.productId,
-              },
-              quantity,
-            },
-          ],
+          lineItems: [{ catalogReference, quantity }],
         });
         return res.cart;
       });
-      return respond({ cart: publicCart(data) }, tokens);
+      const cart = publicCart(data);
+      if (!cart)
+        return NextResponse.json({ error: "variant_required" }, { status: 400 });
+      return respond({ cart }, tokens);
     }
 
     if (action === "update") {

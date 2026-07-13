@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { cartFetch } from "@/lib/cart-client";
 
 function money(amount, currency) {
   const n = Number(amount || 0);
@@ -24,22 +25,8 @@ export default function CartPage() {
     }
   }
 
-  async function post(payload) {
-    const res = await fetch("/api/cart", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error("cart_request_failed");
-    return res.json();
-  }
-
   useEffect(() => {
-    fetch("/api/cart")
-      .then((r) => {
-        if (!r.ok) throw new Error("load_failed");
-        return r.json();
-      })
+    cartFetch()
       .then((d) => applyCart(d.cart))
       .catch((e) => {
         console.error(e);
@@ -51,7 +38,7 @@ export default function CartPage() {
     if (quantity < 1 || quantity > 99) return;
     setBusyLine(line.id);
     try {
-      const d = await post({ action: "update", lineItemId: line.id, quantity });
+      const d = await cartFetch({ action: "update", lineItemId: line.id, quantity });
       applyCart(d.cart);
     } catch (e) {
       console.error(e);
@@ -63,7 +50,7 @@ export default function CartPage() {
   async function removeItem(line) {
     setBusyLine(line.id);
     try {
-      const d = await post({ action: "remove", lineItemId: line.id });
+      const d = await cartFetch({ action: "remove", lineItemId: line.id });
       applyCart(d.cart);
     } catch (e) {
       console.error(e);
@@ -76,7 +63,7 @@ export default function CartPage() {
     setState("checkout");
     setErr(null);
     try {
-      const d = await post({ action: "checkout" });
+      const d = await cartFetch({ action: "checkout" });
       if (!d.checkoutUrl) throw new Error("no_checkout_url");
       window.location.href = d.checkoutUrl;
     } catch (e) {
@@ -125,6 +112,12 @@ export default function CartPage() {
           <div>
             <b>{l.name}</b>
             <br />
+            {l.variant ? (
+              <>
+                <small>{l.variant}</small>
+                <br />
+              </>
+            ) : null}
             <small>{money(l.price, currency)} each</small>
             <div className="qty qty-sm" aria-label="Quantity">
               <button

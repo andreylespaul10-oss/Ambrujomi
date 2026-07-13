@@ -40,8 +40,28 @@ function mapProduct(p) {
     inStock: p.inventory?.availabilityStatus !== "OUT_OF_STOCK",
     options: (p.options || []).map((o) => ({
       name: o.name,
-      choices: (o.choicesSettings?.choices || []).map((c) => c.name),
+      choices: (o.choicesSettings?.choices || [])
+        .filter((c) => c.visible !== false)
+        .map((c) => ({ name: c.name, inStock: c.inStock !== false })),
     })),
+    // Variações (produtos DSers etc.): a Wix exige o variantId no carrinho.
+    variants: (p.variantsInfo?.variants || [])
+      .filter((v) => v.visible !== false)
+      .map((v) => {
+        const vPrice = Number(v.price?.actualPrice?.amount || 0);
+        const vCompare = Number(v.price?.compareAtPrice?.amount || 0);
+        return {
+          id: v._id,
+          price: vPrice,
+          compareAt: vCompare > vPrice ? vCompare : null,
+          inStock: v.inventoryStatus?.inStock !== false,
+          image: img(imageUrl(v.media?.image, 800, 800)),
+          choices: (v.choices || []).map((c) => ({
+            option: c.optionChoiceNames?.optionName,
+            choice: c.optionChoiceNames?.choiceName,
+          })),
+        };
+      }),
   };
 }
 
@@ -58,12 +78,12 @@ export async function getProducts(limit = 100) {
 
 export async function getProductBySlug(slug) {
   const client = serverClient();
-  const res = await client.productsV3
-    .queryProducts(WITH_GALLERY)
-    .eq("slug", slug)
-    .limit(1)
-    .find();
-  return res.items.length ? mapProduct(res.items[0]) : null;
+  // getProductBySlug direto: só ele devolve variantsInfo (com variantId,
+  // preço e estoque por variação), que o carrinho da Wix exige.
+  const res = await client.productsV3.getProductBySlug(slug, {
+    fields: ["MEDIA_ITEMS_INFO", "VARIANT_OPTION_CHOICE_NAMES"],
+  });
+  return res?.product ? mapProduct(res.product) : null;
 }
 
 /** Todos os produtos agrupados por slug de categoria. */
