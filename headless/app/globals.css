@@ -159,6 +159,7 @@ section.blk.alt { background: var(--bg-alt); }
 .pricing { display: flex; align-items: baseline; gap: 0.5rem; margin-top: auto; font-variant-numeric: tabular-nums; }
 .pricing .now { font-weight: 700; color: var(--ink); font-size: 1.02rem; }
 .pricing .was { color: var(--grey); text-decoration: line-through; font-size: 0.8rem; }
+.pricing .each { color: var(--grey); font-size: 0.8rem; }
 
 /* product page */
 .pd { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; padding-block: 2rem; }
