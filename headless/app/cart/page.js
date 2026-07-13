@@ -63,6 +63,20 @@ export default function CartPage() {
     setState("checkout");
     setErr(null);
     try {
+      // Sinaliza "iniciou checkout" ao Google Ads/Analytics — último evento
+      // que capturamos no nosso domínio antes de ir pro pagamento na Wix.
+      if (typeof window !== "undefined" && typeof window.gtag === "function" && cart) {
+        window.gtag("event", "begin_checkout", {
+          currency: cart.currency || "GBP",
+          value: Number(cart.subtotal || 0),
+          items: (cart.lineItems || []).map((l) => ({
+            item_id: l.id,
+            item_name: l.name,
+            price: l.price,
+            quantity: l.quantity,
+          })),
+        });
+      }
       const d = await cartFetch({ action: "checkout" });
       if (!d.checkoutUrl) throw new Error("no_checkout_url");
       window.location.href = d.checkoutUrl;
