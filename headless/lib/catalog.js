@@ -17,14 +17,20 @@ function money(v) {
 
 function mapProduct(p) {
   const price = Number(p.actualPriceRange?.minValue?.amount || 0);
+  const priceMax = Number(p.actualPriceRange?.maxValue?.amount || price);
   const compare = Number(p.compareAtPriceRange?.minValue?.amount || 0);
+  // Produto com variações de preços diferentes → mostra faixa "£min – £max"
+  const hasPriceRange = priceMax - price > 0.001;
   return {
     id: p._id || p.id,
     slug: p.slug,
     name: p.name,
     category: categorize(p.name),
     price,
+    priceMax,
     priceFmt: money(price),
+    priceMaxFmt: money(priceMax),
+    priceRange: hasPriceRange,
     compareAt: compare > price ? compare : null,
     compareAtFmt: compare > price ? money(compare) : null,
     image: img(imageUrl(p.media?.main?.image, 800, 800)),

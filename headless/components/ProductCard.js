@@ -19,8 +19,16 @@ export default function ProductCard({ p }) {
           <Link href={`/product/${p.slug}`}>{p.name}</Link>
         </h3>
         <div className="pricing">
-          <span className="now">{p.priceFmt}</span>
-          {p.compareAtFmt ? <span className="was">{p.compareAtFmt}</span> : null}
+          {p.priceRange ? (
+            <span className="now">
+              {p.priceFmt} – {p.priceMaxFmt}
+            </span>
+          ) : (
+            <>
+              <span className="now">{p.priceFmt}</span>
+              {p.compareAtFmt ? <span className="was">{p.compareAtFmt}</span> : null}
+            </>
+          )}
         </div>
       </div>
     </article>
