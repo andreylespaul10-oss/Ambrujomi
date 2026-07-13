@@ -15,6 +15,11 @@ export const CATEGORIES = [
     blurb: "Gua sha, rollers & brushes — the sculpting rituals loved by facialists.",
   },
   {
+    slug: "body",
+    name: "Body & Bath",
+    blurb: "Soaps, scrubs, bath rituals & fragrance to nourish from head to toe.",
+  },
+  {
     slug: "wellness",
     name: "Wellness & Sleep",
     blurb: "Massage, aromatherapy & rest — self-care beyond the bathroom shelf.",
@@ -27,11 +32,12 @@ export const CATEGORIES = [
 ];
 
 // A ordem importa: a primeira regra que casar vence. Regras mais específicas
-// (hair, wellness) vêm antes; "skincare" é o padrão para o rosto.
+// vêm antes; "skincare" é o padrão para produtos de rosto.
 const RULES = [
   { slug: "hair", kw: ["curl", "scalp", "hair"] },
   { slug: "wellness", kw: ["massager", "diffuser", "aromatherapy", "sleep", "neck", "relax"] },
-  { slug: "tools", kw: ["gua sha", "roller", "brush", "ice"] },
+  { slug: "body", kw: ["soap", "bath", "exfoliat", "glove", "foot", "bronzer", "soak", "scrub", "loose powder", "edt", "1 million", "cologne", "perfume", "fragrance", "body wash", "shower"] },
+  { slug: "tools", kw: ["gua sha", "roller", "cleansing brush", "body brush", "ice"] },
 ];
 
 /** Devolve o slug da categoria de um produto a partir do nome. */
