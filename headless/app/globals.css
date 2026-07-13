@@ -180,6 +180,23 @@ section.blk.alt { background: var(--bg-alt); }
 .cline b { color: var(--ink); font-size: 0.9rem; }
 .cline small { color: var(--grey); }
 .cline .rm { background: none; border: none; color: var(--grey); font-size: 0.75rem; text-decoration: underline; padding: 0; }
+.buyrow { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+.qty {
+  display: inline-flex; align-items: center; gap: 0.15rem;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--bg);
+  padding: 0.15rem 0.3rem;
+}
+.qty button {
+  width: 30px; height: 30px; border: none; background: none; border-radius: 999px;
+  color: var(--ink); font-size: 1.05rem; line-height: 1; cursor: pointer;
+}
+.qty button:hover:not(:disabled) { background: var(--blush); }
+.qty button:disabled { color: var(--grey); opacity: 0.45; cursor: default; }
+.qty span { min-width: 26px; text-align: center; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.qty.qty-sm { margin-top: 0.4rem; padding: 0.05rem 0.2rem; }
+.qty.qty-sm button { width: 24px; height: 24px; font-size: 0.95rem; }
+.qty.qty-sm span { min-width: 20px; font-size: 0.85rem; }
+.qty.qty-sm .rm { margin-left: 0.55rem; }
 .sumbox { border-top: 2px solid var(--line); margin-top: 1rem; padding-top: 1rem; }
 .sumrow { display: flex; justify-content: space-between; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
 .sumrow.total { font-weight: 700; color: var(--ink); font-size: 1.05rem; }
@@ -349,25 +366,6 @@ footer.site a:hover { color: #fff; }
 .catblock-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; }
 .catblock-head h3 { font-family: var(--display); font-size: 1.3rem; font-weight: 700; margin: 0; }
 .catblock-head a { font-size: 0.82rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
-
-/* ---------- add to cart (quantity + feedback) ---------- */
-.atc { margin-top: 1.3rem; }
-.atc-row { display: flex; gap: 0.7rem; align-items: stretch; flex-wrap: wrap; }
-.qty { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; }
-.qty button {
-  width: 42px; height: 100%; min-height: 44px; border: none; background: var(--bg-alt);
-  font-size: 1.15rem; color: var(--ink); line-height: 1;
-}
-.qty button:disabled { opacity: 0.4; }
-.qty button:hover:not(:disabled) { background: var(--blush); color: var(--rose-deep); }
-.qty span { min-width: 2.4rem; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
-.atc-added {
-  display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;
-  margin-top: 0.9rem; padding: 0.7rem 0.9rem; border-radius: 12px;
-  background: var(--good-bg, #e7f4ec); border: 1px solid #cfe6d8;
-}
-.atc-added span { font-weight: 700; color: var(--success); font-size: 0.9rem; }
-.atc-added .btn { padding: 0.5rem 1rem; font-size: 0.82rem; }
 
 /* ---------- product page: perks + ritual ---------- */
 .perks { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; gap: 0.6rem; }

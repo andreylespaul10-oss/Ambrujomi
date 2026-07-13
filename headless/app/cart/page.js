@@ -4,47 +4,71 @@ import Link from "next/link";
 
 function money(amount, currency) {
   const n = Number(amount || 0);
-  const sym = currency === "GBP" ? "£" : currency === "EUR" ? "€" : "£";
+  const sym = currency === "GBP" ? "£" : currency === "EUR" ? "€" : "";
   return sym + n.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export default function CartPage() {
   const [cart, setCart] = useState(null);
   const [state, setState] = useState("loading"); // loading | ready | empty | error | checkout
+  const [busyLine, setBusyLine] = useState(null);
   const [err, setErr] = useState(null);
 
-  async function refresh() {
-    try {
-      const r = await fetch("/api/cart", { cache: "no-store" });
-      const data = await r.json();
-      if (!data.items || !data.items.length) {
-        setState("empty");
-      } else {
-        setCart(data);
-        setState("ready");
-      }
-    } catch (e) {
-      console.error(e);
-      setState("error");
+  function applyCart(c) {
+    if (!c || !c.lineItems?.length) {
+      setCart(null);
+      setState("empty");
+    } else {
+      setCart(c);
+      setState("ready");
     }
   }
 
+  async function post(payload) {
+    const res = await fetch("/api/cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("cart_request_failed");
+    return res.json();
+  }
+
   useEffect(() => {
-    refresh();
+    fetch("/api/cart")
+      .then((r) => {
+        if (!r.ok) throw new Error("load_failed");
+        return r.json();
+      })
+      .then((d) => applyCart(d.cart))
+      .catch((e) => {
+        console.error(e);
+        setState("error");
+      });
   }, []);
 
-  async function removeItem(id) {
+  async function changeQty(line, quantity) {
+    if (quantity < 1 || quantity > 99) return;
+    setBusyLine(line.id);
     try {
-      const r = await fetch("/api/cart", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "remove", lineItemId: id }),
-      });
-      const data = await r.json();
-      if (!data.items || !data.items.length) setState("empty");
-      else setCart(data);
+      const d = await post({ action: "update", lineItemId: line.id, quantity });
+      applyCart(d.cart);
     } catch (e) {
       console.error(e);
+    } finally {
+      setBusyLine(null);
+    }
+  }
+
+  async function removeItem(line) {
+    setBusyLine(line.id);
+    try {
+      const d = await post({ action: "remove", lineItemId: line.id });
+      applyCart(d.cart);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setBusyLine(null);
     }
   }
 
@@ -52,14 +76,9 @@ export default function CartPage() {
     setState("checkout");
     setErr(null);
     try {
-      const r = await fetch("/api/cart", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "checkout", origin: window.location.origin }),
-      });
-      const data = await r.json();
-      if (!r.ok || !data.ok || !data.url) throw new Error(data.error || "no url");
-      window.location.href = data.url;
+      const d = await post({ action: "checkout" });
+      if (!d.checkoutUrl) throw new Error("no_checkout_url");
+      window.location.href = d.checkoutUrl;
     } catch (e) {
       console.error(e);
       setErr("Could not open the secure checkout. Please try again.");
@@ -90,12 +109,12 @@ export default function CartPage() {
       </div>
     );
 
-  const currency = cart.currency || "GBP";
+  const currency = cart.currency;
 
   return (
     <div className="wrap cartpage">
       <h2>Your basket</h2>
-      {cart.items.map((l) => (
+      {cart.lineItems.map((l) => (
         <div className="cline" key={l.id}>
           {l.image ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -106,15 +125,37 @@ export default function CartPage() {
           <div>
             <b>{l.name}</b>
             <br />
-            <small>
-              {l.quantity} × {money(l.price, currency)}
-            </small>
-            <br />
-            <button className="rm" onClick={() => removeItem(l.id)}>
-              Remove
-            </button>
+            <small>{money(l.price, currency)} each</small>
+            <div className="qty qty-sm" aria-label="Quantity">
+              <button
+                type="button"
+                aria-label="Decrease quantity"
+                onClick={() => changeQty(l, l.quantity - 1)}
+                disabled={busyLine === l.id || l.quantity <= 1}
+              >
+                −
+              </button>
+              <span aria-live="polite">{l.quantity}</span>
+              <button
+                type="button"
+                aria-label="Increase quantity"
+                onClick={() => changeQty(l, l.quantity + 1)}
+                disabled={busyLine === l.id}
+              >
+                +
+              </button>
+              <button
+                className="rm"
+                onClick={() => removeItem(l)}
+                disabled={busyLine === l.id}
+              >
+                Remove
+              </button>
+            </div>
           </div>
-          <b style={{ color: "var(--ink)" }}>{money(l.price * l.quantity, currency)}</b>
+          <b style={{ color: "var(--ink)" }}>
+            {money(l.price * l.quantity, currency)}
+          </b>
         </div>
       ))}
       <div className="sumbox">

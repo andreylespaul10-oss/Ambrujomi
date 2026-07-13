@@ -1,53 +1,49 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function AddToCart({ productId }) {
   const [qty, setQty] = useState(1);
   const [busy, setBusy] = useState(false);
-  const [state, setState] = useState("idle"); // idle | added | error
+  const [err, setErr] = useState(false);
   const router = useRouter();
 
   async function add() {
     setBusy(true);
-    setState("idle");
+    setErr(false);
     try {
-      const r = await fetch("/api/cart", {
+      const res = await fetch("/api/cart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "add", productId, quantity: qty }),
       });
-      const data = await r.json();
-      if (!r.ok || !data.ok) throw new Error(data.error || "failed");
-      setState("added");
-      router.refresh();
+      if (!res.ok) throw new Error("add_failed");
+      router.push("/cart");
     } catch (e) {
       console.error(e);
-      setState("error");
-    } finally {
+      setErr(true);
       setBusy(false);
     }
   }
 
   return (
-    <div className="atc">
-      <div className="atc-row">
+    <div>
+      <div className="buyrow">
         <div className="qty" aria-label="Quantity">
           <button
             type="button"
+            aria-label="Decrease quantity"
             onClick={() => setQty((q) => Math.max(1, q - 1))}
             disabled={busy || qty <= 1}
-            aria-label="Decrease quantity"
           >
             −
           </button>
           <span aria-live="polite">{qty}</span>
           <button
             type="button"
-            onClick={() => setQty((q) => Math.min(20, q + 1))}
-            disabled={busy || qty >= 20}
             aria-label="Increase quantity"
+            onClick={() => setQty((q) => Math.min(10, q + 1))}
+            disabled={busy || qty >= 10}
           >
             +
           </button>
@@ -56,16 +52,7 @@ export default function AddToCart({ productId }) {
           {busy ? "Adding…" : "Add to basket"}
         </button>
       </div>
-
-      {state === "added" ? (
-        <div className="atc-added">
-          <span>✓ Added to your basket</span>
-          <Link className="btn btn-ghost" href="/cart">
-            View basket &amp; checkout →
-          </Link>
-        </div>
-      ) : null}
-      {state === "error" ? (
+      {err ? (
         <p className="errmsg">Something went wrong — please try again.</p>
       ) : null}
     </div>
