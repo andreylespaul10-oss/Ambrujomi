@@ -86,16 +86,17 @@ nav.main + .cartbtn { margin-left: 1.4rem; }
 .hero-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* hero banner (foto oficial da marca) */
-.hero-banner { background: linear-gradient(165deg, var(--blush) 0%, var(--bg) 70%); padding: 2.6rem 0 2.8rem; }
-.hero-banner .wrap { display: grid; grid-template-columns: 0.92fr 1.08fr; align-items: center; gap: 2rem; }
+.hero-banner { background: linear-gradient(165deg, var(--blush) 0%, var(--bg) 78%); padding: 2.4rem 0 2.8rem; }
+.hero-banner .wrap { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+.hero-copy { max-width: 640px; }
 .hero-copy .eyebrow { display: block; margin-bottom: 0.7rem; }
-.hero-copy h1 { font-size: clamp(2rem, 5vw, 3.1rem); margin-bottom: 0.7rem; }
-.hero-lead { font-size: 1.05rem; color: var(--body); max-width: 40ch; margin: 0 0 1.5rem; }
+.hero-copy h1 { font-size: clamp(2rem, 5.2vw, 3.2rem); margin-bottom: 0.7rem; }
+.hero-lead { font-size: 1.05rem; color: var(--body); max-width: 46ch; margin: 0 auto 1.5rem; }
 .hero-banner-img {
-  width: 100%; max-width: 620px; border-radius: 24px;
-  box-shadow: 0 20px 50px rgba(201, 124, 152, 0.28); display: block; justify-self: end;
+  width: 100%; max-width: 1000px; border-radius: 24px;
+  box-shadow: 0 22px 55px rgba(201, 124, 152, 0.3); display: block;
 }
-.hero-banner-cta { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+.hero-banner-cta { display: flex; gap: 0.7rem; flex-wrap: wrap; justify-content: center; }
 .btn-lg { padding: 0.95rem 1.9rem; font-size: 0.98rem; }
 /* botão principal mais chamativo: leve brilho + subida no hover */
 .btn-primary {
@@ -416,8 +417,7 @@ footer.site a:hover { color: #fff; }
   .cartbtn { margin-left: 0.5rem; padding: 0.5rem 0.85rem; }
   .cartbtn span { display: none; }
   .promise-grid { grid-template-columns: repeat(2, 1fr); gap: 1.6rem 1rem; }
-  .hero-banner .wrap { grid-template-columns: 1fr; gap: 1.4rem; }
-  .hero-banner-img { max-width: 100%; justify-self: center; order: -1; }
+  .hero-banner .wrap { gap: 1.3rem; }
   .hero-lead { max-width: none; }
   .founder-inner { flex-direction: column; text-align: center; padding: 1.8rem 1.4rem; }
   .founder-text p { max-width: none; }
