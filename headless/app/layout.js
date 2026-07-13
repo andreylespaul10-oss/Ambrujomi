@@ -48,7 +48,7 @@ export default function RootLayout({ children }) {
             </div>
             <div>
               <h4>Help</h4>
-              <Link href="/delivery">Delivery — free, 2–4 days</Link>
+              <Link href="/delivery">Delivery — free, 5–12 days</Link>
               <Link href="/refunds">30-day returns</Link>
               <Link href="/terms">Terms &amp; Conditions</Link>
               <Link href="/privacy">Privacy Policy</Link>

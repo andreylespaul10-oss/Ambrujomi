@@ -41,7 +41,7 @@ export default async function HomePage() {
             <span>on every order</span>
           </div>
           <div>
-            <b>2–4 working days</b>
+            <b>5–12 working days</b>
             <span>tracked shipping</span>
           </div>
           <div>

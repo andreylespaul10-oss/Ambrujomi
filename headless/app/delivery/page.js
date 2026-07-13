@@ -6,7 +6,9 @@ export default function Delivery() {
   return (
     <LegalPage title="Delivery & Contact">
       <H>Free UK delivery on every order</H>
-      <p>Standard delivery is free on all UK orders with no minimum spend, and typically takes 2–4 working days. Every parcel is tracked — your tracking link arrives by email as soon as it ships.</p>
+      <p>Standard delivery is free on all UK orders with no minimum spend, and typically takes 5–12 working days. Every parcel is tracked — your tracking link arrives by email as soon as it ships.</p>
+      <H>Need it sooner?</H>
+      <p>Express delivery is available at checkout for a small additional charge, for those times when you just can&apos;t wait to glow.</p>
       <H>Order processing</H>
       <p>Orders are processed within 24 hours, Monday to Saturday. During busy periods (such as holiday sales) please allow one extra day.</p>
       <H>Contact us</H>

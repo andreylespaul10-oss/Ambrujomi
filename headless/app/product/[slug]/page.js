@@ -46,7 +46,7 @@ export default async function ProductPage({ params }) {
           {p.description ? <p style={{ maxWidth: "52ch" }}>{p.description}</p> : null}
           <AddToCart productId={p.id} />
           <div className="freeline">
-            ✓ FREE UK delivery, 2–4 working days · 30-day returns
+            ✓ FREE UK delivery, 5–12 working days · 30-day returns
           </div>
         </div>
       </div>
