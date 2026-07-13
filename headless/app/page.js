@@ -51,22 +51,30 @@ export default async function HomePage() {
     <>
       <section className="hero-banner">
         <div className="wrap">
+          <div className="hero-copy reveal">
+            <span className="eyebrow">Premium beauty &amp; wellness · United Kingdom</span>
+            <h1>Salon-grade glow, delivered free.</h1>
+            <p className="hero-lead">
+              Skincare tools and self-care rituals that turn &ldquo;tired&rdquo;
+              into radiant — with free UK delivery on every single order.
+            </p>
+            <div className="hero-banner-cta">
+              <Link className="btn btn-primary btn-lg" href="/shop">
+                Shop the collection →
+              </Link>
+              <Link className="btn btn-ghost" href="/#bestsellers">
+                View bestsellers
+              </Link>
+            </div>
+          </div>
           {heroBanner ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              className="hero-banner-img"
+              className="hero-banner-img reveal reveal-2"
               src={heroBanner}
               alt="Bliss Glow — Skincare, Beauty & Wellness. Care that reveals your best glow."
             />
           ) : null}
-          <div className="hero-banner-cta">
-            <Link className="btn btn-primary" href="/shop">
-              Shop the collection
-            </Link>
-            <Link className="btn btn-ghost" href="/#bestsellers">
-              View bestsellers
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -132,6 +140,23 @@ export default async function HomePage() {
                 <p>{p.body}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="founder">
+        <div className="wrap founder-inner">
+          <div className="founder-avatar" aria-hidden="true">Ana</div>
+          <div className="founder-text">
+            <span className="eyebrow">From our founder</span>
+            <h2>Hi, I&apos;m Ana 👋</h2>
+            <p>
+              &ldquo;I started Bliss Glow to bring salon-grade self-care to
+              everyone in the UK — without the salon price. I hand-pick every
+              product myself, and I&apos;m personally here if you ever need
+              anything. A real person, replying within 24 hours.&rdquo;
+            </p>
+            <p className="founder-sign">Ana — Founder, Bliss Glow</p>
           </div>
         </div>
       </section>
