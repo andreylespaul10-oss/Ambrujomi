@@ -66,12 +66,8 @@ export default async function ProductPage({ params }) {
             </span>
           ) : null}
           <h1 style={{ fontSize: "clamp(1.5rem,4.5vw,2.1rem)" }}>{p.name}</h1>
-          <div className="pricing" style={{ margin: ".7rem 0" }}>
-            <span className="now">{p.priceFmt}</span>
-            {p.compareAtFmt ? <span className="was">{p.compareAtFmt}</span> : null}
-          </div>
           {p.description ? <p style={{ maxWidth: "52ch" }}>{p.description}</p> : null}
-          <AddToCart productId={p.id} />
+          <AddToCart productId={p.id} price={p.price} compareAt={p.compareAt} />
           <div className="freeline">
             ✓ FREE UK delivery, 5–12 working days · 30-day returns
           </div>

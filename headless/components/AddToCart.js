@@ -2,7 +2,14 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function AddToCart({ productId }) {
+function money(n) {
+  return "£" + Number(n || 0).toLocaleString("en-GB", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+export default function AddToCart({ productId, price, compareAt }) {
   const [qty, setQty] = useState(1);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState(false);
@@ -28,6 +35,17 @@ export default function AddToCart({ productId }) {
 
   return (
     <div>
+      {price != null ? (
+        <div className="pricing" style={{ margin: ".7rem 0" }}>
+          <span className="now">{money(price * qty)}</span>
+          {compareAt ? <span className="was">{money(compareAt * qty)}</span> : null}
+          {qty > 1 ? (
+            <span className="each">
+              {qty} × {money(price)}
+            </span>
+          ) : null}
+        </div>
+      ) : null}
       <div className="buyrow">
         <div className="qty" aria-label="Quantity">
           <button
