@@ -1,7 +1,11 @@
 import "./globals.css";
 import Link from "next/link";
+import Script from "next/script";
 import Header from "@/components/Header";
 import ChatWidget from "@/components/ChatWidget";
+
+// Google tag (gtag.js) — Google Ads / conversões do tráfego pago
+const GOOGLE_ADS_ID = "AW-18320971501";
 
 export const metadata = {
   title: "Bliss Glow — Premium Beauty & Wellness",
@@ -13,6 +17,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en-GB">
       <body>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GOOGLE_ADS_ID}');`}
+        </Script>
         <div className="announce">
           FREE UK delivery on every order • Use code <b>GLOW10</b> for 10% off your first order
         </div>
