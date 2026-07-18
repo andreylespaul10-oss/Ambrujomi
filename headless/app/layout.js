@@ -10,7 +10,7 @@ const GOOGLE_ADS_ID = "AW-18320971501";
 export const metadata = {
   title: "Bliss Glow — Premium Beauty & Wellness",
   description:
-    "Salon-grade skincare tools and self-care essentials with free UK delivery. Glow is a ritual, not a chance.",
+    "Salon-grade skincare tools and self-care essentials, with free UK delivery over £30. Glow is a ritual, not a chance.",
 };
 
 export default function RootLayout({ children }) {
@@ -28,7 +28,7 @@ gtag('js', new Date());
 gtag('config', '${GOOGLE_ADS_ID}');`}
         </Script>
         <div className="announce">
-          FREE UK delivery on every order • Use code <b>GLOW10</b> for 10% off your first order
+          FREE UK delivery on orders over £30 • Use code <b>GLOW10</b> for 10% off your first order
         </div>
         <Header />
         <main>{children}</main>
@@ -40,7 +40,7 @@ gtag('config', '${GOOGLE_ADS_ID}');`}
                 Bliss <em style={{ color: "#FFE1EE" }}>Glow</em>
               </div>
               <p style={{ fontSize: ".84rem", maxWidth: "32ch", margin: "0 0 1rem" }}>
-                Premium beauty &amp; wellness, delivered free across the United
+                Premium beauty &amp; wellness, delivered across the United
                 Kingdom. Glow is a ritual, not a chance.
               </p>
               <div className="pay" aria-label="Accepted payment methods">
@@ -59,9 +59,9 @@ gtag('config', '${GOOGLE_ADS_ID}');`}
             </div>
             <div>
               <h4>Help</h4>
-              <Link href="/delivery">Delivery — free, 5–12 days</Link>
+              <Link href="/delivery">Delivery — over £30 free</Link>
               <Link href="/refunds">30-day returns</Link>
-              <Link href="/delivery">Contact us</Link>
+              <a href="mailto:contact@blissglow.store">contact@blissglow.store</a>
             </div>
             <div>
               <h4>Legal</h4>

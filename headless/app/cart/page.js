@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { cartFetch } from "@/lib/cart-client";
+import { FREE_SHIPPING_THRESHOLD, shippingFor } from "@/lib/shipping";
 
 function money(amount, currency) {
   const n = Number(amount || 0);
@@ -101,7 +102,7 @@ export default function CartPage() {
         <h2>Your basket</h2>
         <p>
           {state === "empty"
-            ? "Your basket is empty. Every order ships free across the UK. ✨"
+            ? `Your basket is empty. Free UK delivery on orders over £${FREE_SHIPPING_THRESHOLD}. ✨`
             : "We couldn't load your basket — please refresh the page."}
         </p>
         <Link className="btn btn-primary" href="/shop">
@@ -111,6 +112,7 @@ export default function CartPage() {
     );
 
   const currency = cart.currency;
+  const shipping = shippingFor(cart.subtotal);
 
   return (
     <div className="wrap cartpage">
@@ -172,11 +174,20 @@ export default function CartPage() {
         </div>
         <div className="sumrow">
           <span>Delivery</span>
-          <span className="okmsg">FREE</span>
+          {shipping === 0 ? (
+            <span className="okmsg">FREE</span>
+          ) : (
+            <span>{money(shipping, currency)}</span>
+          )}
         </div>
+        {shipping > 0 ? (
+          <p style={{ fontSize: ".76rem", color: "var(--grey)", margin: ".2rem 0 0" }}>
+            Add {money(FREE_SHIPPING_THRESHOLD - cart.subtotal, currency)} more for free delivery
+          </p>
+        ) : null}
         <div className="sumrow total" style={{ marginTop: ".4rem" }}>
           <span>Total</span>
-          <span>{money(cart.subtotal, currency)}</span>
+          <span>{money(cart.subtotal + shipping, currency)}</span>
         </div>
         {err ? <p className="errmsg">{err}</p> : null}
         <button

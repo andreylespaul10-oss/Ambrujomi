@@ -161,7 +161,7 @@ export default function ProductPurchase({
         ) : null}
 
         <div className="freeline">
-          ✓ FREE UK delivery, 5–12 working days · 30-day returns
+          ✓ Free UK delivery over £30 · 5–12 working days · 30-day returns
         </div>
 
         <ul className="perks">

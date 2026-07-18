@@ -31,7 +31,7 @@ export default async function CategoryPage({ params }) {
       <div className="wrap">
         <div className="sec-head">
           <div>
-            <span className="eyebrow">{products.length} products · free UK delivery</span>
+            <span className="eyebrow">{products.length} products · free UK delivery over £30</span>
             <h2>{cat.name}</h2>
             <p className="cat-blurb">{cat.blurb}</p>
           </div>

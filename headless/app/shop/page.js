@@ -22,7 +22,7 @@ export default async function ShopPage() {
       <div className="wrap">
         <div className="sec-head">
           <div>
-            <span className="eyebrow">{total} products · free UK delivery</span>
+            <span className="eyebrow">{total} products · free UK delivery over £30</span>
             <h2>Shop everything</h2>
           </div>
         </div>
