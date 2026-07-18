@@ -44,11 +44,17 @@ function mapProduct(p) {
     description: p.plainDescription || "",
     ribbon: p.ribbon?.name || null,
     inStock: p.inventory?.availabilityStatus !== "OUT_OF_STOCK",
+    // A foto de cada variação (ex.: cor) fica presa na escolha da opção
+    // (linkedMedia), não na variante em si — a Wix guarda assim.
     options: (p.options || []).map((o) => ({
       name: o.name,
       choices: (o.choicesSettings?.choices || [])
         .filter((c) => c.visible !== false)
-        .map((c) => ({ name: c.name, inStock: c.inStock !== false })),
+        .map((c) => ({
+          name: c.name,
+          inStock: c.inStock !== false,
+          image: img(imageUrl(c.linkedMedia?.[0]?.image, 800, 800)),
+        })),
     })),
     // Variações (produtos DSers etc.): a Wix exige o variantId no carrinho.
     variants: (p.variantsInfo?.variants || [])
