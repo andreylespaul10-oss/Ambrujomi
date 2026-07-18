@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProductsByCategory, getProducts } from "@/lib/catalog";
 import { categoryBySlug } from "@/lib/categories";
-import AddToCart from "@/components/AddToCart";
+import ProductPurchase from "@/components/ProductPurchase";
 import ProductCard from "@/components/ProductCard";
 import Reviews from "@/components/Reviews";
 
@@ -12,12 +12,6 @@ export async function generateMetadata({ params }) {
   const p = await getProductBySlug(params.slug).catch(() => null);
   return { title: p ? `${p.name} — Bliss Glow` : "Product — Bliss Glow" };
 }
-
-const PERKS = [
-  { t: "Free UK delivery", s: "Tracked · 5–12 working days" },
-  { t: "30-day returns", s: "Not for you? Send it back" },
-  { t: "Secure checkout", s: "Stripe · Apple & Google Pay" },
-];
 
 const RITUAL = [
   "Start with clean, dry skin — a fresh canvas lets every product work harder.",
@@ -52,42 +46,23 @@ export default async function ProductPage({ params }) {
         / {p.name}
       </p>
 
-      <div className="pd">
-        <div className="pd-art">
-          {p.image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={p.image} alt={p.imageAlt} />
-          ) : null}
-        </div>
-        <div>
-          {p.ribbon ? (
-            <span className="badge" style={{ position: "static", display: "inline-block", marginBottom: ".6rem" }}>
-              {p.ribbon}
-            </span>
-          ) : null}
-          <h1 style={{ fontSize: "clamp(1.5rem,4.5vw,2.1rem)" }}>{p.name}</h1>
-          {p.description ? <p style={{ maxWidth: "52ch" }}>{p.description}</p> : null}
-          <AddToCart
-            productId={p.id}
-            price={p.price}
-            compareAt={p.compareAt}
-            options={p.options}
-            variants={p.variants}
-          />
-          <div className="freeline">
-            ✓ FREE UK delivery, 5–12 working days · 30-day returns
-          </div>
-
-          <ul className="perks">
-            {PERKS.map((x) => (
-              <li key={x.t}>
-                <b>{x.t}</b>
-                <span>{x.s}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <ProductPurchase
+        productId={p.id}
+        image={p.image}
+        imageAlt={p.imageAlt}
+        price={p.price}
+        compareAt={p.compareAt}
+        options={p.options}
+        variants={p.variants}
+      >
+        {p.ribbon ? (
+          <span className="badge" style={{ position: "static", display: "inline-block", marginBottom: ".6rem" }}>
+            {p.ribbon}
+          </span>
+        ) : null}
+        <h1 style={{ fontSize: "clamp(1.5rem,4.5vw,2.1rem)" }}>{p.name}</h1>
+        {p.description ? <p style={{ maxWidth: "52ch" }}>{p.description}</p> : null}
+      </ProductPurchase>
 
       <section className="ritual">
         <div className="ritual-inner">
