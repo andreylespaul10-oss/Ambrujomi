@@ -97,6 +97,11 @@ nav.main + .cartbtn { margin-left: 1.4rem; }
   box-shadow: 0 22px 55px rgba(201, 124, 152, 0.3); display: block;
 }
 .hero-banner-cta { display: flex; gap: 0.7rem; flex-wrap: wrap; justify-content: center; }
+.trust-strip {
+  list-style: none; display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0.5rem 1.2rem; margin: 1.1rem 0 0; padding: 0;
+  font-size: 0.8rem; font-weight: 600; color: var(--grey);
+}
 .btn-lg { padding: 0.95rem 1.9rem; font-size: 0.98rem; }
 /* botão principal mais chamativo: leve brilho + subida no hover */
 .btn-primary {

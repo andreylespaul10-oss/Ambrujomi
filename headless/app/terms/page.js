@@ -35,7 +35,7 @@ export default function Terms() {
 
       <H>4. Delivery</H>
       <p>
-        Delivery is free on every UK order and typically takes 5–12 working days.
+        Delivery is free on UK orders over £30 (£3.75 on smaller orders) and typically takes 5–12 working days.
         Products are sent to the address you provide at checkout — please check
         it carefully, as we cannot be held responsible for deliveries that fail
         because of an incorrect address. You will receive a tracking link by

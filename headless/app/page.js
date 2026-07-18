@@ -9,7 +9,7 @@ export const revalidate = 300; // atualiza o catálogo a cada 5 minutos
 const PROMISE = [
   {
     title: "Free UK delivery",
-    body: "On every order, no minimum spend. Tracked, 5–12 working days.",
+    body: "On orders over £30. Tracked, 5–12 working days.",
     icon: (
       <path d="M3 7h11v8H3V7Zm11 3h4l3 3v2h-7v-5ZM7.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm10 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
     ),
@@ -53,10 +53,10 @@ export default async function HomePage() {
         <div className="wrap">
           <div className="hero-copy reveal">
             <span className="eyebrow">Premium beauty &amp; wellness · United Kingdom</span>
-            <h1>Salon-grade glow, delivered free.</h1>
+            <h1>Salon-grade glow, delivered to your door.</h1>
             <p className="hero-lead">
               Skincare tools and self-care rituals that turn &ldquo;tired&rdquo;
-              into radiant — with free UK delivery on every single order.
+              into radiant — with free UK delivery on orders over £30.
             </p>
             <div className="hero-banner-cta">
               <Link className="btn btn-primary btn-lg" href="/shop">
@@ -66,6 +66,11 @@ export default async function HomePage() {
                 View bestsellers
               </Link>
             </div>
+            <ul className="trust-strip" aria-label="Why shop with Bliss Glow">
+              <li>⭐ 10,000+ happy customers</li>
+              <li>↺ 30-day money-back guarantee</li>
+              <li>🚚 Free UK delivery over £30</li>
+            </ul>
           </div>
           {heroBanner ? (
             // eslint-disable-next-line @next/next/no-img-element
