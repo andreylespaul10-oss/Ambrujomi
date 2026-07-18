@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ambrujomi — Latão e matéria-prima para bijuteria</title>
+<meta name="description" content="Tubos e matéria-prima em latão para bijuteria — de Ø1,80mm a Ø12,00mm, parede 0,30mm. Canudos de inox 304 e varetas de alumínio para pipa. Direto da fábrica ao artesão.">
+<!--
+  ============================================================
+  PERSONALIZAR (troque onde estiver marcado com >>> ):
+   • Nome da loja / marca ....... "Ambrujomi"
+   • WhatsApp ................... var WHATS = '55DDDNUMERO'  (só números)
+   • Endereço da loja física .... bloco #visitar
+   • Horário .................... bloco #visitar
+   • Domínio (rodapé) ........... "seudominio.com.br"
+   • Link dos catálogos (PDF) ... botões "Baixar catálogo"
+  ============================================================
+-->
+<style>
+  :root{
+    /* paleta — latão como protagonista */
+    --brass:      #c9a24b;
+    --brass-deep: #a9822f;
+    --bronze:     #8a6a3b;
+    --steel:      #8a96a0;   /* inox 304 */
+    --ink:        #241d12;
+    --ivory:      #f4efe4;
+    --ivory-2:    #ebe3d2;
+    --line:       #d8cdb5;
+
+    --bg:      var(--ivory);
+    --surface: #fbf8f1;
+    --surface-2: #f0e9da;
+    --text:    var(--ink);
+    --muted:   #6f6450;
+    --border:  var(--line);
+    --accent:  var(--brass-deep);
+    --accent-strong: var(--bronze);
+    --shadow: 0 1px 2px rgba(36,29,18,.06), 0 12px 32px -18px rgba(36,29,18,.30);
+
+    --wa: #1f9d57;
+
+    --font-display: "Arial Narrow","Helvetica Neue Condensed",Helvetica,Arial,system-ui,sans-serif;
+    --font-body: system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono: ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+
+    --maxw: 1120px;
+    --r: 14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:      #17130d;
+      --surface: #201a11;
+      --surface-2: #2a2216;
+      --text:    #f3ecdd;
+      --muted:   #b3a689;
+      --border:  #3a2f1e;
+      --accent:  #d9b566;
+      --accent-strong: #e6c878;
+      --steel:   #a7b3bd;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 20px 44px -22px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17130d; --surface:#201a11; --surface-2:#2a2216; --text:#f3ecdd;
+    --muted:#b3a689; --border:#3a2f1e; --accent:#d9b566; --accent-strong:#e6c878;
+    --steel:#a7b3bd; --shadow:0 1px 2px rgba(0,0,0,.4),0 20px 44px -22px rgba(0,0,0,.7);
+  }
+  :root[data-theme="light"]{
+    --bg:var(--ivory); --surface:#fbf8f1; --surface-2:#f0e9da; --text:var(--ink);
+    --muted:#6f6450; --border:var(--line); --accent:var(--brass-deep); --accent-strong:var(--bronze);
+    --steel:#8a96a0; --shadow:0 1px 2px rgba(36,29,18,.06),0 12px 32px -18px rgba(36,29,18,.30);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important;transition:none!important} }
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--font-body); font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px}
+  a{color:inherit}
+  h1,h2,h3{margin:0; text-wrap:balance; line-height:1.02}
+  .display{font-family:var(--font-display); font-weight:700; letter-spacing:.01em; text-transform:uppercase}
+  .mono{font-family:var(--font-mono); font-variant-numeric:tabular-nums}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.24em;
+    text-transform:uppercase; color:var(--accent-strong);
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:.5em; cursor:pointer;
+    border:1px solid transparent; border-radius:999px; padding:.85em 1.5em;
+    font-weight:700; font-size:.98rem; text-decoration:none; transition:transform .12s ease, box-shadow .2s ease, background .2s;
+  }
+  .btn:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  .btn-wa{background:var(--wa); color:#fff; box-shadow:0 10px 24px -12px rgba(31,157,87,.8)}
+  .btn-wa:hover{transform:translateY(-2px)}
+  .btn-ghost{background:transparent; border-color:var(--border); color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent-strong)}
+
+  /* ---- header ---- */
+  header.nav{
+    position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.4) blur(10px);
+    background:color-mix(in srgb, var(--bg) 82%, transparent);
+    border-bottom:1px solid var(--border);
+  }
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px}
+  .brand{display:flex; align-items:center; gap:.6rem; font-family:var(--font-display); text-transform:uppercase; font-weight:700; font-size:1.28rem; letter-spacing:.06em}
+  .brand .dot{width:26px; height:26px; border-radius:7px; background:
+      linear-gradient(135deg, var(--brass) 0%, #efd693 45%, var(--bronze) 100%);
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+  .nav-links{display:flex; gap:26px; align-items:center}
+  .nav-links a{text-decoration:none; font-size:.92rem; color:var(--muted); font-weight:600}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{display:flex; align-items:center; gap:12px}
+  .themebtn{background:transparent;border:1px solid var(--border);border-radius:999px;width:38px;height:38px;cursor:pointer;color:var(--text);font-size:1rem;display:grid;place-items:center}
+  .themebtn:hover{border-color:var(--accent)}
+  @media (max-width:820px){ .nav-links{display:none} }
+
+  /* ---- hero ---- */
+  .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--border)}
+  .hero::before{
+    content:""; position:absolute; inset:0; z-index:0; opacity:.5;
+    background:
+      radial-gradient(60% 50% at 82% 0%, color-mix(in srgb,var(--brass) 34%, transparent), transparent 70%),
+      radial-gradient(50% 60% at 10% 100%, color-mix(in srgb,var(--bronze) 22%, transparent), transparent 70%);
+  }
+  .hero .wrap{position:relative; z-index:1; padding:74px 22px 60px; display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center}
+  @media (max-width:900px){ .hero .wrap{grid-template-columns:1fr; gap:34px; padding:52px 22px 44px} }
+  .hero h1{font-family:var(--font-display); text-transform:uppercase; font-weight:700; font-size:clamp(2.5rem,7vw,4.6rem); letter-spacing:.005em}
+  .hero h1 em{font-style:normal; color:var(--accent-strong)}
+  .hero .lead{font-size:1.14rem; color:var(--muted); margin:20px 0 28px; max-width:34ch}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:12px}
+  .trust{display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:26px; font-size:.86rem; color:var(--muted)}
+  .trust span{display:inline-flex; align-items:center; gap:.45em}
+  .trust b{color:var(--accent-strong)}
+
+  /* spec plate — o motivo técnico (cota de engenharia) */
+  .plate{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--r);
+    box-shadow:var(--shadow); padding:26px; position:relative;
+  }
+  .plate .corner{position:absolute; width:14px; height:14px; border:2px solid var(--accent); opacity:.55}
+  .plate .c1{top:10px;left:10px;border-right:0;border-bottom:0}
+  .plate .c2{top:10px;right:10px;border-left:0;border-bottom:0}
+  .plate .c3{bottom:10px;left:10px;border-right:0;border-top:0}
+  .plate .c4{bottom:10px;right:10px;border-left:0;border-top:0}
+  .plate h3{font-family:var(--font-mono); font-weight:600; font-size:.78rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:16px}
+  .dimline{display:flex; align-items:baseline; gap:12px; margin:4px 0}
+  .dimline .big{font-family:var(--font-mono); font-weight:700; font-size:clamp(1.7rem,5vw,2.5rem); letter-spacing:-.01em}
+  .dimline .to{color:var(--muted); font-family:var(--font-mono); font-size:1rem}
+  .plate .note{margin-top:10px; font-size:.82rem; color:var(--muted); font-family:var(--font-mono)}
+  .ring{display:flex; gap:14px; margin-top:22px; padding-top:18px; border-top:1px dashed var(--border); flex-wrap:wrap}
+  .ring div{flex:1; min-width:90px}
+  .ring .k{font-family:var(--font-mono); font-weight:700; font-size:1.15rem}
+  .ring .v{font-size:.76rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em}
+
+  /* ---- sections ---- */
+  section{padding:72px 0}
+  .sec-head{max-width:60ch; margin-bottom:40px}
+  .sec-head h2{font-family:var(--font-display); text-transform:uppercase; font-size:clamp(1.8rem,4.4vw,2.9rem); font-weight:700; margin-top:10px}
+  .sec-head p{color:var(--muted); margin-top:14px; font-size:1.06rem}
+
+  /* carro-chefe: latão */
+  .brass-band{background:
+      linear-gradient(180deg, transparent, color-mix(in srgb,var(--brass) 8%, transparent)),
+      var(--surface-2);
+      border-top:1px solid var(--border); border-bottom:1px solid var(--border)}
+  .sizes{display:grid; grid-template-columns:repeat(auto-fill,minmax(112px,1fr)); gap:12px; margin-top:8px}
+  .size{
+    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    padding:16px 12px; text-align:center; transition:transform .12s, border-color .2s, box-shadow .2s;
+  }
+  .size:hover{transform:translateY(-3px); border-color:var(--accent); box-shadow:var(--shadow)}
+  .size .d{font-family:var(--font-mono); font-weight:700; font-size:1.32rem}
+  .size .p{font-size:.72rem; color:var(--muted); font-family:var(--font-mono); margin-top:4px}
+  .size.more{display:grid; place-content:center; background:transparent; border-style:dashed; color:var(--accent-strong); font-weight:700}
+  .uses{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px}
+  .chip{border:1px solid var(--border); background:var(--surface); border-radius:999px; padding:.5em 1em; font-size:.86rem; color:var(--muted)}
+  .chip b{color:var(--text); font-weight:600}
+
+  /* cards de produto (inox / alumínio) */
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+  @media (max-width:760px){ .cards{grid-template-columns:1fr} }
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--r);
+    padding:30px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+  }
+  .card .tag{position:absolute; top:22px; right:22px; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:.3em .8em}
+  .card .ic{width:52px; height:52px; border-radius:12px; display:grid; place-items:center; font-size:1.5rem; margin-bottom:18px}
+  .card.inox .ic{background:color-mix(in srgb,var(--steel) 24%, transparent); box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--steel) 50%, transparent)}
+  .card.alum .ic{background:color-mix(in srgb,var(--brass) 22%, transparent); box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--brass) 55%, transparent)}
+  .card h3{font-size:1.35rem; margin-bottom:8px}
+  .card p{color:var(--muted); font-size:.98rem}
+  .card ul{list-style:none; padding:0; margin:16px 0 0; display:grid; gap:8px}
+  .card li{display:flex; gap:.6em; font-size:.92rem; align-items:flex-start}
+  .card li::before{content:"—"; color:var(--accent-strong); font-weight:700}
+
+  /* diferenciais */
+  .feats{display:grid; grid-template-columns:repeat(4,1fr); gap:18px}
+  @media (max-width:900px){ .feats{grid-template-columns:1fr 1fr} }
+  @media (max-width:520px){ .feats{grid-template-columns:1fr} }
+  .feat{padding:24px; border:1px solid var(--border); border-radius:var(--r); background:var(--surface)}
+  .feat .n{font-family:var(--font-mono); color:var(--accent-strong); font-size:.8rem; letter-spacing:.1em}
+  .feat h3{font-size:1.1rem; margin:10px 0 6px}
+  .feat p{color:var(--muted); font-size:.9rem}
+
+  /* como comprar / visitar */
+  .buy{display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:stretch}
+  @media (max-width:760px){ .buy{grid-template-columns:1fr} }
+  .buy-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:32px; box-shadow:var(--shadow)}
+  .buy-card.wa{background:linear-gradient(160deg, color-mix(in srgb,var(--wa) 14%, var(--surface)), var(--surface))}
+  .buy-card h3{font-size:1.4rem; margin-bottom:8px}
+  .buy-card p{color:var(--muted); margin-bottom:20px}
+  .info-row{display:flex; gap:.7em; padding:10px 0; border-top:1px solid var(--border); font-size:.96rem}
+  .info-row:first-of-type{border-top:0}
+  .info-row .lab{color:var(--muted); min-width:88px; font-size:.82rem; text-transform:uppercase; letter-spacing:.06em; padding-top:.15em}
+  .info-row .val{font-weight:600}
+
+  /* catálogo cta */
+  .catalog{background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r); padding:40px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px}
+  .catalog h2{font-family:var(--font-display); text-transform:uppercase; font-size:clamp(1.5rem,4vw,2.2rem)}
+  .catalog p{color:var(--muted); margin-top:8px; max-width:44ch}
+
+  /* footer */
+  footer{border-top:1px solid var(--border); background:var(--surface); margin-top:40px}
+  footer .wrap{padding:44px 22px; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:28px}
+  @media (max-width:760px){ footer .wrap{grid-template-columns:1fr; gap:22px} }
+  footer .brand{margin-bottom:12px}
+  footer p{color:var(--muted); font-size:.92rem}
+  footer h4{font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin:0 0 12px}
+  footer a{display:block; text-decoration:none; color:var(--text); font-size:.94rem; padding:4px 0}
+  footer a:hover{color:var(--accent-strong)}
+  .domain{font-family:var(--font-mono); font-weight:700; color:var(--accent-strong); font-size:1.05rem}
+  .legal{border-top:1px solid var(--border); padding:18px 22px; text-align:center; color:var(--muted); font-size:.82rem}
+
+  /* sticky whatsapp */
+  .fab{position:fixed; right:18px; bottom:18px; z-index:60; box-shadow:0 14px 34px -12px rgba(31,157,87,.9)}
+  @media (min-width:821px){ .fab{display:none} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>Ambrujomi</div>
+    <nav class="nav-links" aria-label="Seções">
+      <a href="#latao">Latão</a>
+      <a href="#outros">Inox &amp; Alumínio</a>
+      <a href="#diferenciais">Por que nós</a>
+      <a href="#comprar">Como comprar</a>
+      <a href="#visitar">A loja</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="themebtn" id="themebtn" title="Alternar tema" aria-label="Alternar tema claro/escuro">◐</button>
+      <a class="btn btn-wa js-wa" href="#" aria-label="Falar no WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.7-.85-2-.95-.26-.1-.45-.15-.64.15-.19.28-.73.94-.9 1.13-.16.19-.33.21-.61.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.44.13-.59.13-.13.29-.34.44-.51.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.08-.15-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.15.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.11.55-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34zM12 21.5a9.5 9.5 0 01-4.84-1.33l-.35-.2-3.6.94.96-3.5-.23-.36A9.5 9.5 0 1112 21.5z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Fábrica &middot; Atacado e varejo &middot; Direto ao artesão</p>
+      <h1>Latão para <em>bijuteria</em><br>na medida certa</h1>
+      <p class="lead">Tubos e matéria-prima em latão para quem cria. Do fino ao grosso, com padrão de fábrica — e ainda canudos de inox&nbsp;304 e varetas de alumínio para pipa.</p>
+      <div class="hero-actions">
+        <a class="btn btn-wa js-wa" href="#">Pedir orçamento no WhatsApp</a>
+        <a class="btn btn-ghost" href="#latao">Ver medidas</a>
+      </div>
+      <div class="trust">
+        <span>✦ Carro-chefe: <b>latão</b></span>
+        <span>✦ Parede <b class="mono">0,30&nbsp;mm</b></span>
+        <span>✦ <b>Inox 304</b> alimentício</span>
+      </div>
+    </div>
+
+    <div class="plate" aria-label="Faixa de medidas dos tubos de latão">
+      <span class="corner c1"></span><span class="corner c2"></span>
+      <span class="corner c3"></span><span class="corner c4"></span>
+      <h3>Tubo de latão &mdash; faixa de bitolas</h3>
+      <div class="dimline">
+        <span class="big">Ø1,80</span><span class="to">até</span><span class="big">Ø12,00</span>
+      </div>
+      <p class="note">diâmetro externo em mm &middot; parede 0,30&nbsp;mm</p>
+      <div class="ring">
+        <div><div class="k mono">0,30</div><div class="v">Parede (mm)</div></div>
+        <div><div class="k mono">10+</div><div class="v">Bitolas</div></div>
+        <div><div class="k mono">C&nbsp;3,60</div><div class="v">Zamak/latão</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LATÃO (carro-chefe) ============ -->
+<section id="latao" class="brass-band">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">O nosso forte</p>
+      <h2>Tubos e matéria-prima em latão</h2>
+      <p>O latão é o coração da nossa produção. Trabalhamos toda a faixa de bitolas — de <b class="mono">Ø1,80&nbsp;mm</b> a <b class="mono">Ø12,00&nbsp;mm</b>, com parede de <b class="mono">0,30&nbsp;mm</b> — cortado e entregue no padrão que o seu ateliê precisa.</p>
+    </div>
+
+    <div class="sizes" role="list" aria-label="Bitolas de tubo de latão disponíveis">
+      <div class="size" role="listitem"><div class="d mono">1,80</div><div class="p">× 0,30</div></div>
+      <div class="size" role="listitem"><div class="d mono">2,00</div><div class="p">× 0,30</div></div>
+      <div class="size" role="listitem"><div class="d mono">2,50</div><div class="p">× 0,30</div></div>
+      <div class="size" role="listitem"><div class="d mono">3,00</div><div class="p">× 0,30</div></div>
+      <div class="size" role="listitem"><div class="d mono">4,00</div><div class="p">× 0,30</div></div>
+      <div class="size" role="listitem"><div class="d mono">5,00</div><div class="p">× 0,30</div></div>
+      <div class="size" role="listitem"><div class="d mono">6,00</div><div class="p">× 0,30</div></div>
+      <div class="size" role="listitem"><div class="d mono">8,00</div><div class="p">× 0,30</div></div>
+      <div class="size" role="listitem"><div class="d mono">10,00</div><div class="p">× 0,30</div></div>
+      <div class="size" role="listitem"><div class="d mono">12,00</div><div class="p">× 0,30</div></div>
+      <a class="size more js-wa" href="#" role="listitem">Outra<br>medida?</a>
+    </div>
+
+    <div class="uses">
+      <span class="chip"><b>Argolas</b> e brincos</span>
+      <span class="chip"><b>Componentes</b> de bijuteria</span>
+      <span class="chip"><b>Canutilhos</b> e separadores</span>
+      <span class="chip"><b>Peças torneadas</b></span>
+      <span class="chip"><b>Artesanato</b> em metal</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INOX + ALUMÍNIO ============ -->
+<section id="outros">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Também fabricamos</p>
+      <h2>Inox 304 e alumínio</h2>
+      <p>Além do latão, produzimos duas linhas com muita saída — uma sustentável, outra para quem solta pipa.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card inox">
+        <span class="tag">Aço inox 304</span>
+        <div class="ic" aria-hidden="true">🥤</div>
+        <h3>Canudos de inox 304</h3>
+        <p>Reutilizáveis, higiênicos e para durar. Aço inox 304 de grau alimentício — ideais para restaurantes, cafeterias, brindes e o consumidor consciente.</p>
+        <ul>
+          <li>Aço 304 alimentício, não enferruja</li>
+          <li>Reto ou curvo, com escovinha de limpeza</li>
+          <li>Atacado para revenda e food service</li>
+        </ul>
+      </article>
+
+      <article class="card alum">
+        <span class="tag">Alumínio</span>
+        <div class="ic" aria-hidden="true">🪁</div>
+        <h3>Varetas de alumínio para pipa</h3>
+        <p>Varetas leves e resistentes para armação de pipa. Padrão de fábrica, com regularidade de bitola para quem monta em quantidade.</p>
+        <ul>
+          <li>Alumínio leve e resistente</li>
+          <li>Vendas por quantidade / atacado</li>
+          <li>Corte sob medida a combinar</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIFERENCIAIS ============ -->
+<section id="diferenciais" class="brass-band">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Por que comprar com a gente</p>
+      <h2>Da fábrica ao seu ateliê</h2>
+    </div>
+    <div class="feats">
+      <div class="feat"><div class="n mono">01</div><h3>Padrão de fábrica</h3><p>Bitola e parede regulares em todo o lote — o seu trabalho fica uniforme.</p></div>
+      <div class="feat"><div class="n mono">02</div><h3>Atacado e varejo</h3><p>Da peça avulsa ao volume para produção. Preço melhor na quantidade.</p></div>
+      <div class="feat"><div class="n mono">03</div><h3>Sob medida</h3><p>Precisa de um corte ou bitola específica? A gente ajusta pra você.</p></div>
+      <div class="feat"><div class="n mono">04</div><h3>Loja física</h3><p>Atendimento de verdade, presencial, com quem entende de matéria-prima.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMO COMPRAR ============ -->
+<section id="comprar">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Como comprar</p>
+      <h2>Peça agora ou venha na loja</h2>
+      <p>Mande as medidas e a quantidade pelo WhatsApp e receba o orçamento — ou passe na loja física para ver de perto.</p>
+    </div>
+
+    <div class="buy">
+      <div class="buy-card wa" id="comprar-wa">
+        <h3>Pedir pelo WhatsApp</h3>
+        <p>Resposta rápida. Diga o produto, a bitola (ex.: <b class="mono">Ø3,00&nbsp;× 0,30</b>) e a quantidade.</p>
+        <a class="btn btn-wa js-wa" href="#" style="width:100%;justify-content:center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.7-.85-2-.95-.26-.1-.45-.15-.64.15-.19.28-.73.94-.9 1.13-.16.19-.33.21-.61.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.44.13-.59.13-.13.29-.34.44-.51.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.08-.15-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.15.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.11.55-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34zM12 21.5a9.5 9.5 0 01-4.84-1.33l-.35-.2-3.6.94.96-3.5-.23-.36A9.5 9.5 0 1112 21.5z"/></svg>
+          Chamar no WhatsApp
+        </a>
+      </div>
+
+      <div class="buy-card" id="visitar">
+        <h3>Visite a loja física</h3>
+        <p>Atendimento presencial de segunda a sábado.</p>
+        <div class="info-row"><span class="lab">Endereço</span><span class="val">Rua Exemplo, 000 &middot; Bairro<br>Cidade / UF &middot; CEP 00000-000</span></div>
+        <div class="info-row"><span class="lab">Horário</span><span class="val">Seg a Sex 8h–18h &middot; Sáb 8h–12h</span></div>
+        <div class="info-row"><span class="lab">Telefone</span><span class="val mono">(00) 0000-0000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATÁLOGO ============ -->
+<section>
+  <div class="wrap">
+    <div class="catalog">
+      <div>
+        <p class="eyebrow">Catálogo completo</p>
+        <h2>Baixe a tabela de medidas</h2>
+        <p>Todas as bitolas de latão, canudos de inox 304 e varetas de alumínio em um só arquivo.</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-wa js-wa" href="#">Receber catálogo</a>
+        <a class="btn btn-ghost" href="#" id="catalogo-pdf">Baixar PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="brand"><span class="dot" aria-hidden="true"></span>Ambrujomi</div>
+      <p>Matéria-prima em latão para bijuteria, canudos de inox 304 e varetas de alumínio para pipa. Da fábrica direto ao seu trabalho.</p>
+      <p class="domain" style="margin-top:14px">seudominio.com.br</p>
+    </div>
+    <div>
+      <h4>Produtos</h4>
+      <a href="#latao">Tubos de latão</a>
+      <a href="#latao">Matéria-prima p/ bijuteria</a>
+      <a href="#outros">Canudos de inox 304</a>
+      <a href="#outros">Varetas de alumínio (pipa)</a>
+    </div>
+    <div>
+      <h4>Atendimento</h4>
+      <a href="#" class="js-wa">WhatsApp</a>
+      <a href="#visitar">Loja física</a>
+      <a href="#comprar">Como comprar</a>
+      <a href="#">Catálogo</a>
+    </div>
+  </div>
+  <div class="legal">© <span id="ano"></span> Ambrujomi · Todos os direitos reservados · seudominio.com.br</div>
+</footer>
+
+<a class="btn btn-wa fab js-wa" href="#" aria-label="Falar no WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.7-.85-2-.95-.26-.1-.45-.15-.64.15-.19.28-.73.94-.9 1.13-.16.19-.33.21-.61.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.44.13-.59.13-.13.29-.34.44-.51.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.08-.15-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.15.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.11.55-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34zM12 21.5a9.5 9.5 0 01-4.84-1.33l-.35-.2-3.6.94.96-3.5-.23-.36A9.5 9.5 0 1112 21.5z"/></svg>
+</a>
+
+<script>
+  // >>> PERSONALIZAR: WhatsApp (código do país + DDD + número, só dígitos)
+  var WHATS = '5500000000000';
+  var MSG = encodeURIComponent('Olá! Vim pela página da Ambrujomi e quero um orçamento.');
+  var link = 'https://wa.me/' + WHATS + '?text=' + MSG;
+  document.querySelectorAll('.js-wa').forEach(function(a){ a.setAttribute('href', link); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener'); });
+
+  // ano no rodapé
+  document.getElementById('ano').textContent = new Date().getFullYear();
+
+  // tema (persistente)
+  var root = document.documentElement, tb = document.getElementById('themebtn');
+  var saved = null; try{ saved = localStorage.getItem('amb-theme'); }catch(e){}
+  if(saved){ root.setAttribute('data-theme', saved); }
+  tb.addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme');
+    if(!cur){ cur = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light'; }
+    var next = cur === 'dark' ? 'light':'dark';
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem('amb-theme', next); }catch(e){}
+  });
+</script>
+</body>
+</html>
