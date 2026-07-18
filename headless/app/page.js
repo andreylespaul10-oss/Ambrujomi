@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getProducts } from "@/lib/catalog";
+import { CATEGORIES } from "@/lib/categories";
 import { wixMediaUrl, HERO_IMAGE_ID } from "@/lib/wix";
 import ProductCard from "@/components/ProductCard";
 import BestsellerCarousel from "@/components/BestsellerCarousel";
@@ -47,11 +48,13 @@ export default async function HomePage() {
   }
   const featured = products.slice(0, 8);
   const heroBanner = wixMediaUrl(HERO_IMAGE_ID, 1600, 970);
+  const categoryTiles = CATEGORIES.map((c) => ({
+    ...c,
+    image: products.find((p) => p.category === c.slug)?.image || null,
+  })).filter((c) => c.image);
 
   return (
     <>
-      <BestsellerCarousel products={featured.slice(0, 6)} />
-
       <section className="hero-banner">
         <div className="wrap">
           <div className="hero-copy reveal">
@@ -90,7 +93,7 @@ export default async function HomePage() {
         <div className="wrap">
           <div>
             <b>Free UK delivery</b>
-            <span>on every order</span>
+            <span>on orders over £30</span>
           </div>
           <div>
             <b>5–12 working days</b>
@@ -113,6 +116,41 @@ export default async function HomePage() {
             <div>
               <span className="eyebrow">Customer favourites</span>
               <h2>Bestsellers</h2>
+            </div>
+            <Link href="/shop">View all →</Link>
+          </div>
+          <BestsellerCarousel products={featured.slice(0, 6)} />
+        </div>
+      </section>
+
+      {categoryTiles.length ? (
+        <section className="blk">
+          <div className="wrap">
+            <div className="sec-head">
+              <div>
+                <span className="eyebrow">Browse by need</span>
+                <h2>Shop by category</h2>
+              </div>
+            </div>
+            <div className="catgrid">
+              {categoryTiles.map((c) => (
+                <Link key={c.slug} href={`/shop/${c.slug}`} className="cattile">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={c.image} alt={c.name} />
+                  <span className="cattile-name">{c.name}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      <section className="blk">
+        <div className="wrap">
+          <div className="sec-head">
+            <div>
+              <span className="eyebrow">Full catalogue</span>
+              <h2>Shop the collection</h2>
             </div>
             <Link href="/shop">View all →</Link>
           </div>
