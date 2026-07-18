@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const LINKS = [
@@ -13,6 +14,7 @@ const LINKS = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   // Trava o scroll do fundo quando o menu mobile está aberto.
   useEffect(() => {
@@ -26,10 +28,10 @@ export default function Header() {
     <header className="site">
       <div className="wrap bar">
         <button
-          className="hamburger"
-          aria-label="Open menu"
+          className={`hamburger${open ? " is-open" : ""}`}
+          aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          onClick={() => setOpen(true)}
+          onClick={() => setOpen((o) => !o)}
         >
           <span></span>
           <span></span>
@@ -42,7 +44,11 @@ export default function Header() {
 
         <nav className="main" aria-label="Main">
           {LINKS.map((l) => (
-            <Link key={l.href} href={l.href}>
+            <Link
+              key={l.href}
+              href={l.href}
+              className={pathname === l.href ? "active" : undefined}
+            >
               {l.label}
             </Link>
           ))}
@@ -70,17 +76,23 @@ export default function Header() {
             </button>
           </div>
           <nav className="drawer-nav" aria-label="Mobile">
-            {LINKS.map((l) => (
-              <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
+            {LINKS.map((l, i) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className={pathname === l.href ? "active" : undefined}
+                style={{ "--i": i }}
+              >
                 {l.label}
               </Link>
             ))}
-            <Link href="/cart" onClick={() => setOpen(false)}>
+            <Link href="/cart" onClick={() => setOpen(false)} style={{ "--i": LINKS.length }}>
               Basket
             </Link>
           </nav>
           <div className="drawer-foot">
-            <p>Free UK delivery on every order</p>
+            <p>Free UK delivery over £30</p>
             <Link href="/terms" onClick={() => setOpen(false)}>Terms</Link>
             <Link href="/privacy" onClick={() => setOpen(false)}>Privacy</Link>
           </div>
