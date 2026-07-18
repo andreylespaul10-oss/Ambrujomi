@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getProducts } from "@/lib/catalog";
 import { wixMediaUrl, HERO_IMAGE_ID } from "@/lib/wix";
 import ProductCard from "@/components/ProductCard";
+import BestsellerCarousel from "@/components/BestsellerCarousel";
 import Newsletter from "@/components/Newsletter";
 
 export const revalidate = 300; // atualiza o catálogo a cada 5 minutos
@@ -49,6 +50,8 @@ export default async function HomePage() {
 
   return (
     <>
+      <BestsellerCarousel products={featured.slice(0, 6)} />
+
       <section className="hero-banner">
         <div className="wrap">
           <div className="hero-copy reveal">
