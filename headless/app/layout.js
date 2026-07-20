@@ -81,9 +81,6 @@ s0.parentNode.insertBefore(s1,s0);
               <Link href="/refunds">Refund Policy</Link>
             </div>
           </div>
-          <div className="fin">
-            © 2026 Bliss Glow · blissglow.store · Prices include VAT where applicable
-          </div>
         </footer>
       </body>
     </html>
